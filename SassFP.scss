@@ -1,0 +1,313 @@
+// Argument-converted Sass Functions
+@function fpAppend($item, $list) {
+  @return append($list, $item);
+}
+
+@function fpJoin($list2, $list1) {
+  @return join($list1, $list2);
+}
+
+@function fpNth($item, $list) {
+  @return nth($list, $item);
+}
+
+// convenience type-checking functions
+@function is_list($val) {@return type-of($val) == list;}
+@function is_color($val) {@return type-of($val) == color;}
+@function is_string($val) {@return type-of($val) == string;}
+@function is_boolean($val) {@return type-of($val) == boolean;}
+@function is_number($val) {@return type-of($val) == number;}
+@function is_null($val) {@return type-of($val) == null;}
+@function is_map($val) {@return type-of($val) == map;}
+
+// String Functions
+@function prefixStr($prefix, $str){
+  @return '#{$prefix}#{$str}';
+}
+
+@function suffixStr($suffix, $str){
+  @return '#{$str}#{$suffix}';
+}
+
+@function repeat-into-list($times, $item) {
+  $result: ();
+  @for $i from 1 through $times {
+    $result: append($result, $item);
+  }
+  @return $result;
+};
+
+// converts a string to a list by splitting on a passed string
+// explode('-', 'selector-one'); => ('selector', 'one')
+@function explode($separator, $str) {
+  $result: ();
+  $sep-length: str-length($separator);
+  $index: str-index($str, $separator);
+  @while $index != null {
+    $item: str-slice($str, 1, $index - 1);
+    $result: append($result, $item);
+    $str: str-slice($str, $index + $sep-length);
+    $index: str-index($str, $separator);
+  }
+  $result: append($result, $str);
+  @return $result;
+}
+
+// converts a list to a string with a passed string
+// implode('-', ('selector', 'one')); => 'selector-one'
+@function implode($glue: '', $list: ()) {
+  $result: null;
+  @for $i from 1 through length($list) {
+    $appendor: if($i != length($list), $glue, '');
+    $item: suffixStr($appendor, nth($list, $i));
+    $result: suffixStr($item, $result);
+  }
+  @return $result;
+}
+
+// allows for getting at nested attributes in a Sass map
+// ensures a null return for any unrecognized paths
+// $colors: (header:(one: #333, two: #444), footer: #666);
+// prop('header.two', $colors); => #444
+// prop('footer', $colors); => #666
+// prop('body', $colors); => null
+@function prop($path, $map) {
+  $keys: explode('.', $path);
+  @each $key in $keys {
+    @if not is_map($map) {
+      $map: (_mt_: null);
+    }
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+// allows for merging deeply nested maps
+@function assign($parent-map, $child-map) {
+  $result: $parent-map;
+  @each $key, $value in $child-map {
+    @if (not map-has-key($result, $key)) or (type-of(map-get($result, $key)) != type-of($value)) or (not (type-of(map-get($result, $key)) == map and type-of($value) == map)) {
+      $result: map-merge($result, ($key: $value));
+    }
+    @else {
+      $result: map-merge($result, ($key: assign(map-get($result, $key), $value)));
+    }
+  }
+  @return $result;
+}
+
+// takes a value and appends the supplied unit
+// $x: 50;
+// applyUnit(px, $x); => 50px
+// applyUnit(em, $x); => 50em
+@function applyUnit($unit, $val) {
+  @return unquote('#{$val}#{$unit}');
+}
+
+// shortcut function to apply px unit
+@function px($val) {
+  @return applyUnit('px', $val);
+}
+
+// shortcut function to apply em unit
+@function em($val) {
+  @return applyUnit('em', $val);
+}
+
+// shortcut function to apply vw unit
+@function vw($val) {
+  @return applyUnit('vw', $val);
+}
+
+// shortcut function to apply vh unit
+@function vh($val) {
+  @return applyUnit('vh', $val);
+}
+
+// shortcut function to apply rem unit
+@function rem($val) {
+  @return applyUnit('rem', $val);
+}
+
+// accepts a function name, a list, and an initial value.
+// outputs the accumulated result of running the function on each list member
+@function reduce($callback, $initial, $list) {
+  $accumulated: $initial;
+  @for $i from 1 through length($list) {
+    $accumulated: call($callback, $accumulated, nth($list, $i));
+  }
+  @return $accumulated;
+}
+
+// returns either a null if the predicate is false
+// or the $item back when true
+@function filterItem($predicateFn, $item) {
+  @return if(call($predicateFn, $item), $item, null);
+}
+
+// accepts a predicate and a list
+// outputs a new list consisting of all the members of the initial list for which the predicate is true
+@function filter($predicate, $list) {
+  $accumulated: ();
+  @for $i from 1 through length($list) {
+    $accumulated: append($accumulated, filterItem($predicate, nth($list, $i)));
+  }
+  @return $accumulated;
+}
+
+// accepts a function name and a list.
+// outputs a new list where each member has had the function run against it
+@function map($fn, $list) {
+  $accumulated: ();
+  @for $i from 1 through length($list) {
+    $accumulated: append($accumulated, call($fn, nth($list, $i)));
+  }
+  @return $accumulated;
+}
+
+// returns a part of a list from a start value to an end
+@function slice($start, $end, $list) {
+  $accumulated: ();
+  @for $i from $start through $end {
+    $accumulated: append($accumulated, nth($list, $i));
+  }
+  @return $accumulated;
+}
+
+// returns the first member of a list
+@function head($list) {
+  @return nth($list, 1);
+}
+
+// returns all but the first member of a list
+@function tail($list) {
+  @return slice(2, length($list), $list);
+}
+
+// returns all but the last member of a list
+@function init($list) {
+  @return slice(1, length($list) - 1, $list);
+}
+
+// returns the last member of a list
+@function last($list) {
+  @return nth($list, length($list));
+}
+
+// flattens a list
+@function flatten($list...) {
+  // compose and pipe can pass these along as arguments
+  // so this is a 'preflight' step to ensure the input is a list
+  @return _flatten($list);
+}
+
+// internal method that actually does the flattening
+@function _flatten($list) {
+  $result: ();
+  @each $item in $list {
+    @if is_list($item) {
+      $flatten: _flatten($item);
+      @each $i in $flatten {
+        $result: append($result, $i);
+      }
+    }
+    @else {
+      $result: append($result, $item);
+    }
+  }
+  @return $result;
+}
+
+
+// internal
+// accepts a single function name or
+// list where the first member is a function name.
+// outputs the result of function call
+@function _item-fn-call($fnName, $input) {
+  $fn: head($fnName);
+  @if is_list($fnName) {
+    $input: append(tail($fnName), $input);
+  }
+  @return call($fn, $input...);
+}
+
+// accepts a list of function names and initial data.
+// outputs the result of each of the functions being run
+// on the successive results from first to last
+@function pipe($params...) {
+  $args: head($params);
+  $function-list: init($args);
+  $result: last($args);
+  @each $item in $function-list {
+    $result: _item-fn-call($item, $result);
+  }
+  @return $result;
+}
+
+// same as pipe function, but runs in reverse order
+@function compose($params...) {
+  $args: head($params);
+  $function-list: init($args);
+  $result: last($args);
+  @for $i from length($function-list) * -1 through -1 {
+    $item: nth($function-list, abs($i));
+    $result: _item-fn-call($item, $result);
+  }
+  @return $result;
+}
+
+// Mathematical Functions
+@function add($x, $y) {
+  @return $x + $y;
+}
+
+@function multiply($x, $y) {
+  @return $x * $y;
+}
+
+@function subtract($x, $y) {
+  @return $x - $y;
+}
+
+@function divide($x, $y) {
+  @return $x / $y;
+}
+
+@function percent($x, $y) {
+  @return percentage(divide($x, $y));
+}
+
+@function square($x) {
+  @return multiply($x, $x);
+}
+
+@function double($x) {
+  @return add($x, $x);
+}
+
+@function inc($x) {
+  @return add($x, 1);
+}
+
+@function dec($x) {
+  @return subtract($x, 1);
+}
+
+// sum is a reduce using the 'add' function with a 0 initial value
+@function sum($num-list...) {
+  @return reduce(add, 0, $num-list);
+}
+
+// allows for the raising of a positive number to a certain power
+// power(20, 2) * 1px; => 400px
+@function power($num: 1, $exponent: 1) {
+  $list: repeat-into-list($exponent, $num);
+  @return reduce(multiply, 1, $list);
+}
+
+// takes a decimal number and limits its significant digits to the value of the 2nd argument passed. defaults to 2
+// to-decimal-places(33.33333) => 33.33
+// to-decimal-places(33.33333, 1) => 33.3
+@function to-decimal-places($base-number, $digits: 2) {
+  @return floor($base-number * power(10, $digits)) / power(10, $digits);
+}
