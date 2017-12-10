@@ -7,100 +7,127 @@ Like Ramda, all the functions in SassFP are iteratee-first, data-last. Some nati
 ## Available Methods
 
 ### String Methods
-**`prefixStr($prefix, $str)`**
+#### `prefixStr($prefix, $str)`
+
 Returns **`$str`** prefixed with **`$prefix`**.
-```sass
-prefixStr('selector', 'one') => 'selectorone'
+
+```scss
+prefixStr('selector', 'one') // => 'selectorone'
 ```
 
-**`suffixStr($suffix, $str)`**
+#### `suffixStr($suffix, $str)`
+
 Returns **`$str`** with **`$suffix`** appended to it
-```sass
-suffixStr('selector', 'one') => 'oneselector'
+
+```scss
+suffixStr('selector', 'one') // => 'oneselector'
 ```
 
-**`explode($separator, $str)`**
+#### `explode($separator, $str)`
+
 Converts a string to a list by splitting on $separator
-```sass
-explode('-', 'selector-one'); => ('selector', 'one')
+
+```scss
+explode('-', 'selector-one'); // => ('selector', 'one')
 ```
 
 ### List Methods
-**`implode($glue: '', $list: ())`**
+#### `implode($glue: '', $list: ())`
+
 Returns a string where all the members of **`$list`** have been concatenated together with **`$glue`** between them.
-```sass
-implode('-', ('selector', 'one')); => 'selector-one'
+
+```scss
+implode('-', ('selector', 'one')); // => 'selector-one'
 ```
 
-**`repeat-into-list($times, $item)`**
+#### `repeat-into-list($times, $item)`
+
 Returns a list where **`$item`** is represented **`$times`** times
-```sass
-repeat-into-list(3, 10) => (10, 10, 10)
+
+```scss
+repeat-into-list(3, 10) // => (10, 10, 10)
 ```
 
-**`slice($start, $end, $list)`**
-Returns **`$list`**'s members beginning at position **`$start`** and ending at **`$end`**
+#### `slice($start, $end, $list)`
 
-**`head($list)`**
-Returns the first member of **`$list`**
+Returns **`$list`**'s members beginning at position **`$start`** and ending at **`$end`**.
 
-**`tail($list)`**
-Returns all but the first member of **`$list`**
+#### `head($list)`
 
-**`init($list)`**
-Returns all but the last member of **`$list`**
+Returns the first member of **`$list`**.
 
-**`last($list)`**
-Returns the last member of **`$list`**
+#### `tail($list)`
 
-**`flatten($list...)`**
+Returns all but the first member of **`$list`**.
+
+#### `init($list)`
+
+Returns all but the last member of **`$list`**.
+
+#### `last($list)`
+
+Returns the last member of **`$list`**.
+
+#### `flatten($list...)`
+
 Returns a flattened version of **`$list`**.
-```sass
-flatten(#fff, red, (#222, #333)) => (#fff, red, #222, #333)
+
+```scss
+flatten(#fff, red, (#222, #333)) // => (#fff, red, #222, #333)
 ```
 
 ### Functional Methods
-**`map($fn, $list)`**
+#### `map($fn, $list)`
+
 Returns a new list where each member of **`$list`** has had function **`$fn`** run against it.
-```sass
+
+```scss
 @function darkenbyten($color) {
   @return darken($color, 10%);
 }
-map(darkenbyten, (#fff, red, #222, #333)); => #e6e6e6 #cc0000 #090909 #1a1a1a
+map(darkenbyten, (#fff, red, #222, #333)); // => #e6e6e6 #cc0000 #090909 #1a1a1a
 ```
 
-**`filter($predicate, $list)`**
+#### `filter($predicate, $list)`
+
 Returns a new list where **`$predicate`** returns **`true`** for members of **`$list`**.
-```sass
+
+```scss
 @function gt5($val) {
   @return $val > 5;
 }
-filter(gt5, (4,5,6,7)); => (6, 7)
+filter(gt5, (4,5,6,7)); // => (6, 7)
 ```
 
-**`reduce($fn, $initial, $list)`**
+#### `reduce($fn, $initial, $list)`
+
 Accumulates the result of running each member of **`$list`** through **`$fn`** starting with the **`$initial`** value and **`$list`**'s first member.
-```sass
-reduce(prefixStr, '.', ('alex', 'billy', 'charlie')); => ".alexbillycharlie"
-reduce(suffixStr, '', ('alex', 'billy', 'charlie')); => "charliebillyalex"
-reduce(add, 0, (4,5,6)); => 15
+
+```scss
+reduce(prefixStr, '.', ('alex', 'billy', 'charlie')); // => ".alexbillycharlie"
+reduce(suffixStr, '', ('alex', 'billy', 'charlie')); // => "charliebillyalex"
+reduce(add, 0, (4,5,6)); // => 15
 ```
 
-**`pipe($params...)`**
+#### `pipe($params...)`
+
 Accepts a list of function names and initial data. Returns the result of each of the functions being run on the successive results from first to last. The very last item must be the data being operated on. Functions being passed in with additional parameters take the form of sub-lists.
-```sass
+
+```scss
 pipe(
   (
     flatten,
     (map, darkenbyten),
     (#fff, red, (#222, #333))
   )
-); => #e6e6e6 #cc0000 #090909 #1a1a1a
+); // => #e6e6e6 #cc0000 #090909 #1a1a1a
 ```
 
-**`compose($params...)`**
+#### `compose($params...)`
+
 Same as pipe function, but runs in reverse order
-```sass
+
+```scss
 compose(
   (
     unquote,
@@ -109,131 +136,166 @@ compose(
     (join, ('d', 'e')),
     ('a', 'b', 'c')
   )
-) => .d-e-a-b-c
+) // => .d-e-a-b-c
 ```
 
 ### Object Methods
-**`prop($path, $map)`**
-Allows for getting at nested attributes in a Sass map. Also, ensures a `null` return for any unrecognized paths.
-```sass
+#### `prop($path, $map)`
+
+Allows for getting at nested attributes in a Sass map. Uses dot syntax to get at nested attributes. Ensures a `null` return for any unrecognized paths.
+
+```scss
 $colors: (header:(one: #333, two: #444), footer: #666);
-prop('header.two', $colors); => #444
-prop('footer', $colors); => #666
-prop('body', $colors); => null
+prop('header.two', $colors); // => #444
+prop('footer', $colors); // => #666
+prop('body', $colors); // => null
 ```
 
-**`assign($parent-map, $child-map)`**
+#### `assign($parent-map, $child-map)`
+
 Allows for merging deeply nested maps
 
 
 ### Mathematical Methods
-**`add($x, $y)`**
+#### `add($x, $y)`
+
 Adds **`$y`** to **`$x`**.
-```sass
-add(10, 2) => 12
+
+```scss
+add(10, 2) // => 12
 ```
 
-**`multiply($x, $y)`**
+#### `multiply($x, $y)`
+
 Multiplies **`$x`** by **`$y`**.
-```sass
-multiply(10, 2) => 20
+
+```scss
+multiply(10, 2) // => 20
 ```
 
-**`subtract($x, $y)`**
+#### `subtract($x, $y)`
+
 Subtracts **`$y`** from **`$x`**.
-```sass
-subtract(10, 2) => 8
+
+```scss
+subtract(10, 2) // => 8
 ```
 
-**`divide($x, $y)`**
+#### `divide($x, $y)`
+
 Divides **`$x`** by **`$y`**.
-```sass
-divide(10, 2) => 5
+
+```scss
+divide(10, 2) // => 5
 ```
 
-**`percent($x, $y)`**
+#### `percent($x, $y)`
+
 Returns **`$y`**'s percent of **`$x`**.
-```sass
-percent(10, 2) => 50%
+
+```scss
+percent(10, 2) // => 50%
 ```
 
-**`double($x)`**
+#### `double($x)`
+
 Doubles **`$x`**.
-```sass
-double(10) => 20
+
+```scss
+double(10) // => 20
 ```
 
-**`square($x)`**
+#### `square($x)`
+
 Squares **`$x`**.
-```sass
-sqaure(10) => 100
+
+```scss
+sqaure(10) // => 100
 ```
 
-**`inc($x)`**
+#### `inc($x)`
+
 Increments **`$x`**.
-```sass
-inc(10) => 11
+
+```scss
+inc(10) // => 11
 ```
 
-**`dec($x)`**
+#### `dec($x)`
+
 Decrements **`$x`**.
-```sass
-dec(10) => 9
+
+```scss
+dec(10) // => 9
 ```
 
-**`sum($num-list...)`**
+#### `sum($num-list...)`
+
 Accepts a list of numbers and returns the sum of them.
-```sass
-sum(10, 5, 2) => 17
+
+```scss
+sum(10, 5, 2) // => 17
 ```
 
-**`power($num: 1, $exponent: 1)`**
+#### `power($num: 1, $exponent: 1)`
+
 Returns the total after multiplying **`$num`** **`$exponent`** times.
-```sass
-power(10, 2) => 100
+
+```scss
+power(10, 2) // => 100
 ```
 
-**`to-decimal-places($num, $digits: 2)`**
+#### `to-decimal-places($num, $digits: 2)`
+
 Returns **`$num`** to **`$digits`** number of significant digits dropping anything beyond it. **`$digits`** is 2 by default since Sass has a default of returning 3 significant digits.
-```sass
-to-decimal-places(10.129, 2) => 10.12
+
+```scss
+to-decimal-places(10.129, 2) // => 10.12
 ```
 ### Misc Methods
-**`applyUnit($unit, $val)`**
-Appends **`$unit`** to **`$val`**
-```sass
-applyUnit(px, 50); => 50px
-applyUnit(em, 50); => 50em
+
+#### `applyUnit($unit, $val)`
+
+Appends **`$unit`** to **`$val`
+
+```scss
+applyUnit(px, 50); // => 50px
+applyUnit(em, 50); // => 50em
 ```
 
-**`px($val)`**
+#### `px($val)`
+
 Shortcut function to apply `px` unit
 
-**`em($val)`**
+#### `em($val)`
+
 Shortcut function to apply `em` unit
 
-**`vw($val)`**
+#### `vw($val)`
+
 Shortcut function to apply `vw` unit
 
-**`vh($val)`**
+#### `vh($val)`
+
 Shortcut function to apply `vh` unit
 
-**`rem($val)`**
+#### `rem($val)`
+
 Shortcut function to apply `rem` unit
 
 ### Argument-converted Sass Functions
-**`fpAppend($item, $list)`**
-**`fpJoin($list2, $list1)`**
-**`fpNth($list, $item)`**
+#### `fpAppend($item, $list)`
+#### `fpJoin($list2, $list1)`
+#### `fpNth($list, $item)`
 
 ### Convenience Type Boolean Methods
-**`is_list($val)`**
-**`is_color($val)`**
-**`is_string($val)`**
-**`is_boolean($val)`**
-**`is_number($val)`**
-**`is_null($val)`**
-**`is_map($val)`**
+#### `is_list($val)`
+#### `is_color($val)`
+#### `is_string($val)`
+#### `is_boolean($val)`
+#### `is_number($val)`
+#### `is_null($val)`
+#### `is_map($val)`
 
   [ramda]: http://ramdajs.com
   [lodashfp]: https://github.com/lodash/lodash/wiki/FP-Guide
