@@ -12,54 +12,54 @@
   content: (null null 'abd' null);
   content: filter(gt5, (4,5,6,7));
   content: compose(
-    (
-      (map, darkenbyten),
-      flatten,
-      (#fff, red, (#222, (#333, #444), #555, (#666, #777)))
-    )
+    (map, darkenbyten),
+    flatten,
+    (#fff, red, (#222, (#333, #444), #555, (#666, #777)))
   );
   content: pipe(
-    (
-      (map, square),
-      sum,
-      double,
-      (4,5,6)
-    )
+    (map, square),
+    sum,
+    double,
+    (4,5,6)
   );
   content: compose(
-    (
-      double,
-      sum, // could be replaced with (reduce, add, 0)
-      (map, square),
-      (4,5,6)
-    )
+    double,
+    sum,
+    (map, square),
+    (4,5,6)
   );
   content: compose(
-    (
-      unquote,
-      (prefixStr, '.'),
-      (implode, '-'),
-      (fpJoin, ('xyz', 'asdf')),
-      (join, 'abc'),
-      ('a', 'b', 'c')
-    )
+    double,
+    (reduce, add, 0),
+    (map, square),
+    (4,5,6)
+  );
+  content: compose(
+    unquote,
+    (prefixStr, '.'),
+    (implode, '-'),
+    (fpJoin, ('xyz', 'asdf')),
+    (join, 'abc'),
+    ('a', 'b', 'c')
   );
   content: reduce(prefixStr, '.', ('alex', 'billy', 'charlie'));
   content: to-decimal-places(33.33333, 1);
   content: compose(
-    (
-      (multiply, 1/10),
-      floor,
-      (reduce, multiply, 1),
-      (33.33333, 10)
-    )
+    (multiply, 1/10),
+    floor,
+    (reduce, multiply, 1),
+    (33.33333, 10)
   );
   content: compose(
-    (
-      inc,
-      inc,
-      inc,
-      (1)
-    )
+    inc,
+    inc,
+    inc,
+    1
+  );
+  content: compose(
+    dec,
+    dec,
+    dec,
+    5
   );
 }

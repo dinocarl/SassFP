@@ -235,9 +235,8 @@
 // outputs the result of each of the functions being run
 // on the successive results from first to last
 @function pipe($params...) {
-  $args: head($params);
-  $function-list: init($args);
-  $result: last($args);
+  $function-list: init($params);
+  $result: last($params);
   @each $item in $function-list {
     $result: _item-fn-call($item, $result);
   }
@@ -246,9 +245,8 @@
 
 // same as pipe function, but runs in reverse order
 @function compose($params...) {
-  $args: head($params);
-  $function-list: init($args);
-  $result: last($args);
+  $function-list: init($params);
+  $result: last($params);
   @for $i from length($function-list) * -1 through -1 {
     $item: nth($function-list, abs($i));
     $result: _item-fn-call($item, $result);

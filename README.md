@@ -111,32 +111,35 @@ reduce(add, 0, (4,5,6)); // => 15
 
 #### `pipe($params...)`
 
-Accepts a list of function names and initial data. Returns the result of each of the functions being run on the successive results from first to last. The very last item must be the data being operated on. Functions being passed in with additional parameters take the form of sub-lists.
+Accepts a list of arguments where the last item is the initial data and the others are a sequence of functions to run. Returns the result of each of the functions being run on the successive results from first to last. The very last item must be the data being operated on. Functions being passed in with additional parameters take the form of sub-lists.
 
 ```scss
 pipe(
-  (
-    flatten,
-    (map, darkenbyten),
-    (#fff, red, (#222, #333))
-  )
+  flatten,
+  (map, darkenbyten),
+  (#fff, red, (#222, #333))
 ); // => #e6e6e6 #cc0000 #090909 #1a1a1a
 ```
 
 #### `compose($params...)`
 
-Same as pipe function, but runs in reverse order
+Same as **`pipe`**, but functions run in reverse order. Initial data remains last argument.
 
 ```scss
 compose(
-  (
-    unquote,
-    (prefixStr, '.'),
-    (implode, '-'),
-    (join, ('d', 'e')),
-    ('a', 'b', 'c')
-  )
+  unquote,
+  (prefixStr, '.'),
+  (implode, '-'),
+  (join, ('d', 'e')),
+  ('a', 'b', 'c')
 ) // => .d-e-a-b-c
+
+compose(
+  double,
+  (reduce, add, 0),
+  (map, square),
+  (4,5,6)
+) // => 154
 ```
 
 ### Object Methods
