@@ -154,7 +154,7 @@ prop('footer', $colors); // => #666
 prop('body', $colors); // => null
 ```
 
-#### `assign($parent-map, $child-map)`
+#### `assign($map1, $map2)`
 
 Allows for merging deeply nested maps
 
@@ -289,7 +289,7 @@ Shortcut function to apply `rem` unit
 ### Argument-converted Sass Functions
 #### `fpAppend($item, $list)`
 #### `fpJoin($list2, $list1)`
-#### `fpNth($list, $item)`
+#### `fpNth($item, $list)`
 
 ### Convenience Type Boolean Methods
 #### `is_list($val)`
