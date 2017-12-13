@@ -12,7 +12,7 @@ Like Ramda, all the functions in SassFP are iteratee-first, data-last. Some nati
 Returns **`$str`** prefixed with **`$prefix`**.
 
 ```scss
-prefixStr('selector', 'one') // => 'selectorone'
+prefixStr('selector', 'one'); // => 'selectorone'
 ```
 
 #### `suffixStr($suffix, $str)`
@@ -20,7 +20,7 @@ prefixStr('selector', 'one') // => 'selectorone'
 Returns **`$str`** with **`$suffix`** appended to it
 
 ```scss
-suffixStr('selector', 'one') // => 'oneselector'
+suffixStr('selector', 'one'); // => 'oneselector'
 ```
 
 #### `explode($separator, $str)`
@@ -45,7 +45,7 @@ implode('-', ('selector', 'one')); // => 'selector-one'
 Returns a list where **`$item`** is represented **`$times`** times
 
 ```scss
-repeat-into-list(3, 10) // => (10, 10, 10)
+repeat-into-list(3, 10); // => (10, 10, 10)
 ```
 
 #### `slice($start, $end, $list)`
@@ -53,7 +53,7 @@ repeat-into-list(3, 10) // => (10, 10, 10)
 Returns **`$list`**'s members beginning at position **`$start`** and ending at **`$end`**.
 
 ```scss
-rslice(3, 5, ('alex', 'billy', 'charlie', 'dani', 'elliot')) // => ('charlie', 'dani', 'elliot')
+slice(3, 5, ('alex', 'billy', 'charlie', 'dani', 'elliot')); // => ('charlie', 'dani', 'elliot')
 ```
 
 #### `head($list)`
@@ -61,7 +61,7 @@ rslice(3, 5, ('alex', 'billy', 'charlie', 'dani', 'elliot')) // => ('charlie', '
 Returns the first member of **`$list`**.
 
 ```scss
-head(('alex' 'billy' 'charlie' 'dani' 'elliot')) // => 'alex'
+head(('alex' 'billy' 'charlie' 'dani' 'elliot')); // => 'alex'
 ```
 
 #### `tail($list)`
@@ -69,7 +69,7 @@ head(('alex' 'billy' 'charlie' 'dani' 'elliot')) // => 'alex'
 Returns all but the first member of **`$list`**.
 
 ```scss
-tail(('alex' 'billy' 'charlie' 'dani' 'elliot')) // => 'billy' 'charlie' 'dani' 'elliot'
+tail(('alex' 'billy' 'charlie' 'dani' 'elliot')); // => 'billy' 'charlie' 'dani' 'elliot'
 ```
 
 #### `init($list)`
@@ -77,7 +77,7 @@ tail(('alex' 'billy' 'charlie' 'dani' 'elliot')) // => 'billy' 'charlie' 'dani' 
 Returns all but the last member of **`$list`**.
 
 ```scss
-init(('alex' 'billy' 'charlie' 'dani' 'elliot')) // => 'alex' 'billy' 'charlie' 'dani'
+init(('alex' 'billy' 'charlie' 'dani' 'elliot')); // => 'alex' 'billy' 'charlie' 'dani'
 ```
 
 #### `last($list)`
@@ -85,7 +85,7 @@ init(('alex' 'billy' 'charlie' 'dani' 'elliot')) // => 'alex' 'billy' 'charlie' 
 Returns the last member of **`$list`**.
 
 ```scss
-last(('alex' 'billy' 'charlie' 'dani' 'elliot')) // => 'elliot'
+last(('alex' 'billy' 'charlie' 'dani' 'elliot')); // => 'elliot'
 ```
 
 #### `flatten($list...)`
@@ -93,7 +93,7 @@ last(('alex' 'billy' 'charlie' 'dani' 'elliot')) // => 'elliot'
 Returns a flattened version of **`$list`**.
 
 ```scss
-flatten(#fff, red, (#222, #333)) // => (#fff, red, #222, #333)
+flatten(#fff, red, (#222, #333)); // => (#fff, red, #222, #333)
 ```
 
 ### Functional Methods
@@ -152,14 +152,14 @@ compose(
   (implode, '-'),
   (join, ('d', 'e')),
   ('a', 'b', 'c')
-) // => .d-e-a-b-c
+); // => .d-e-a-b-c
 
 compose(
   double,
   (reduce, add, 0),
   (map, square),
   (4,5,6)
-) // => 154
+); // => 154
 ```
 
 ### Object Methods
@@ -185,7 +185,7 @@ Allows for merging deeply nested maps
 Adds **`$y`** to **`$x`**.
 
 ```scss
-add(10, 2) // => 12
+add(10, 2); // => 12
 ```
 
 #### `multiply($x, $y)`
@@ -193,7 +193,7 @@ add(10, 2) // => 12
 Multiplies **`$x`** by **`$y`**.
 
 ```scss
-multiply(10, 2) // => 20
+multiply(10, 2); // => 20
 ```
 
 #### `subtract($x, $y)`
@@ -201,7 +201,7 @@ multiply(10, 2) // => 20
 Subtracts **`$y`** from **`$x`**.
 
 ```scss
-subtract(10, 2) // => 8
+subtract(10, 2); // => 8
 ```
 
 #### `divide($x, $y)`
@@ -209,7 +209,7 @@ subtract(10, 2) // => 8
 Divides **`$x`** by **`$y`**.
 
 ```scss
-divide(10, 2) // => 5
+divide(10, 2); // => 5
 ```
 
 #### `percent($x, $y)`
@@ -217,7 +217,7 @@ divide(10, 2) // => 5
 Returns **`$y`**'s percent of **`$x`**.
 
 ```scss
-percent(10, 2) // => 50%
+percent(10, 2); // => 50%
 ```
 
 #### `double($x)`
@@ -225,7 +225,7 @@ percent(10, 2) // => 50%
 Doubles **`$x`**.
 
 ```scss
-double(10) // => 20
+double(10); // => 20
 ```
 
 #### `square($x)`
@@ -233,7 +233,7 @@ double(10) // => 20
 Squares **`$x`**.
 
 ```scss
-square(10) // => 100
+square(10); // => 100
 ```
 
 #### `inc($x)`
@@ -241,7 +241,7 @@ square(10) // => 100
 Increments **`$x`**.
 
 ```scss
-inc(10) // => 11
+inc(10); // => 11
 ```
 
 #### `dec($x)`
@@ -249,7 +249,7 @@ inc(10) // => 11
 Decrements **`$x`**.
 
 ```scss
-dec(10) // => 9
+dec(10); // => 9
 ```
 
 #### `sum($num-list...)`
@@ -257,7 +257,7 @@ dec(10) // => 9
 Accepts a list of numbers and returns the sum of them.
 
 ```scss
-sum(10, 5, 2) // => 17
+sum(10, 5, 2); // => 17
 ```
 
 #### `power($num: 1, $exponent: 1)`
@@ -265,7 +265,7 @@ sum(10, 5, 2) // => 17
 Returns the total after multiplying **`$num`** **`$exponent`** times.
 
 ```scss
-power(10, 2) // => 100
+power(10, 2); // => 100
 ```
 
 #### `to-decimal-places($num, $digits: 2)`
@@ -273,7 +273,7 @@ power(10, 2) // => 100
 Returns **`$num`** to **`$digits`** number of significant digits dropping anything beyond it. **`$digits`** is 2 by default since Sass has a default of returning 3 significant digits.
 
 ```scss
-to-decimal-places(10.129, 2) // => 10.12
+to-decimal-places(10.129, 2); // => 10.12
 ```
 ### Misc Methods
 
