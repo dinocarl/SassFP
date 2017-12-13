@@ -1,0 +1,113 @@
+@charset "UTF-8";
+/* # Module: prefixStr */
+/* ------------------- */
+/* Test: Prefixes a string with first argument */
+/*   ✔ [assert-equal] Prefixes a string with first argument */
+/*  */
+/*  */
+/* # Module: suffixStr */
+/* ------------------- */
+/* Test: Suffixes a string with first argument */
+/*   ✔ [assert-equal] Suffixes a string with first argument */
+/*  */
+/*  */
+/* # Module: explode */
+/* ----------------- */
+/* Test: Applies a function to a list to determine whether a given member gets included */
+/*   ✔ [assert-equal] Applies a function to a list to determine whether a given member gets included */
+/*  */
+/*  */
+/* # Module: implode */
+/* ----------------- */
+/* Test: Returns a string where all the members of $list have been concatenated together with $glue between them. */
+/*   ✔ [assert-equal] Returns a string where all the members of $list have been concatenated together with $glue between them. */
+/*  */
+/*  */
+/* # Module: repeat-into-list */
+/* -------------------------- */
+/* Test: Returns a list where $item is represented $times times */
+/*   ✔ [assert-equal] Returns a list where $item is represented $times times */
+/*  */
+/*  */
+/* # Module: slice */
+/* --------------- */
+/* Test: Returns **`$list`**'s members beginning at position **`$start`** and ending at **`$end`**. */
+/*   ✔ [assert-equal] Returns **`$list`**'s members beginning at position **`$start`** and ending at **`$end`**. */
+/*  */
+/*  */
+/* # Module: head */
+/* -------------- */
+/* Test: Returns the first member of $strlist. */
+/*   ✔ [assert-equal] Returns the first member of $strlist. */
+/*  */
+/*  */
+/* # Module: tail */
+/* -------------- */
+/* Test: Returns all but the first member of $strlist. */
+/*   ✔ [assert-equal] Returns all but the first member of $strlist. */
+/*  */
+/*  */
+/* # Module: init */
+/* -------------- */
+/* Test: Returns all but the last member of $strlist. */
+/*   ✔ [assert-equal] Returns all but the last member of $strlist. */
+/*  */
+/*  */
+/* # Module: last */
+/* -------------- */
+/* Test: Returns the last member of $strlist. */
+/*   ✔ [assert-equal] Returns the last member of $strlist. */
+/*  */
+/*  */
+/* # Module: flatten */
+/* ----------------- */
+/* Test: Returns a flattened version of $list. */
+/*   ✔ [assert-equal] Returns a flattened version of $list. */
+/*  */
+/*  */
+/* # Module: filter */
+/* ---------------- */
+/* Test: Converts a string to a list */
+/*   ✔ [assert-equal] Converts a string to a list */
+/*  */
+/*  */
+/* # Module: map */
+/* ------------- */
+/* Test: Returns a new list where each member of $list has had function $fn run against it. */
+/*   ✔ [assert-equal] Returns a new list where each member of $list has had function $fn run against it. */
+/*  */
+/*  */
+/* # Module: reduce */
+/* ---------------- */
+/* Test: Accumulates the result of running each member of $list through $fn starting with the $initial value and $list's first member. */
+/*   ✔ [assert-equal] Accumulates the result of running each member of $list through $fn starting with the $initial value and $list's first member. */
+/*  */
+/*  */
+/* # Module: multiply */
+/* ------------------ */
+/* Test: Multiplies $x by $y. */
+/*   ✔ [assert-equal] Multiplies $x by $y. */
+/*  */
+/*  */
+/* # SUMMARY ---------- */
+/* 15 Tests: */
+/* - 15 Passed */
+/* - 0 Failed */
+/* Stats: */
+/* - 15 Modules */
+/* - 15 Tests */
+/* - 15 Assertions */
+/* -------------------- */
+.test {
+  content: "abd";
+  content: 6 7;
+  content: #e6e6e6 #cc0000 #090909 #1a1a1a #2b2b2b #3c3c3c #4d4d4d #5e5e5e;
+  content: 154;
+  content: 154;
+  content: 154;
+  content: .abc-a-b-c-xyz-asdf;
+  content: ".alexbillycharlie";
+  content: 33.3;
+  content: 33.3;
+  content: 4;
+  content: 2; }

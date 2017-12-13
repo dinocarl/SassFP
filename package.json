@@ -1,0 +1,34 @@
+{
+  "name": "sassfp",
+  "version": "0.1.0",
+  "description": "Library of functional methods for Sass",
+  "main": "SassFP.scss",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node-sass tests/tests.scss tests/tests.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dinocarl/SassFP.git"
+  },
+  "keywords": [
+    "Sass",
+    "Functional",
+    "compose",
+    "pipe",
+    "map",
+    "filter",
+    "reduce"
+  ],
+  "author": " <site@dinocarl.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dinocarl/SassFP/issues"
+  },
+  "homepage": "https://github.com/dinocarl/SassFP#readme",
+  "devDependencies": {
+    "sass-true": "^3.0.2"
+  }
+}

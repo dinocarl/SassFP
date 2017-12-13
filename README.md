@@ -52,21 +52,41 @@ repeat-into-list(3, 10) // => (10, 10, 10)
 
 Returns **`$list`**'s members beginning at position **`$start`** and ending at **`$end`**.
 
+```scss
+rslice(3, 5, ('alex', 'billy', 'charlie', 'dani', 'elliot')) // => ('charlie', 'dani', 'elliot')
+```
+
 #### `head($list)`
 
 Returns the first member of **`$list`**.
+
+```scss
+head(('alex' 'billy' 'charlie' 'dani' 'elliot')) // => 'alex'
+```
 
 #### `tail($list)`
 
 Returns all but the first member of **`$list`**.
 
+```scss
+tail(('alex' 'billy' 'charlie' 'dani' 'elliot')) // => 'billy' 'charlie' 'dani' 'elliot'
+```
+
 #### `init($list)`
 
 Returns all but the last member of **`$list`**.
 
+```scss
+init(('alex' 'billy' 'charlie' 'dani' 'elliot')) // => 'alex' 'billy' 'charlie' 'dani'
+```
+
 #### `last($list)`
 
 Returns the last member of **`$list`**.
+
+```scss
+last(('alex' 'billy' 'charlie' 'dani' 'elliot')) // => 'elliot'
+```
 
 #### `flatten($list...)`
 
@@ -213,7 +233,7 @@ double(10) // => 20
 Squares **`$x`**.
 
 ```scss
-sqaure(10) // => 100
+square(10) // => 100
 ```
 
 #### `inc($x)`

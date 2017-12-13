@@ -1,3 +1,4 @@
+@import "../node_modules/sass-true/sass/true";
 @import '../SassFP';
 
 @function darkenbyten($color) {
@@ -8,14 +9,124 @@
   @return $val > 5;
 }
 
+$strlist: 'alex' 'billy' 'charlie' 'dani' 'elliot';
+$clrlist-nested: (#fff, red, (#222, (#333, #444), #555, (#666, #777)));
+$clrlist-flat: (#fff red #222 #333 #444 #555 #666 #777);
+$clrlist-darkened: (#e6e6e6 #cc0000 #090909 #1a1a1a #2b2b2b #3c3c3c #4d4d4d #5e5e5e);
+
+$suite: (
+  (
+    'prefixStr',
+    'Prefixes a string with first argument',
+    prefixStr('selector', 'one'),
+    'selectorone'
+  ),
+  (
+    'suffixStr',
+    'Suffixes a string with first argument',
+    prefixStr('selector', 'one'),
+    'selectorone'
+  ),
+  (
+    'explode',
+    'Applies a function to a list to determine whether a given member gets included',
+    explode('-', 'selector-one'),
+    'selector' 'one'
+  ),
+  (
+    'implode',
+    'Returns a string where all the members of $list have been concatenated together with $glue between them.',
+    implode('-', ('selector', 'one')),
+    'selector-one'
+  ),
+  (
+    'repeat-into-list',
+    'Returns a list where $item is represented $times times',
+    repeat-into-list(3, 10),
+    10 10 10
+  ),
+  (
+    'slice',
+    'Returns **`$list`**\'s members beginning at position **`$start`** and ending at **`$end`**.',
+    slice(3, 5, $strlist),
+    'charlie' 'dani' 'elliot'
+  ),
+  (
+    'head',
+    'Returns the first member of $strlist.',
+    head($strlist),
+    'alex'
+  ),
+  (
+    'tail',
+    'Returns all but the first member of $strlist.',
+    tail($strlist),
+    'billy' 'charlie' 'dani' 'elliot'
+  ),
+  (
+    'init',
+    'Returns all but the last member of $strlist.',
+    init($strlist),
+    'alex' 'billy' 'charlie' 'dani'
+  ),
+  (
+    'last',
+    'Returns the last member of $strlist.',
+    last($strlist),
+    'elliot'
+  ),
+  (
+    'flatten',
+    'Returns a flattened version of $list.',
+    flatten($clrlist-nested),
+    $clrlist-flat
+  ),
+  (
+    'filter',
+    'Converts a string to a list',
+    filter(gt5, (4,5,6,7)),
+    null null 6 7
+  ),
+  (
+    'map',
+    'Returns a new list where each member of $list has had function $fn run against it.',
+    map(darkenbyten, $clrlist-flat),
+    $clrlist-darkened
+  ),
+  (
+    'reduce',
+    'Accumulates the result of running each member of $list through $fn starting with the $initial value and $list\'s first member.',
+    (
+      reduce(prefixStr, '.', ('alex', 'billy', 'charlie'))
+      reduce(suffixStr, '', ('alex', 'billy', 'charlie'))
+      reduce(add, 0, (4,5,6))
+    ),
+    ".alexbillycharlie" "charliebillyalex" 15
+  ),
+  (
+    'multiply',
+    'Multiplies $x by $y.',
+    multiply(12, 2),
+    24
+  )
+);
+
+@each $test in $suite {
+  @include describe(nth($test, 1)) {
+    @include it(nth($test, 2)) {
+      @include assert-equal(
+        nth($test, 3),
+        nth($test, 4),
+        $inspect: true
+      );
+    }
+  }
+}
+
+@include report;
+
+
 .test {
-  content: (null null 'abd' null);
-  content: filter(gt5, (4,5,6,7));
-  content: compose(
-    (map, darkenbyten),
-    flatten,
-    (#fff, red, (#222, (#333, #444), #555, (#666, #777)))
-  );
   content: pipe(
     (map, square),
     sum,
