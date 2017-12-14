@@ -13,6 +13,7 @@ $strlist: 'alex' 'billy' 'charlie' 'dani' 'elliot';
 $clrlist-nested: (#fff, red, (#222, (#333, #444), #555, (#666, #777)));
 $clrlist-flat: (#fff red #222 #333 #444 #555 #666 #777);
 $clrlist-darkened: (#e6e6e6 #cc0000 #090909 #1a1a1a #2b2b2b #3c3c3c #4d4d4d #5e5e5e);
+$clrobj: (header:(one: #333, two: #444), footer: #666);
 
 $suite: (
   (
@@ -104,10 +105,231 @@ $suite: (
     ".alexbillycharlie" "charliebillyalex" 15
   ),
   (
+    'pipe',
+    'Accepts a list of function names and initial data, outputs the result of each of the functions being run on the successive results from first to last.',
+    (
+      pipe(
+        flatten,
+        (map, darkenbyten),
+        $clrlist-nested
+      )
+      pipe(
+        (join, ('d', 'e')),
+        (implode, '-'),
+        (prefixStr, 'x'),
+        unquote,
+        ('a', 'b', 'c')
+      )
+      pipe(
+        (map, square),
+        (reduce, add, 0),
+        double,
+        (4,5,6)
+      )
+    ),
+    $clrlist-darkened xd-e-a-b-c 154
+  ),
+  (
+    'compose',
+    'Accepts a list of function names and initial data, outputs the result of each of the functions being run on the successive results from last to first.',
+    (
+      compose(
+        (map, darkenbyten),
+        flatten,
+        $clrlist-nested
+      )
+      compose(
+        unquote,
+        (prefixStr, 'x'),
+        (implode, '-'),
+        (join, ('d', 'e')),
+        ('a', 'b', 'c')
+      )
+      compose(
+        double,
+        (reduce, add, 0),
+        (map, square),
+        (4, 5, 6)
+      )
+    ),
+    $clrlist-darkened xd-e-a-b-c 154
+  ),
+  (
+    'prop',
+    'Allows for getting at nested attributes in a Sass map. Uses dot syntax to get at nested attributes. Ensures a null return for any unrecognized paths.',
+    (
+      prop('header.two', $clrobj)
+      prop('footer', $clrobj)
+      prop('body', $clrobj)
+    ),
+    #444 #666 null
+  ),
+  (
+    'add',
+    'Adds $y to $x.',
+    add(12, 2),
+    14
+  ),
+  (
     'multiply',
     'Multiplies $x by $y.',
     multiply(12, 2),
     24
+  ),
+  (
+    'subtract',
+    'Subtracts $y from $x.',
+    subtract(12, 2),
+    10
+  ),
+  (
+    'divide',
+    'Divides $x by $y.',
+    divide(12, 2),
+    6
+  ),
+  (
+    'percent',
+    'Returns $y\'s percent of $x.',
+    percent(6, 12),
+    50%
+  ),
+  (
+    'double',
+    'Doubles $x.',
+    double(10),
+    20
+  ),
+  (
+    'square',
+    'Squares $x.',
+    square(10),
+    100
+  ),
+  (
+    'inc',
+    'Increments $x.',
+    inc(10),
+    11
+  ),
+  (
+    'dec',
+    'Decrements $x.',
+    dec(10),
+    9
+  ),
+  (
+    'sum',
+    'Accepts a list of numbers and returns the sum of them.',
+    sum(10, 5, 2),
+    17
+  ),
+  (
+    'power',
+    'Returns the total after multiplying $num $exponent times.',
+    power(10, 2) power(2, 10),
+    100 1024
+  ),
+  (
+    'to-decimal-places',
+    'Returns $num to $digits number of significant digits dropping anything beyond it.',
+    to-decimal-places(10.129, 2),
+    10.12
+  ),
+  (
+    'to-decimal-places / with compose',
+    'Returns the equivalent output of to-decimal-places using compose',
+    to-decimal-places(33.33333, 1),
+    compose(
+      (multiply, 1/10),
+      floor,
+      (reduce, multiply, 1),
+      (33.33333, 10)
+    )
+  ),
+  (
+    'applyUnit',
+    'Appends $unit to $val',
+    applyUnit(px, 50) applyUnit(em, 50),
+    50px 50em
+  ),
+  (
+    'px',
+    'Shortcut function to apply px unit',
+    px(50),
+    50px
+  ),
+  (
+    'em',
+    'Shortcut function to apply em unit',
+    em(50),
+    50em
+  ),
+  (
+    'vw',
+    'Shortcut function to apply vw unit',
+    vw(50),
+    50vw
+  ),
+  (
+    'vh',
+    'Shortcut function to apply vh unit',
+    vh(50),
+    50vh
+  ),
+  (
+    'rem',
+    'Shortcut function to apply rem unit',
+    rem(50),
+    50rem
+  ),
+  (
+    'applyUnit and shortcuts',
+    'Shortcut unit functions should create the same output as the longform',
+    applyUnit(px, 50) applyUnit(em, 50) applyUnit(vw, 50) applyUnit(vh, 50) applyUnit(rem, 50),
+    px(50) em(50) vw(50) vh(50) rem(50)
+  ),
+  (
+    'is_list',
+    'Returns whether $val is a list.',
+    is_list((#fff, red, #222, #333)) is_list(#fff red #222 #333),
+    true true
+  ),
+  (
+    'is_color',
+    'Returns whether $val is a color.',
+    is_color(red) is_color('red'),
+    true false
+  ),
+  (
+    'is_string',
+    'Returns whether $val is a string.',
+    is_string('val') is_string(false),
+    true false
+  ),
+  (
+    'is_boolean',
+    'Returns whether $val is a boolean.',
+    is_boolean(true) is_boolean('val'),
+    true false
+  ),
+  (
+    'is_number',
+    'Returns whether $val is a number.',
+    is_number(10) is_number('10'),
+    true false
+  ),
+  (
+    'is_null',
+    'Returns whether $val is a null.',
+    is_null(null) is_null(true),
+    true false
+  ),
+  (
+    'is_map',
+    'Returns whether $val is a map.',
+    is_map((header: red)) is_map((header red)),
+    true false
   )
 );
 
@@ -124,53 +346,3 @@ $suite: (
 }
 
 @include report;
-
-
-.test {
-  content: pipe(
-    (map, square),
-    sum,
-    double,
-    (4,5,6)
-  );
-  content: compose(
-    double,
-    sum,
-    (map, square),
-    (4,5,6)
-  );
-  content: compose(
-    double,
-    (reduce, add, 0),
-    (map, square),
-    (4,5,6)
-  );
-  content: compose(
-    unquote,
-    (prefixStr, '.'),
-    (implode, '-'),
-    (fpJoin, ('xyz', 'asdf')),
-    (join, 'abc'),
-    ('a', 'b', 'c')
-  );
-  content: reduce(prefixStr, '.', ('alex', 'billy', 'charlie'));
-  content: to-decimal-places(33.33333, 1);
-  content: compose(
-    (multiply, 1/10),
-    floor,
-    (reduce, multiply, 1),
-    (33.33333, 10)
-  );
-  content: compose(
-    inc,
-    inc,
-    inc,
-    1
-  );
-  content: compose(
-    dec,
-    dec,
-    dec,
-    5
-  );
-}

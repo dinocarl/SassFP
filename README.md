@@ -290,21 +290,41 @@ applyUnit(em, 50); // => 50em
 
 Shortcut function to apply `px` unit
 
+```scss
+px(50); // => 50px
+```
+
 #### `em($val)`
 
 Shortcut function to apply `em` unit
+
+```scss
+em(50); // => 50em
+```
 
 #### `vw($val)`
 
 Shortcut function to apply `vw` unit
 
+```scss
+vw(50); // => 50vw
+```
+
 #### `vh($val)`
 
 Shortcut function to apply `vh` unit
 
+```scss
+vh(50); // => 50vh
+```
+
 #### `rem($val)`
 
 Shortcut function to apply `rem` unit
+
+```scss
+rem(50); // => 50rem
+```
 
 ### Argument-converted Sass Functions
 #### `fpAppend($item, $list)`
@@ -313,12 +333,68 @@ Shortcut function to apply `rem` unit
 
 ### Convenience Type Boolean Methods
 #### `is_list($val)`
+
+Returns whether **`$val`** is a list.
+
+```scss
+is_list((#fff, red, #222, #333)); => true
+is_list(#fff, red, #222, #333); => false
+```
+
 #### `is_color($val)`
+
+Returns whether **`$val`** is a color.
+
+```scss
+is_color(red); => true
+is_color('red'); => false
+```
+
 #### `is_string($val)`
+
+Returns whether **`$val`** is a string.
+
+```scss
+is_string('val'); => true
+is_string(false); => false
+```
+
 #### `is_boolean($val)`
+
+Returns whether **`$val`** is a boolean.
+
+```scss
+is_boolean(false); => true
+is_boolean('val'); => false
+```
+
 #### `is_number($val)`
+
+Returns whether **`$val`** is a number.
+
+```scss
+is_number(10); => true
+is_number('10'); => false
+```
+
 #### `is_null($val)`
+
+Returns whether **`$val`** is a null.
+
+```scss
+is_null(null); => true
+is_null(true); => false
+```
+
 #### `is_map($val)`
+
+Returns whether **`$val`** is a map.
+
+```scss
+is_map((header: red)); => true
+is_map((header red)); => true
+```
+
 
   [ramda]: http://ramdajs.com
   [lodashfp]: https://github.com/lodash/lodash/wiki/FP-Guide

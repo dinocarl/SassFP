@@ -83,31 +83,192 @@
 /*   ✔ [assert-equal] Accumulates the result of running each member of $list through $fn starting with the $initial value and $list's first member. */
 /*  */
 /*  */
+/* # Module: pipe */
+/* -------------- */
+/* Test: Accepts a list of function names and initial data, outputs the result of each of the functions being run on the successive results from first to last. */
+/*   ✔ [assert-equal] Accepts a list of function names and initial data, outputs the result of each of the functions being run on the successive results from first to last. */
+/*  */
+/*  */
+/* # Module: compose */
+/* ----------------- */
+/* Test: Accepts a list of function names and initial data, outputs the result of each of the functions being run on the successive results from last to first. */
+/*   ✔ [assert-equal] Accepts a list of function names and initial data, outputs the result of each of the functions being run on the successive results from last to first. */
+/*  */
+/*  */
+/* # Module: prop */
+/* -------------- */
+/* Test: Allows for getting at nested attributes in a Sass map. Uses dot syntax to get at nested attributes. Ensures a null return for any unrecognized paths. */
+/*   ✔ [assert-equal] Allows for getting at nested attributes in a Sass map. Uses dot syntax to get at nested attributes. Ensures a null return for any unrecognized paths. */
+/*  */
+/*  */
+/* # Module: add */
+/* ------------- */
+/* Test: Adds $y to $x. */
+/*   ✔ [assert-equal] Adds $y to $x. */
+/*  */
+/*  */
 /* # Module: multiply */
 /* ------------------ */
 /* Test: Multiplies $x by $y. */
 /*   ✔ [assert-equal] Multiplies $x by $y. */
 /*  */
 /*  */
+/* # Module: subtract */
+/* ------------------ */
+/* Test: Subtracts $y from $x. */
+/*   ✔ [assert-equal] Subtracts $y from $x. */
+/*  */
+/*  */
+/* # Module: divide */
+/* ---------------- */
+/* Test: Divides $x by $y. */
+/*   ✔ [assert-equal] Divides $x by $y. */
+/*  */
+/*  */
+/* # Module: percent */
+/* ----------------- */
+/* Test: Returns $y's percent of $x. */
+/*   ✔ [assert-equal] Returns $y's percent of $x. */
+/*  */
+/*  */
+/* # Module: double */
+/* ---------------- */
+/* Test: Doubles $x. */
+/*   ✔ [assert-equal] Doubles $x. */
+/*  */
+/*  */
+/* # Module: square */
+/* ---------------- */
+/* Test: Squares $x. */
+/*   ✔ [assert-equal] Squares $x. */
+/*  */
+/*  */
+/* # Module: inc */
+/* ------------- */
+/* Test: Increments $x. */
+/*   ✔ [assert-equal] Increments $x. */
+/*  */
+/*  */
+/* # Module: dec */
+/* ------------- */
+/* Test: Decrements $x. */
+/*   ✔ [assert-equal] Decrements $x. */
+/*  */
+/*  */
+/* # Module: sum */
+/* ------------- */
+/* Test: Accepts a list of numbers and returns the sum of them. */
+/*   ✔ [assert-equal] Accepts a list of numbers and returns the sum of them. */
+/*  */
+/*  */
+/* # Module: power */
+/* --------------- */
+/* Test: Returns the total after multiplying $num $exponent times. */
+/*   ✔ [assert-equal] Returns the total after multiplying $num $exponent times. */
+/*  */
+/*  */
+/* # Module: to-decimal-places */
+/* --------------------------- */
+/* Test: Returns $num to $digits number of significant digits dropping anything beyond it. */
+/*   ✔ [assert-equal] Returns $num to $digits number of significant digits dropping anything beyond it. */
+/*  */
+/*  */
+/* # Module: to-decimal-places / with compose */
+/* ------------------------------------------ */
+/* Test: Returns the equivalent output of to-decimal-places using compose */
+/*   ✔ [assert-equal] Returns the equivalent output of to-decimal-places using compose */
+/*  */
+/*  */
+/* # Module: applyUnit */
+/* ------------------- */
+/* Test: Appends $unit to $val */
+/*   ✔ [assert-equal] Appends $unit to $val */
+/*  */
+/*  */
+/* # Module: px */
+/* ------------ */
+/* Test: Shortcut function to apply px unit */
+/*   ✔ [assert-equal] Shortcut function to apply px unit */
+/*  */
+/*  */
+/* # Module: em */
+/* ------------ */
+/* Test: Shortcut function to apply em unit */
+/*   ✔ [assert-equal] Shortcut function to apply em unit */
+/*  */
+/*  */
+/* # Module: vw */
+/* ------------ */
+/* Test: Shortcut function to apply vw unit */
+/*   ✔ [assert-equal] Shortcut function to apply vw unit */
+/*  */
+/*  */
+/* # Module: vh */
+/* ------------ */
+/* Test: Shortcut function to apply vh unit */
+/*   ✔ [assert-equal] Shortcut function to apply vh unit */
+/*  */
+/*  */
+/* # Module: rem */
+/* ------------- */
+/* Test: Shortcut function to apply rem unit */
+/*   ✔ [assert-equal] Shortcut function to apply rem unit */
+/*  */
+/*  */
+/* # Module: applyUnit and shortcuts */
+/* --------------------------------- */
+/* Test: Shortcut unit functions should create the same output as the longform */
+/*   ✔ [assert-equal] Shortcut unit functions should create the same output as the longform */
+/*  */
+/*  */
+/* # Module: is_list */
+/* ----------------- */
+/* Test: Returns whether $val is a list. */
+/*   ✔ [assert-equal] Returns whether $val is a list. */
+/*  */
+/*  */
+/* # Module: is_color */
+/* ------------------ */
+/* Test: Returns whether $val is a color. */
+/*   ✔ [assert-equal] Returns whether $val is a color. */
+/*  */
+/*  */
+/* # Module: is_string */
+/* ------------------- */
+/* Test: Returns whether $val is a string. */
+/*   ✔ [assert-equal] Returns whether $val is a string. */
+/*  */
+/*  */
+/* # Module: is_boolean */
+/* -------------------- */
+/* Test: Returns whether $val is a boolean. */
+/*   ✔ [assert-equal] Returns whether $val is a boolean. */
+/*  */
+/*  */
+/* # Module: is_number */
+/* ------------------- */
+/* Test: Returns whether $val is a number. */
+/*   ✔ [assert-equal] Returns whether $val is a number. */
+/*  */
+/*  */
+/* # Module: is_null */
+/* ----------------- */
+/* Test: Returns whether $val is a null. */
+/*   ✔ [assert-equal] Returns whether $val is a null. */
+/*  */
+/*  */
+/* # Module: is_map */
+/* ---------------- */
+/* Test: Returns whether $val is a map. */
+/*   ✔ [assert-equal] Returns whether $val is a map. */
+/*  */
+/*  */
 /* # SUMMARY ---------- */
-/* 15 Tests: */
-/* - 15 Passed */
+/* 44 Tests: */
+/* - 44 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 15 Modules */
-/* - 15 Tests */
-/* - 15 Assertions */
+/* - 44 Modules */
+/* - 44 Tests */
+/* - 44 Assertions */
 /* -------------------- */
-.test {
-  content: "abd";
-  content: 6 7;
-  content: #e6e6e6 #cc0000 #090909 #1a1a1a #2b2b2b #3c3c3c #4d4d4d #5e5e5e;
-  content: 154;
-  content: 154;
-  content: 154;
-  content: .abc-a-b-c-xyz-asdf;
-  content: ".alexbillycharlie";
-  content: 33.3;
-  content: 33.3;
-  content: 4;
-  content: 2; }
