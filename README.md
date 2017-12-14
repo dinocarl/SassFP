@@ -393,7 +393,7 @@ Returns whether **`$val`** is a map.
 
 ```scss
 is_map((header: red)); // => true
-is_map((header red)); // => true
+is_map((header red)); // => false
 ```
 
 
