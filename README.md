@@ -337,9 +337,9 @@ rem(50); // => 50rem
 Returns whether **`$val`** is a list.
 
 ```scss
-is_list((#fff, red, #222, #333)); => true
-is_list(#fff red #222 #333); => true
-is_list(#fff); => false
+is_list((#fff, red, #222, #333)); // => true
+is_list(#fff red #222 #333); // => true
+is_list(#fff); // => false
 ```
 
 #### `is_color($val)`
@@ -347,8 +347,8 @@ is_list(#fff); => false
 Returns whether **`$val`** is a color.
 
 ```scss
-is_color(red); => true
-is_color('red'); => false
+is_color(red); // => true
+is_color('red'); // => false
 ```
 
 #### `is_string($val)`
@@ -356,8 +356,8 @@ is_color('red'); => false
 Returns whether **`$val`** is a string.
 
 ```scss
-is_string('val'); => true
-is_string(false); => false
+is_string('val'); // => true
+is_string(false); // => false
 ```
 
 #### `is_boolean($val)`
@@ -365,8 +365,8 @@ is_string(false); => false
 Returns whether **`$val`** is a boolean.
 
 ```scss
-is_boolean(false); => true
-is_boolean('val'); => false
+is_boolean(false); // => true
+is_boolean('val'); // => false
 ```
 
 #### `is_number($val)`
@@ -374,8 +374,8 @@ is_boolean('val'); => false
 Returns whether **`$val`** is a number.
 
 ```scss
-is_number(10); => true
-is_number('10'); => false
+is_number(10); // => true
+is_number('10'); // => false
 ```
 
 #### `is_null($val)`
@@ -383,8 +383,8 @@ is_number('10'); => false
 Returns whether **`$val`** is a null.
 
 ```scss
-is_null(null); => true
-is_null(true); => false
+is_null(null); // => true
+is_null(true); // => false
 ```
 
 #### `is_map($val)`
@@ -392,8 +392,8 @@ is_null(true); => false
 Returns whether **`$val`** is a map.
 
 ```scss
-is_map((header: red)); => true
-is_map((header red)); => true
+is_map((header: red)); // => true
+is_map((header red)); // => true
 ```
 
 
