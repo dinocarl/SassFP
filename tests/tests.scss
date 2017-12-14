@@ -292,8 +292,8 @@ $suite: (
   (
     'is_list',
     'Returns whether $val is a list.',
-    is_list((#fff, red, #222, #333)) is_list(#fff red #222 #333),
-    true true
+    is_list((#fff, red, #222, #333)) is_list(#fff red #222 #333) is_list(#fff),
+    true true false
   ),
   (
     'is_color',

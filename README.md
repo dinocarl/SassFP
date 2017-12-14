@@ -338,7 +338,8 @@ Returns whether **`$val`** is a list.
 
 ```scss
 is_list((#fff, red, #222, #333)); => true
-is_list(#fff, red, #222, #333); => false
+is_list(#fff red #222 #333); => true
+is_list(#fff); => false
 ```
 
 #### `is_color($val)`
