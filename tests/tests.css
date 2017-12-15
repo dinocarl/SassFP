@@ -127,8 +127,8 @@
 /*  */
 /* # Module: percent */
 /* ----------------- */
-/* Test: Returns $y's percent of $x. */
-/*   ✔ [assert-equal] Returns $y's percent of $x. */
+/* Test: Returns $x's percent of $y. */
+/*   ✔ [assert-equal] Returns $x's percent of $y. */
 /*  */
 /*  */
 /* # Module: double */

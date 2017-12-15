@@ -214,10 +214,10 @@ divide(10, 2); // => 5
 
 #### `percent($x, $y)`
 
-Returns **`$y`**'s percent of **`$x`**.
+Returns **`$x`**'s percent of **`$y`**.
 
 ```scss
-percent(10, 2); // => 50%
+percent(2, 10); // => 50%
 ```
 
 #### `double($x)`

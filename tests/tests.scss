@@ -190,7 +190,7 @@ $suite: (
   ),
   (
     'percent',
-    'Returns $y\'s percent of $x.',
+    'Returns $x\'s percent of $y.',
     percent(6, 12),
     50%
   ),
