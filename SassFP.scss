@@ -297,8 +297,8 @@
 }
 
 // allows for the raising of a positive number to a certain power
-// power(20, 2) * 1px; => 400px
-@function power($num: 1, $exponent: 1) {
+// power(2, 20) * 1px; => 400px
+@function power($exponent: 1, $num: 1) {
   $list: repeat-into-list($exponent, $num);
   @return reduce(multiply, 1, $list);
 }
@@ -306,6 +306,12 @@
 // takes a decimal number and limits its significant digits to the value of the 2nd argument passed. defaults to 2
 // to-decimal-places(33.33333) => 33.33
 // to-decimal-places(33.33333, 1) => 33.3
-@function to-decimal-places($base-number, $digits: 2) {
-  @return floor($base-number * power(10, $digits)) / power(10, $digits);
+@function to-decimal-places($digits: 2, $base-number: 1) {
+  $adjuster: power($digits, 10);
+  @return compose(
+    (multiply, 1/$adjuster),
+    floor,
+    (multiply, $adjuster),
+    $base-number
+  );
 }

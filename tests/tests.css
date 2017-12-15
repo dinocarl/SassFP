@@ -173,10 +173,10 @@
 /*   ✔ [assert-equal] Returns $num to $digits number of significant digits dropping anything beyond it. */
 /*  */
 /*  */
-/* # Module: to-decimal-places / with compose */
-/* ------------------------------------------ */
-/* Test: Returns the equivalent output of to-decimal-places using compose */
-/*   ✔ [assert-equal] Returns the equivalent output of to-decimal-places using compose */
+/* # Module: to-decimal-places with alternative implementation */
+/* ----------------------------------------------------------- */
+/* Test: Returns the equivalent output of to-decimal-places using an alternative implemetation */
+/*   ✔ [assert-equal] Returns the equivalent output of to-decimal-places using an alternative implemetation */
 /*  */
 /*  */
 /* # Module: applyUnit */

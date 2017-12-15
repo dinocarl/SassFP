@@ -227,25 +227,20 @@ $suite: (
   (
     'power',
     'Returns the total after multiplying $num $exponent times.',
-    power(10, 2) power(2, 10),
+    power(2, 10) power(10, 2),
     100 1024
   ),
   (
     'to-decimal-places',
     'Returns $num to $digits number of significant digits dropping anything beyond it.',
-    to-decimal-places(10.129, 2),
+    to-decimal-places(2, 10.129),
     10.12
   ),
   (
-    'to-decimal-places / with compose',
-    'Returns the equivalent output of to-decimal-places using compose',
-    to-decimal-places(33.33333, 1),
-    compose(
-      (multiply, 1/10),
-      floor,
-      (reduce, multiply, 1),
-      (33.33333, 10)
-    )
+    'to-decimal-places with alternative implementation',
+    'Returns the equivalent output of to-decimal-places using an alternative implemetation',
+    to-decimal-places(1, 33.33333),
+    floor(33.33333 * power(1, 10)) / power(1, 10)
   ),
   (
     'applyUnit',

@@ -131,7 +131,7 @@ reduce(add, 0, (4,5,6)); // => 15
 
 #### `pipe($params...)`
 
-Accepts a list of arguments where the last item is the initial data and the others are a sequence of functions to run. Returns the result of each of the functions being run on the successive results from first to last. The very last item must be the data being operated on. Functions being passed in with additional parameters take the form of sub-lists.
+Accepts a list of arguments where the last item is the initial data and the others are a sequence of functions to run. Returns the result of each of the functions being run on the successive results from first to last. **The very last item must be the data being operated on.** Functions being passed in with additional parameters take the form of sub-lists.
 
 ```scss
 pipe(
@@ -260,23 +260,23 @@ Accepts a list of numbers and returns the sum of them.
 sum(10, 5, 2); // => 17
 ```
 
-#### `power($num: 1, $exponent: 1)`
+#### `power($exponent: 1, $num: 1)`
 
 Returns the total after multiplying **`$num`** **`$exponent`** times.
 
 ```scss
-power(10, 2); // => 100
+power(2, 10); // => 100 (10^2)
+power(10, 2); // => 1024 (2^10)
 ```
 
-#### `to-decimal-places($num, $digits: 2)`
+#### `to-decimal-places($digits: 2, $num: 1)`
 
 Returns **`$num`** to **`$digits`** number of significant digits dropping anything beyond it. **`$digits`** is 2 by default since Sass has a default of returning 3 significant digits.
 
 ```scss
-to-decimal-places(10.129, 2); // => 10.12
+to-decimal-places(2, 10.129); // => 10.12
 ```
 ### Misc Methods
-
 #### `applyUnit($unit, $val)`
 
 Appends **`$unit`** to **`$val`
