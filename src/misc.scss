@@ -1,0 +1,34 @@
+// Miscellaneous Functions
+
+// takes a value and appends the supplied unit
+// $x: 50;
+// applyUnit(px, $x); => 50px
+// applyUnit(em, $x); => 50em
+@function applyUnit($unit, $val) {
+  @return unquote('#{$val}#{$unit}');
+}
+
+// shortcut function to apply px unit
+@function px($val) {
+  @return applyUnit('px', $val);
+}
+
+// shortcut function to apply em unit
+@function em($val) {
+  @return applyUnit('em', $val);
+}
+
+// shortcut function to apply vw unit
+@function vw($val) {
+  @return applyUnit('vw', $val);
+}
+
+// shortcut function to apply vh unit
+@function vh($val) {
+  @return applyUnit('vh', $val);
+}
+
+// shortcut function to apply rem unit
+@function rem($val) {
+  @return applyUnit('rem', $val);
+}

@@ -1,0 +1,35 @@
+// Object Functions
+
+@import 'type';
+@import 'list';
+
+// allows for getting at nested attributes in a Sass map
+// ensures a null return for any unrecognized paths
+// $colors: (header:(one: #333, two: #444), footer: #666);
+// prop('header.two', $colors); => #444
+// prop('footer', $colors); => #666
+// prop('body', $colors); => null
+@function prop($path, $map) {
+  $keys: explode('.', $path);
+  @each $key in $keys {
+    @if not is_map($map) {
+      $map: (_mt_: null);
+    }
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+// allows for merging deeply nested maps
+@function assign($parent-map, $child-map) {
+  $result: $parent-map;
+  @each $key, $value in $child-map {
+    @if (not map-has-key($result, $key)) or (type-of(map-get($result, $key)) != type-of($value)) or (not (type-of(map-get($result, $key)) == map and type-of($value) == map)) {
+      $result: map-merge($result, ($key: $value));
+    }
+    @else {
+      $result: map-merge($result, ($key: assign(map-get($result, $key), $value)));
+    }
+  }
+  @return $result;
+}

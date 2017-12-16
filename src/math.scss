@@ -1,0 +1,65 @@
+// Mathematical Functions
+
+@import 'list';
+@import 'functional';
+
+// Mathematical Functions
+@function add($x, $y) {
+  @return $x + $y;
+}
+
+@function multiply($x, $y) {
+  @return $x * $y;
+}
+
+@function subtract($x, $y) {
+  @return $x - $y;
+}
+
+@function divide($x, $y) {
+  @return $x / $y;
+}
+
+@function percent($x, $y) {
+  @return percentage(divide($x, $y));
+}
+
+@function square($x) {
+  @return multiply($x, $x);
+}
+
+@function double($x) {
+  @return add($x, $x);
+}
+
+@function inc($x) {
+  @return add($x, 1);
+}
+
+@function dec($x) {
+  @return subtract($x, 1);
+}
+
+// sum is a reduce using the 'add' function with a 0 initial value
+@function sum($num-list...) {
+  @return reduce(add, 0, $num-list);
+}
+
+// allows for the raising of a positive number to a certain power
+// power(2, 20) * 1px; => 400px
+@function power($exponent: 1, $num: 1) {
+  $list: repeat-into-list($exponent, $num);
+  @return reduce(multiply, 1, $list);
+}
+
+// takes a decimal number and limits its significant digits to the value of the 2nd argument passed. defaults to 2
+// to-decimal-places(33.33333, 1) => 33.3
+@function to-decimal-places($digits: 2, $base-number: 1) {
+  $adjuster: power($digits, 10);
+  @return compose(
+    (multiply, 1/$adjuster),
+    floor,
+    (multiply, $adjuster),
+    $base-number
+  );
+}

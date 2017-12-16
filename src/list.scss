@@ -1,0 +1,77 @@
+// List Functions
+// converts a string to a list by splitting on a passed string
+// explode('-', 'selector-one'); => ('selector', 'one')
+@function explode($separator, $str) {
+  $result: ();
+  $sep-length: str-length($separator);
+  $index: str-index($str, $separator);
+  @while $index != null {
+    $item: str-slice($str, 1, $index - 1);
+    $result: append($result, $item);
+    $str: str-slice($str, $index + $sep-length);
+    $index: str-index($str, $separator);
+  }
+  $result: append($result, $str);
+  @return $result;
+}
+
+@function repeat-into-list($times, $item) {
+  $result: ();
+  @for $i from 1 through $times {
+    $result: append($result, $item);
+  }
+  @return $result;
+};
+
+// returns a part of a list from a start value to an end
+@function slice($start, $end, $list) {
+  $accumulated: ();
+  @for $i from $start through $end {
+    $accumulated: append($accumulated, nth($list, $i));
+  }
+  @return $accumulated;
+}
+
+// returns the first member of a list
+@function head($list) {
+  @return nth($list, 1);
+}
+
+// returns all but the first member of a list
+@function tail($list) {
+  @return slice(2, length($list), $list);
+}
+
+// returns all but the last member of a list
+@function init($list) {
+  @return slice(1, length($list) - 1, $list);
+}
+
+// returns the last member of a list
+@function last($list) {
+  @return nth($list, length($list));
+}
+
+// flattens a list
+@function flatten($list...) {
+  // compose and pipe can pass these along as arguments
+  // so this is a 'preflight' step to ensure the input is a list
+  @return _flatten($list);
+}
+
+// internal method that actually does the flattening
+@function _flatten($list) {
+  $result: ();
+  @each $item in $list {
+    @if is_list($item) {
+      $flatten: _flatten($item);
+      @each $i in $flatten {
+        $result: append($result, $i);
+      }
+    }
+    @else {
+      $result: append($result, $item);
+    }
+  }
+  @return $result;
+}

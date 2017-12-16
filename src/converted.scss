@@ -1,0 +1,12 @@
+// Argument-converted Sass Functions
+@function fpAppend($item, $list) {
+  @return append($list, $item);
+}
+
+@function fpJoin($list2, $list1) {
+  @return join($list1, $list2);
+}
+
+@function fpNth($item, $list) {
+  @return nth($list, $item);
+}

@@ -1,0 +1,20 @@
+// String Functions
+@function prefixStr($prefix, $str){
+  @return '#{$prefix}#{$str}';
+}
+
+@function suffixStr($suffix, $str){
+  @return '#{$str}#{$suffix}';
+}
+
+// converts a list to a string with a passed string
+// implode('-', ('selector', 'one')); => 'selector-one'
+@function implode($glue: '', $list: ()) {
+  $result: null;
+  @for $i from 1 through length($list) {
+    $appendor: if($i != length($list), $glue, '');
+    $item: suffixStr($appendor, nth($list, $i));
+    $result: suffixStr($item, $result);
+  }
+  @return $result;
+}

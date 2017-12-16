@@ -1,0 +1,8 @@
+// convenience type-checking functions
+@function is_list($val) {@return type-of($val) == list;}
+@function is_color($val) {@return type-of($val) == color;}
+@function is_string($val) {@return type-of($val) == string;}
+@function is_boolean($val) {@return type-of($val) == bool;}
+@function is_number($val) {@return type-of($val) == number;}
+@function is_null($val) {@return type-of($val) == 'null';}
+@function is_map($val) {@return type-of($val) == map;}
