@@ -53,7 +53,7 @@
 }
 
 // takes a decimal number and limits its significant digits to the value of the 2nd argument passed. defaults to 2
-// to-decimal-places(33.33333, 1) => 33.3
+// to-decimal-places(1, 33.33333) => 33.3
 @function to-decimal-places($digits: 2, $base-number: 1) {
   $adjuster: power($digits, 10);
   @return compose(
