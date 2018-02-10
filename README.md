@@ -279,7 +279,7 @@ to-decimal-places(2, 10.129); // => 10.12
 ### Misc Methods
 #### `applyUnit($unit, $val)`
 
-Appends **`$unit`** to **`$val`
+Appends **`$unit`** to **`$val`**.
 
 ```scss
 applyUnit(px, 50); // => 50px
@@ -288,7 +288,7 @@ applyUnit(em, 50); // => 50em
 
 #### `px($val)`
 
-Shortcut function to apply `px` unit
+Shortcut function to apply **`px`** unit.
 
 ```scss
 px(50); // => 50px
@@ -296,7 +296,7 @@ px(50); // => 50px
 
 #### `em($val)`
 
-Shortcut function to apply `em` unit
+Shortcut function to apply **`em`** unit.
 
 ```scss
 em(50); // => 50em
@@ -304,7 +304,7 @@ em(50); // => 50em
 
 #### `vw($val)`
 
-Shortcut function to apply `vw` unit
+Shortcut function to apply **`vw`** unit.
 
 ```scss
 vw(50); // => 50vw
@@ -312,7 +312,7 @@ vw(50); // => 50vw
 
 #### `vh($val)`
 
-Shortcut function to apply `vh` unit
+Shortcut function to apply **`vh`** unit.
 
 ```scss
 vh(50); // => 50vh
@@ -320,16 +320,40 @@ vh(50); // => 50vh
 
 #### `rem($val)`
 
-Shortcut function to apply `rem` unit
+Shortcut function to apply **`rem`** unit.
 
 ```scss
 rem(50); // => 50rem
 ```
 
 ### Argument-converted Sass Functions
+
+Existing Sass functions with data-last argument orders.
+
 #### `fpAppend($item, $list)`
+
+Adds an item to the end of a provided list. See Sass [append] documentation.
+
+```scss
+fpAppend('charlie', ('alex', 'billy')); // => 'alex' 'billy' 'charlie'
+```
+
 #### `fpJoin($list2, $list1)`
-#### `fpNth($item, $list)`
+
+Joins **`$list2`** to the end of **`$list1`**. See Sass [join] documentation.
+
+```scss
+fpJoin(('charlie' 'dani'), ('alex', 'billy')); // => 'alex' 'billy' 'charlie' 'dani'
+```
+
+#### `fpNth($position, $list)`
+
+Returns the item at **`$position`** from **`$list`**. See Sass [nth] documentation.
+
+```scss
+fpNth(2, ('alex', 'billy')); // => 'billy'
+```
+
 
 ### Convenience Type Boolean Methods
 #### `is_list($val)`
@@ -399,3 +423,7 @@ is_map((header red)); // => false
 
   [ramda]: http://ramdajs.com
   [lodashfp]: https://github.com/lodash/lodash/wiki/FP-Guide
+  [append]: http://sass-lang.com/documentation/Sass/Script/Functions.html#append-instance_method
+  [join]: http://sass-lang.com/documentation/Sass/Script/Functions.html#join-instance_method
+  [nth]: http://sass-lang.com/documentation/Sass/Script/Functions.html#nth-instance_method
+  

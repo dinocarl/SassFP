@@ -7,6 +7,6 @@
   @return join($list1, $list2);
 }
 
-@function fpNth($item, $list) {
-  @return nth($list, $item);
+@function fpNth($position, $list) {
+  @return nth($list, $position);
 }

@@ -221,6 +221,24 @@
 /*   ✔ [assert-equal] Shortcut unit functions should create the same output as the longform */
 /*  */
 /*  */
+/* # Module: fpAppend */
+/* ------------------ */
+/* Test: Is same as native Sass function, append, with argument order converted */
+/*   ✔ [assert-equal] Is same as native Sass function, append, with argument order converted */
+/*  */
+/*  */
+/* # Module: fpJoin */
+/* ---------------- */
+/* Test: Is same as native Sass function, join, with argument order converted */
+/*   ✔ [assert-equal] Is same as native Sass function, join, with argument order converted */
+/*  */
+/*  */
+/* # Module: fpNth */
+/* --------------- */
+/* Test: Is same as native Sass function, nth, with argument order converted */
+/*   ✔ [assert-equal] Is same as native Sass function, nth, with argument order converted */
+/*  */
+/*  */
 /* # Module: is_list */
 /* ----------------- */
 /* Test: Returns whether $val is a list. */
@@ -264,11 +282,11 @@
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 44 Tests: */
-/* - 44 Passed */
+/* 47 Tests: */
+/* - 47 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 44 Modules */
-/* - 44 Tests */
-/* - 44 Assertions */
+/* - 47 Modules */
+/* - 47 Tests */
+/* - 47 Assertions */
 /* -------------------- */
