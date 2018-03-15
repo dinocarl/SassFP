@@ -3,6 +3,11 @@
 @import 'type';
 @import 'list';
 
+// returns the value provided
+@function always($val) {
+  @return $val;
+}
+
 // returns either a null if the predicate is false
 // or the $item back when true
 @function itemOrNull($predicateFn, $item) {

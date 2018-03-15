@@ -85,8 +85,20 @@ $suite: (
     $clrlist-flat
   ),
   (
+    'always',
+    'Returns the value passed to it.',
+    (
+      always(1),
+      always('asdf'),
+      always(('x', 'y', 'z')),
+      always(true),
+      always(false)
+    ),
+    (1, 'asdf', ('x', 'y', 'z'), true, false)
+  ),
+  (
     'filter',
-    'Converts a string to a list',
+    'Returns a new list where $predicate returns true for members of $list.',
     filter(gt5, (4,5,6,7)),
     null null 6 7
   ),
@@ -163,8 +175,20 @@ $suite: (
       prop('header.two', $clrobj)
       prop('footer', $clrobj)
       prop('body', $clrobj)
+      prop('header.two.three.four', $clrobj)
     ),
-    #444 #666 null
+    #444 #666 null null
+  ),
+  (
+    'propOr',
+    'Returns the value of a `prop` lookup when successful, and returns a provided fallback when not.',
+    (
+      propOr(':(', 'header.two', $clrobj)
+      propOr(':(', 'footer', $clrobj)
+      propOr(':(', 'body', $clrobj)
+      propOr(':(', 'header.two.three.four', $clrobj)
+    ),
+    #444 #666 ":(" ":("
   ),
   (
     'add',

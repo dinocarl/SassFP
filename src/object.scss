@@ -20,6 +20,11 @@
   @return $map;
 }
 
+@function propOr($fallback, $path, $map) {
+  $propLookUp: prop($path, $map);
+  @return if(is_null($propLookUp), $fallback, $propLookUp);
+}
+
 // allows for merging deeply nested maps
 @function assign($parent-map, $child-map) {
   $result: $parent-map;

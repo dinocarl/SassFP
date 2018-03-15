@@ -97,6 +97,18 @@ flatten(#fff, red, (#222, #333)); // => (#fff, red, #222, #333)
 ```
 
 ### Functional Methods
+#### `always($val)`
+
+Returns the value passed to it.
+
+```scss
+always(1)  // => 1
+always('asdf')  // => asdf'
+always(('x', 'y', 'z'))  // => ('x', 'y', 'z')
+always(true)  // => true
+always(false)  // => false
+```
+
 #### `map($fn, $list)`
 
 Returns a new list where each member of **`$list`** has had function **`$fn`** run against it.
@@ -172,6 +184,16 @@ $colors: (header:(one: #333, two: #444), footer: #666);
 prop('header.two', $colors); // => #444
 prop('footer', $colors); // => #666
 prop('body', $colors); // => null
+```
+#### `propOr($fallback, $path, $map)`
+
+Returns the value of a `prop` lookup when successful, and returns a provided fallback when not.
+
+```scss
+$colors: (header:(one: #333, two: #444), footer: #666);
+propOr(':(', 'header.two', $colors); // => #444
+propOr(':(', 'footer', $colors); // => #666
+propOr(':(', 'body', $colors); // => ':('
 ```
 
 #### `assign($map1, $map2)`
