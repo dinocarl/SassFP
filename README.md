@@ -40,12 +40,12 @@ Returns a string where all the members of **`$list`** have been concatenated tog
 implode('-', ('selector', 'one')); // => 'selector-one'
 ```
 
-#### `repeat-into-list($times, $item)`
+#### `repeat($times, $item)`
 
 Returns a list where **`$item`** is represented **`$times`** times
 
 ```scss
-repeat-into-list(3, 10); // => (10, 10, 10)
+repeat(3, 10); // => (10, 10, 10)
 ```
 
 #### `slice($start, $end, $list)`

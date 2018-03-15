@@ -15,7 +15,7 @@
   @return $result;
 }
 
-@function repeat-into-list($times, $item) {
+@function repeat($times, $item) {
   $result: ();
   @for $i from 1 through $times {
     $result: append($result, $item);

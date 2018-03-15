@@ -48,7 +48,7 @@
 // allows for the raising of a positive number to a certain power
 // power(2, 20) * 1px; => 400px
 @function power($exponent: 1, $num: 1) {
-  $list: repeat-into-list($exponent, $num);
+  $list: repeat($exponent, $num);
   @return reduce(multiply, 1, $list);
 }
 

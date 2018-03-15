@@ -23,8 +23,8 @@
 /*   ✔ [assert-equal] Returns a string where all the members of $list have been concatenated together with $glue between them. */
 /*  */
 /*  */
-/* # Module: repeat-into-list */
-/* -------------------------- */
+/* # Module: repeat */
+/* ---------------- */
 /* Test: Returns a list where $item is represented $times times */
 /*   ✔ [assert-equal] Returns a list where $item is represented $times times */
 /*  */
@@ -65,10 +65,16 @@
 /*   ✔ [assert-equal] Returns a flattened version of $list. */
 /*  */
 /*  */
+/* # Module: always */
+/* ---------------- */
+/* Test: Returns the value passed to it. */
+/*   ✔ [assert-equal] Returns the value passed to it. */
+/*  */
+/*  */
 /* # Module: filter */
 /* ---------------- */
-/* Test: Converts a string to a list */
-/*   ✔ [assert-equal] Converts a string to a list */
+/* Test: Returns a new list where $predicate returns true for members of $list. */
+/*   ✔ [assert-equal] Returns a new list where $predicate returns true for members of $list. */
 /*  */
 /*  */
 /* # Module: map */
@@ -99,6 +105,12 @@
 /* -------------- */
 /* Test: Allows for getting at nested attributes in a Sass map. Uses dot syntax to get at nested attributes. Ensures a null return for any unrecognized paths. */
 /*   ✔ [assert-equal] Allows for getting at nested attributes in a Sass map. Uses dot syntax to get at nested attributes. Ensures a null return for any unrecognized paths. */
+/*  */
+/*  */
+/* # Module: propOr */
+/* ---------------- */
+/* Test: Returns the value of a `prop` lookup when successful, and returns a provided fallback when not. */
+/*   ✔ [assert-equal] Returns the value of a `prop` lookup when successful, and returns a provided fallback when not. */
 /*  */
 /*  */
 /* # Module: add */
@@ -282,11 +294,11 @@
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 47 Tests: */
-/* - 47 Passed */
+/* 49 Tests: */
+/* - 49 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 47 Modules */
-/* - 47 Tests */
-/* - 47 Assertions */
+/* - 49 Modules */
+/* - 49 Tests */
+/* - 49 Assertions */
 /* -------------------- */

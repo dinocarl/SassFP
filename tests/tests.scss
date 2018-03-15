@@ -43,9 +43,9 @@ $suite: (
     'selector-one'
   ),
   (
-    'repeat-into-list',
+    'repeat',
     'Returns a list where $item is represented $times times',
-    repeat-into-list(3, 10),
+    repeat(3, 10),
     10 10 10
   ),
   (
