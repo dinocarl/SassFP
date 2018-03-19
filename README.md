@@ -122,13 +122,21 @@ map(darkenbyten, (#fff, red, #222, #333)); // => #e6e6e6 #cc0000 #090909 #1a1a1a
 
 #### `filter($predicate, $list)`
 
-Returns a new list where **`$predicate`** returns **`true`** for members of **`$list`**.
+Returns a new list where **`$predicate`** returns **`true`** for members of **`$list`**. Inverse of **`reject`**.
 
 ```scss
 @function gt5($val) {
   @return $val > 5;
 }
 filter(gt5, (4,5,6,7)); // => (6, 7)
+```
+
+#### `reject($predicate, $list)`
+
+Returns a new list where **`$predicate`** returns **`false`** for members of **`$list`**. Inverse of **`filter`**.
+
+```scss
+reject(gt5, (4,5,6,7)); // => (4, 5)
 ```
 
 #### `reduce($fn, $initial, $list)`

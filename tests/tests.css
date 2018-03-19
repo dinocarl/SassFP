@@ -77,6 +77,12 @@
 /*   ✔ [assert-equal] Returns a new list where $predicate returns true for members of $list. */
 /*  */
 /*  */
+/* # Module: reject */
+/* ---------------- */
+/* Test: Returns a new list where $predicate returns false for members of $list. */
+/*   ✔ [assert-equal] Returns a new list where $predicate returns false for members of $list. */
+/*  */
+/*  */
 /* # Module: map */
 /* ------------- */
 /* Test: Returns a new list where each member of $list has had function $fn run against it. */
@@ -294,11 +300,11 @@
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 49 Tests: */
-/* - 49 Passed */
+/* 50 Tests: */
+/* - 50 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 49 Modules */
-/* - 49 Tests */
-/* - 49 Assertions */
+/* - 50 Modules */
+/* - 50 Tests */
+/* - 50 Assertions */
 /* -------------------- */

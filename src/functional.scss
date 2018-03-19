@@ -14,12 +14,28 @@
   @return if(call($predicateFn, $item), $item, null);
 }
 
+// returns either a null if the predicate is true
+// or the $item back when true
+@function nullOrItem($predicateFn, $item) {
+  @return if(call($predicateFn, $item), null, $item);
+}
+
 // accepts a predicate and a list
 // outputs a new list consisting of all the members of the initial list for which the predicate is true
 @function filter($predicate, $list) {
   $accumulated: ();
   @for $i from 1 through length($list) {
     $accumulated: append($accumulated, itemOrNull($predicate, nth($list, $i)));
+  }
+  @return $accumulated;
+}
+
+// accepts a predicate and a list
+// outputs a new list consisting of all the members of the initial list for which the predicate is false
+@function reject($predicate, $list) {
+  $accumulated: ();
+  @for $i from 1 through length($list) {
+    $accumulated: append($accumulated, nullOrItem($predicate, nth($list, $i)));
   }
   @return $accumulated;
 }

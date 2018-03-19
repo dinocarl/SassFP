@@ -103,6 +103,12 @@ $suite: (
     null null 6 7
   ),
   (
+    'reject',
+    'Returns a new list where $predicate returns false for members of $list.',
+    reject(gt5, (4,5,6,7)),
+    4 5 null null
+  ),
+  (
     'map',
     'Returns a new list where each member of $list has had function $fn run against it.',
     map(darkenbyten, $clrlist-flat),
