@@ -17,6 +17,12 @@
 /*   ✔ [assert-equal] Applies a function to a list to determine whether a given member gets included */
 /*  */
 /*  */
+/* # Module: pathToMap */
+/* ------------------- */
+/* Test: Converts a dot-delimited string and any value into a Sass map with that same object heirarchy. */
+/*   ✔ [assert-equal] Converts a dot-delimited string and any value into a Sass map with that same object heirarchy. */
+/*  */
+/*  */
 /* # Module: implode */
 /* ----------------- */
 /* Test: Returns a string where all the members of $list have been concatenated together with $glue between them. */
@@ -307,26 +313,26 @@
 /*  */
 /* # Module: isnt_color */
 /* -------------------- */
-/* Test: Returns whether $val is anot  color. */
-/*   ✔ [assert-equal] Returns whether $val is anot  color. */
+/* Test: Returns whether $val is not a color. */
+/*   ✔ [assert-equal] Returns whether $val is not a color. */
 /*  */
 /*  */
 /* # Module: isnt_string */
 /* --------------------- */
-/* Test: Returns whether $val is a not string. */
-/*   ✔ [assert-equal] Returns whether $val is a not string. */
+/* Test: Returns whether $val is not a string. */
+/*   ✔ [assert-equal] Returns whether $val is not a string. */
 /*  */
 /*  */
 /* # Module: isnt_boolean */
 /* ---------------------- */
-/* Test: Returns whether $val is a bnot oolean. */
-/*   ✔ [assert-equal] Returns whether $val is a bnot oolean. */
+/* Test: Returns whether $val is not a boolean. */
+/*   ✔ [assert-equal] Returns whether $val is not a boolean. */
 /*  */
 /*  */
 /* # Module: isnt_number */
 /* --------------------- */
-/* Test: Returns whether $val is a not number. */
-/*   ✔ [assert-equal] Returns whether $val is a not number. */
+/* Test: Returns whether $val is not a number. */
+/*   ✔ [assert-equal] Returns whether $val is not a number. */
 /*  */
 /*  */
 /* # Module: isnt_null */
@@ -342,11 +348,11 @@
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 57 Tests: */
-/* - 57 Passed */
+/* 58 Tests: */
+/* - 58 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 57 Modules */
-/* - 57 Tests */
-/* - 57 Assertions */
+/* - 58 Modules */
+/* - 58 Tests */
+/* - 58 Assertions */
 /* -------------------- */

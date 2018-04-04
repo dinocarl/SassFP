@@ -12,7 +12,7 @@
 @function prop($path, $map) {
   $keys: explode('.', $path);
   @each $key in $keys {
-    @if not is_map($map) {
+    @if isnt_map($map) {
       $map: (_mt_: null);
     }
     $map: map-get($map, $key);

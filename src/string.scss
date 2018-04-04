@@ -18,3 +18,24 @@
   }
   @return $result;
 }
+
+// converts a dot-delimited string and any value into
+// a Sass map with that same object heirarchy
+// pathToMap('x', 10px); => (x: 10px)
+// pathToMap('x.y', 10px); => (x: (y: 10px))
+// pathToMap('x.y.z', 10px); => (x: (y: (z: 10px)))
+@function pathToMap($path, $val) {
+  $fst-item: $path;
+  $snd-item: '';
+  $index: str-index($path, '.');
+  // recurse the function
+  @if isnt_null($index) {
+    $fst-item: str-slice($path, 1, $index - 1);
+    $snd-item: str-slice($path, $index + 1, str-length($path));
+    @return (#{$fst-item}: pathToMap($snd-item, $val));
+  }
+  //  base case
+  @else {
+    @return (#{$path}: $val);
+  }
+}

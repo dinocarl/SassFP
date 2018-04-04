@@ -17,7 +17,7 @@ prefixStr('selector', 'one'); // => 'selectorone'
 
 #### `suffixStr($suffix, $str)`
 
-Returns **`$str`** with **`$suffix`** appended to it
+Returns **`$str`** with **`$suffix`** appended to it.
 
 ```scss
 suffixStr('selector', 'one'); // => 'oneselector'
@@ -25,11 +25,22 @@ suffixStr('selector', 'one'); // => 'oneselector'
 
 #### `explode($separator, $str)`
 
-Converts a string to a list by splitting on $separator
+Converts a string to a list by splitting on $separator.
 
 ```scss
 explode('-', 'selector-one'); // => ('selector', 'one')
 ```
+
+#### `pathToMap($path, $val)`
+
+Converts a dot-delimited string and any value into a Sass map with that same object heirarchy.
+
+```scss
+pathToMap('x', 10px); => (x: 10px)
+pathToMap('x.y', 10px); => (x: (y: 10px))
+pathToMap('x.y.z', 10px); => (x: (y: (z: 10px)))
+```
+
 
 ### List Methods
 #### `implode($glue: '', $list: ())`
@@ -103,8 +114,8 @@ Returns the value passed to it.
 
 ```scss
 always(1)  // => 1
-always('asdf')  // => asdf'
-always(('x', 'y', 'z'))  // => ('x', 'y', 'z')
+always('asdf')  // => "asdf"
+always(('x', 'y', 'z'))  // => ("x", "y", "z")
 always(true)  // => true
 always(false)  // => false
 ```
