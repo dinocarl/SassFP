@@ -375,6 +375,48 @@ $suite: (
     'Returns whether $val is a map.',
     is_map((header: red)) is_map((header red)),
     true false
+  ),
+  (
+    'isnt_list',
+    'Returns whether $val is not a list.',
+    isnt_list((#fff, red, #222, #333)) isnt_list(#fff red #222 #333) isnt_list(#fff),
+    false false true
+  ),
+  (
+    'isnt_color',
+    'Returns whether $val is anot  color.',
+    isnt_color(red) isnt_color('red'),
+    false true
+  ),
+  (
+    'isnt_string',
+    'Returns whether $val is a not string.',
+    isnt_string('val') isnt_string(false),
+    false true
+  ),
+  (
+    'isnt_boolean',
+    'Returns whether $val is a bnot oolean.',
+    isnt_boolean(true) isnt_boolean('val'),
+    false true
+  ),
+  (
+    'isnt_number',
+    'Returns whether $val is a not number.',
+    isnt_number(10) isnt_number('10'),
+    false true
+  ),
+  (
+    'isnt_null',
+    'Returns whether $val is not a null.',
+    isnt_null(null) isnt_null(true),
+    false true
+  ),
+  (
+    'isnt_map',
+    'Returns whether $val is not a map.',
+    isnt_map((header: red)) isnt_map((header red)),
+    false true
   )
 );
 

@@ -450,6 +450,70 @@ is_map((header: red)); // => true
 is_map((header red)); // => false
 ```
 
+#### `isnt_list($val)`
+
+Returns whether **`$val`** is not a list.
+
+```scss
+isnt_list((#fff, red, #222, #333)); // => false
+isnt_list(#fff red #222 #333); // => false
+isnt_list(#fff); // => true
+```
+
+#### `isnt_color($val)`
+
+Returns whether **`$val`** is not a color.
+
+```scss
+isnt_color(red); // => false
+isnt_color('red'); // => true
+```
+
+#### `isnt_string($val)`
+
+Returns whether **`$val`** is not a string.
+
+```scss
+isnt_string('val'); // => false
+isnt_string(false); // => true
+```
+
+#### `isnt_boolean($val)`
+
+Returns whether **`$val`** is not a boolean.
+
+```scss
+isnt_boolean(false); // => false
+isnt_boolean('val'); // => true
+```
+
+#### `isnt_number($val)`
+
+Returns whether **`$val`** is not a number.
+
+```scss
+isnt_number(10); // => false
+isnt_number('10'); // => true
+```
+
+#### `isnt_null($val)`
+
+Returns whether **`$val`** is not a null.
+
+```scss
+isnt_null(null); // => false
+isnt_null(true); // => true
+```
+
+#### `isnt_map($val)`
+
+Returns whether **`$val`** is not a map.
+
+```scss
+isnt_map((header: red)); // => false
+isnt_map((header red)); // => true
+```
+
 
   [ramda]: http://ramdajs.com
   [lodashfp]: https://github.com/lodash/lodash/wiki/FP-Guide

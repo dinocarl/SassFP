@@ -299,12 +299,54 @@
 /*   ✔ [assert-equal] Returns whether $val is a map. */
 /*  */
 /*  */
+/* # Module: isnt_list */
+/* ------------------- */
+/* Test: Returns whether $val is not a list. */
+/*   ✔ [assert-equal] Returns whether $val is not a list. */
+/*  */
+/*  */
+/* # Module: isnt_color */
+/* -------------------- */
+/* Test: Returns whether $val is anot  color. */
+/*   ✔ [assert-equal] Returns whether $val is anot  color. */
+/*  */
+/*  */
+/* # Module: isnt_string */
+/* --------------------- */
+/* Test: Returns whether $val is a not string. */
+/*   ✔ [assert-equal] Returns whether $val is a not string. */
+/*  */
+/*  */
+/* # Module: isnt_boolean */
+/* ---------------------- */
+/* Test: Returns whether $val is a bnot oolean. */
+/*   ✔ [assert-equal] Returns whether $val is a bnot oolean. */
+/*  */
+/*  */
+/* # Module: isnt_number */
+/* --------------------- */
+/* Test: Returns whether $val is a not number. */
+/*   ✔ [assert-equal] Returns whether $val is a not number. */
+/*  */
+/*  */
+/* # Module: isnt_null */
+/* ------------------- */
+/* Test: Returns whether $val is not a null. */
+/*   ✔ [assert-equal] Returns whether $val is not a null. */
+/*  */
+/*  */
+/* # Module: isnt_map */
+/* ------------------ */
+/* Test: Returns whether $val is not a map. */
+/*   ✔ [assert-equal] Returns whether $val is not a map. */
+/*  */
+/*  */
 /* # SUMMARY ---------- */
-/* 50 Tests: */
-/* - 50 Passed */
+/* 57 Tests: */
+/* - 57 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 50 Modules */
-/* - 50 Tests */
-/* - 50 Assertions */
+/* - 57 Modules */
+/* - 57 Tests */
+/* - 57 Assertions */
 /* -------------------- */

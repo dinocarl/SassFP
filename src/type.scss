@@ -6,3 +6,12 @@
 @function is_number($val) {@return type-of($val) == number;}
 @function is_null($val) {@return type-of($val) == 'null';}
 @function is_map($val) {@return type-of($val) == map;}
+
+// inverses
+@function isnt_list($val) {@return not is_list($val); }
+@function isnt_color($val) {@return not is_color($val); }
+@function isnt_string($val) {@return not is_string($val); }
+@function isnt_boolean($val) {@return not is_boolean($val); }
+@function isnt_number($val) {@return not is_number($val); }
+@function isnt_null($val) {@return not is_null($val); }
+@function isnt_map($val) {@return not is_map($val); }
