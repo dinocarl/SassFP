@@ -2,6 +2,7 @@
 
 @import 'type';
 @import 'list';
+@import 'string';
 
 // allows for getting at nested attributes in a Sass map
 // ensures a null return for any unrecognized paths
@@ -29,11 +30,11 @@
 @function assign($parent-map, $child-map) {
   $result: $parent-map;
   @each $key, $value in $child-map {
-    @if (not map-has-key($result, $key)) or (type-of(map-get($result, $key)) != type-of($value)) or (not (type-of(map-get($result, $key)) == map and type-of($value) == map)) {
+    @if (not map-has-key($result, $key)) or (type-of(prop($key, $result)) != type-of($value)) or (not (is_map(prop($key, $result)) and is_map($value))) {
       $result: map-merge($result, ($key: $value));
     }
     @else {
-      $result: map-merge($result, ($key: assign(map-get($result, $key), $value)));
+      $result: map-merge($result, ($key: assign(prop($key, $result), $value)));
     }
   }
   @return $result;

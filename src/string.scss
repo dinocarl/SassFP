@@ -1,4 +1,7 @@
 // String Functions
+
+@import 'type';
+
 @function prefixStr($prefix, $str){
   @return '#{$prefix}#{$str}';
 }

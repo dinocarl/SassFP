@@ -207,6 +207,16 @@ $suite: (
     #444 #666 ":(" ":("
   ),
   (
+    'assign',
+    'Merges 2 deeply-nested map objects.',
+    (
+      assign($clrobj, (header: (one: red)))
+      assign($clrobj, (header: (three: red)))
+    ),
+    (header:(one: red, two: #444), footer: #666)
+    (header:(one: #333, two: #444, three: red), footer: #666)
+  ),
+  (
     'add',
     'Adds $y to $x.',
     add(12, 2),

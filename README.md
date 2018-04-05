@@ -217,7 +217,12 @@ propOr(':(', 'body', $colors); // => ':('
 
 #### `assign($map1, $map2)`
 
-Allows for merging deeply nested maps
+Merges 2 deeply-nested map objects.
+```scss
+$colors: (header:(one: #333, two: #444), footer: #666);
+assign($colors, (header: (one: red))); // => (header:(one: red, two: #444), footer: #666)
+assign($colors, (header: (three: red))); // => (header:(one: #333, two: #444, three: red), footer: #666)
+```
 
 
 ### Mathematical Methods

@@ -125,6 +125,12 @@
 /*   ✔ [assert-equal] Returns the value of a `prop` lookup when successful, and returns a provided fallback when not. */
 /*  */
 /*  */
+/* # Module: assign */
+/* ---------------- */
+/* Test: Merges 2 deeply-nested map objects. */
+/*   ✔ [assert-equal] Merges 2 deeply-nested map objects. */
+/*  */
+/*  */
 /* # Module: add */
 /* ------------- */
 /* Test: Adds $y to $x. */
@@ -348,11 +354,11 @@
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 58 Tests: */
-/* - 58 Passed */
+/* 59 Tests: */
+/* - 59 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 58 Modules */
-/* - 58 Tests */
-/* - 58 Assertions */
+/* - 59 Modules */
+/* - 59 Tests */
+/* - 59 Assertions */
 /* -------------------- */
