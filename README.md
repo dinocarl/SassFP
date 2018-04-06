@@ -218,10 +218,22 @@ propOr(':(', 'body', $colors); // => ':('
 #### `assign($map1, $map2)`
 
 Merges 2 deeply-nested map objects.
+
 ```scss
 $colors: (header:(one: #333, two: #444), footer: #666);
 assign($colors, (header: (one: red))); // => (header:(one: red, two: #444), footer: #666)
 assign($colors, (header: (three: red))); // => (header:(one: #333, two: #444, three: red), footer: #666)
+```
+
+#### `pick($key-list, $map)`
+
+Creates new map object from **`$map`** selecting keys provided by **`$key-list`**.
+
+```scss
+$colors: (header:(one: #333, two: #444), footer: #666);
+pick('footer', $colors); // => (footer: #666)
+pick('header.one', $colors); // => (header:(one: #333))
+pick(('header', 'footer'), $colors); // same as original
 ```
 
 

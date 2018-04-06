@@ -217,6 +217,18 @@ $suite: (
     (header:(one: #333, two: #444, three: red), footer: #666)
   ),
   (
+    'pick',
+    'Creates new map object from list of keys and a given map object.',
+    (
+      pick('footer', $clrobj)
+      pick('header.one', $clrobj)
+      pick(('header', 'footer'), $clrobj)
+    ),
+    (footer: #666)
+    (header:(one: #333))
+    $clrobj
+  ),
+  (
     'add',
     'Adds $y to $x.',
     add(12, 2),

@@ -131,6 +131,12 @@
 /*   ✔ [assert-equal] Merges 2 deeply-nested map objects. */
 /*  */
 /*  */
+/* # Module: pick */
+/* -------------- */
+/* Test: Creates new map object from list of keys and a given map object. */
+/*   ✔ [assert-equal] Creates new map object from list of keys and a given map object. */
+/*  */
+/*  */
 /* # Module: add */
 /* ------------- */
 /* Test: Adds $y to $x. */
@@ -354,11 +360,11 @@
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 59 Tests: */
-/* - 59 Passed */
+/* 60 Tests: */
+/* - 60 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 59 Modules */
-/* - 59 Tests */
-/* - 59 Assertions */
+/* - 60 Modules */
+/* - 60 Tests */
+/* - 60 Assertions */
 /* -------------------- */

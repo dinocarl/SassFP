@@ -3,6 +3,7 @@
 @import 'type';
 @import 'list';
 @import 'string';
+@import 'functional';
 
 // allows for getting at nested attributes in a Sass map
 // ensures a null return for any unrecognized paths
@@ -39,3 +40,18 @@
   }
   @return $result;
 }
+
+// creates new map object from list of keys and a given map object
+@function pick($key-list, $obj) {
+  $accumulated: ();
+  @each $key in $key-list {
+    $accumulated: compose(
+      (assign, $accumulated),
+      (pathToMap, $key),
+      (prop, $key),
+      $obj
+    );
+  }
+  @return $accumulated;
+}
+
