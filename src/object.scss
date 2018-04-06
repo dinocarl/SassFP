@@ -31,7 +31,13 @@
 @function assign($parent-map, $child-map) {
   $result: $parent-map;
   @each $key, $value in $child-map {
-    @if (not map-has-key($result, $key)) or (type-of(prop($key, $result)) != type-of($value)) or (not (is_map(prop($key, $result)) and is_map($value))) {
+    @if (
+      is_null(prop($key, $result))
+    ) or (
+      type-of(prop($key, $result)) != type-of($value)
+    ) or (
+      not (is_map(prop($key, $result)) and is_map($value))
+    ) {
       $result: map-merge($result, ($key: $value));
     }
     @else {
