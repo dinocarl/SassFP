@@ -1,4 +1,7 @@
 // List Functions
+
+@import 'converted';
+
 // converts a string to a list by splitting on a passed string
 // explode('-', 'selector-one'); => ('selector', 'one')
 @function explode($separator, $str) {
@@ -74,4 +77,19 @@
     }
   }
   @return $result;
+}
+
+// returns a 2 member list where $list is split along
+// whether its members evaluate $predicate as true
+@function partition($predicateFn, $list) {
+  $true-list: ();
+  $false-list: ();
+  @each $item in $list {
+    @if call($predicateFn, $item) {
+      $true-list: fpAppend($item, $true-list);
+    } @else {
+      $false-list: fpAppend($item, $false-list);
+    }
+  }
+  @return ($true-list, $false-list);
 }

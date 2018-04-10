@@ -107,6 +107,17 @@ Returns a flattened version of **`$list`**.
 flatten(#fff, red, (#222, #333)); // => (#fff, red, #222, #333)
 ```
 
+#### `partition($predicate, $list)`
+
+Returns 2-dimensional list where the first member contains all the members of **`$list`** for which **`$predicate`** is **`true`**, and the second, all those for which it is **`false`**.
+
+```scss
+partition(gt5, (4,5,6,7)); // => ((6 7), (4 5))
+partition(gt5, (0,1,2,3)); // => ((), (0 1 2 3))
+partition(gt5, (6,7,8,9)); // => ((6 7 8 9), ())
+```
+
+
 ### Functional Methods
 #### `always($val)`
 
@@ -548,4 +559,3 @@ isnt_map((header red)); // => true
   [append]: http://sass-lang.com/documentation/Sass/Script/Functions.html#append-instance_method
   [join]: http://sass-lang.com/documentation/Sass/Script/Functions.html#join-instance_method
   [nth]: http://sass-lang.com/documentation/Sass/Script/Functions.html#nth-instance_method
-  

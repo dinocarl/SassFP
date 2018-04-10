@@ -71,6 +71,12 @@
 /*   ✔ [assert-equal] Returns a flattened version of $list. */
 /*  */
 /*  */
+/* # Module: partition */
+/* ------------------- */
+/* Test: Returns a split version of $list. */
+/*   ✔ [assert-equal] Returns a split version of $list. */
+/*  */
+/*  */
 /* # Module: always */
 /* ---------------- */
 /* Test: Returns the value passed to it. */
@@ -360,11 +366,11 @@
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 60 Tests: */
-/* - 60 Passed */
+/* 61 Tests: */
+/* - 61 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 60 Modules */
-/* - 60 Tests */
-/* - 60 Assertions */
+/* - 61 Modules */
+/* - 61 Tests */
+/* - 61 Assertions */
 /* -------------------- */
