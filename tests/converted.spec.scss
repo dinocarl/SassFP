@@ -1,0 +1,25 @@
+// Specs for Converted functions
+
+@import '../src/converted';
+
+$converted-suite: (
+  (
+    'fpAppend',
+    'Is same as native Sass function, append, with argument order converted',
+    fpAppend('frankie', $strlist),
+    append($strlist, 'frankie')
+  ),
+  (
+    'fpJoin',
+    'Is same as native Sass function, join, with argument order converted',
+    fpJoin($listfrag2, $listfrag1),
+    join($listfrag1, $listfrag2)
+  ),
+  (
+    'fpNth',
+    'Is same as native Sass function, nth, with argument order converted',
+    fpNth(1, $strlist),
+    nth($strlist, 1)
+  )
+);
+

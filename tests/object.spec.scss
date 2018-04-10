@@ -1,0 +1,53 @@
+// Specs for Object functions
+
+@import '../src/object';
+
+$object-suite: (
+  (
+    'prop',
+    'Allows for getting at nested attributes in a Sass map. Uses dot syntax to get at nested attributes. Ensures a null return for any unrecognized paths.',
+    (
+      prop('header.two', $clrobj)
+      prop('footer', $clrobj)
+      prop('body', $clrobj)
+      prop('header.two.three.four', $clrobj)
+    ),
+    #444 #666 null null
+  ),
+  (
+    'propOr',
+    'Returns the value of a `prop` lookup when successful, and returns a provided fallback when not.',
+    (
+      propOr(':(', 'header.two', $clrobj)
+      propOr(':(', 'footer', $clrobj)
+      propOr(':(', 'body', $clrobj)
+      propOr(':(', 'header.two.three.four', $clrobj)
+    ),
+    #444 #666 ":(" ":("
+  ),
+  (
+    'assign',
+    'Merges 2 deeply-nested map objects.',
+    (
+      assign($clrobj, (header: (one: red)))
+      assign($clrobj, (header: (three: red)))
+    ),
+    (header:(one: red, two: #444), footer: #666)
+    (header:(one: #333, two: #444, three: red), footer: #666)
+  ),
+  (
+    'pick',
+    'Creates new map object from list of keys and a given map object.',
+    (
+      pick('footer', $clrobj)
+      pick('header.one', $clrobj)
+      pick(('header', 'footer'), $clrobj)
+      pick('arm', $clrobj)
+    ),
+    (footer: #666)
+    (header:(one: #333))
+    $clrobj
+    (arm: null)
+  )
+);
+

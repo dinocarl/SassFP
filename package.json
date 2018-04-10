@@ -1,12 +1,13 @@
 {
   "name": "sassfp",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Library of functional methods for Sass",
   "main": "SassFP.scss",
   "directories": {
     "test": "tests"
   },
   "scripts": {
+    "tdd": "node-sass tests/tests.scss tests/tests.css --watch",
     "test": "node-sass tests/tests.scss tests/tests.css"
   },
   "repository": {

@@ -1,0 +1,91 @@
+// Specs for Type functions
+
+@import '../src/type';
+
+$type-suite: (
+  (
+    'is_list',
+    'Returns whether $val is a list.',
+    is_list((#fff, red, #222, #333)) is_list(#fff red #222 #333) is_list(#fff),
+    true true false
+  ),
+  (
+    'is_color',
+    'Returns whether $val is a color.',
+    is_color(red) is_color('red'),
+    true false
+  ),
+  (
+    'is_string',
+    'Returns whether $val is a string.',
+    is_string('val') is_string(false),
+    true false
+  ),
+  (
+    'is_boolean',
+    'Returns whether $val is a boolean.',
+    is_boolean(true) is_boolean('val'),
+    true false
+  ),
+  (
+    'is_number',
+    'Returns whether $val is a number.',
+    is_number(10) is_number('10'),
+    true false
+  ),
+  (
+    'is_null',
+    'Returns whether $val is a null.',
+    is_null(null) is_null(true),
+    true false
+  ),
+  (
+    'is_map',
+    'Returns whether $val is a map.',
+    is_map((header: red)) is_map((header red)),
+    true false
+  ),
+  (
+    'isnt_list',
+    'Returns whether $val is not a list.',
+    isnt_list((#fff, red, #222, #333)) isnt_list(#fff red #222 #333) isnt_list(#fff),
+    false false true
+  ),
+  (
+    'isnt_color',
+    'Returns whether $val is not a color.',
+    isnt_color(red) isnt_color('red'),
+    false true
+  ),
+  (
+    'isnt_string',
+    'Returns whether $val is not a string.',
+    isnt_string('val') isnt_string(false),
+    false true
+  ),
+  (
+    'isnt_boolean',
+    'Returns whether $val is not a boolean.',
+    isnt_boolean(true) isnt_boolean('val'),
+    false true
+  ),
+  (
+    'isnt_number',
+    'Returns whether $val is not a number.',
+    isnt_number(10) isnt_number('10'),
+    false true
+  ),
+  (
+    'isnt_null',
+    'Returns whether $val is not a null.',
+    isnt_null(null) isnt_null(true),
+    false true
+  ),
+  (
+    'isnt_map',
+    'Returns whether $val is not a map.',
+    isnt_map((header: red)) isnt_map((header red)),
+    false true
+  )
+);
+

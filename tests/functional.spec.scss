@@ -1,0 +1,97 @@
+// Specs for Functional functions
+
+@import '../src/functional';
+
+$functional-suite: (
+  (
+    'always',
+    'Returns the value passed to it.',
+    (
+      always(1),
+      always('asdf'),
+      always(('x', 'y', 'z')),
+      always(true),
+      always(false)
+    ),
+    (1, 'asdf', ('x', 'y', 'z'), true, false)
+  ),
+  (
+    'filter',
+    'Returns a new list where $predicate returns true for members of $list.',
+    filter(gt5, (4,5,6,7)),
+    6 7
+  ),
+  (
+    'reject',
+    'Returns a new list where $predicate returns false for members of $list.',
+    reject(gt5, (4,5,6,7)),
+    4 5
+  ),
+  (
+    'map',
+    'Returns a new list where each member of $list has had function $fn run against it.',
+    map(darkenbyten, $clrlist-flat),
+    $clrlist-darkened
+  ),
+  (
+    'reduce',
+    'Accumulates the result of running each member of $list through $fn starting with the $initial value and $list\'s first member.',
+    (
+      reduce(prefixStr, '.', ('alex', 'billy', 'charlie'))
+      reduce(suffixStr, '', ('alex', 'billy', 'charlie'))
+      reduce(add, 0, (4,5,6))
+    ),
+    ".alexbillycharlie" "charliebillyalex" 15
+  ),
+  (
+    'pipe',
+    'Accepts a list of function names and initial data, outputs the result of each of the functions being run on the successive results from first to last.',
+    (
+      pipe(
+        flatten,
+        (map, darkenbyten),
+        $clrlist-nested
+      )
+      pipe(
+        (join, ('d', 'e')),
+        (implode, '-'),
+        (prefixStr, 'x'),
+        unquote,
+        ('a', 'b', 'c')
+      )
+      pipe(
+        (map, square),
+        (reduce, add, 0),
+        double,
+        (4,5,6)
+      )
+    ),
+    $clrlist-darkened xd-e-a-b-c 154
+  ),
+  (
+    'compose',
+    'Accepts a list of function names and initial data, outputs the result of each of the functions being run on the successive results from last to first.',
+    (
+      compose(
+        (map, darkenbyten),
+        flatten,
+        $clrlist-nested
+      )
+      compose(
+        unquote,
+        (prefixStr, 'x'),
+        (implode, '-'),
+        (join, ('d', 'e')),
+        ('a', 'b', 'c')
+      )
+      compose(
+        double,
+        (reduce, add, 0),
+        (map, square),
+        (4, 5, 6)
+      )
+    ),
+    $clrlist-darkened xd-e-a-b-c 154
+  )
+);
+

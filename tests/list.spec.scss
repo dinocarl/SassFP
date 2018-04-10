@@ -1,0 +1,65 @@
+// Specs for String functions
+
+@import '../src/list';
+
+$list-suite: (
+  (
+    'implode',
+    'Returns a string where all the members of $list have been concatenated together with $glue between them.',
+    implode('-', ('selector', 'one')),
+    'selector-one'
+  ),
+  (
+    'repeat',
+    'Returns a list where $item is represented $times times',
+    repeat(3, 10),
+    10 10 10
+  ),
+  (
+    'slice',
+    'Returns **`$list`**\'s members beginning at position **`$start`** and ending at **`$end`**.',
+    slice(3, 5, $strlist),
+    'charlie' 'dani' 'elliot'
+  ),
+  (
+    'head',
+    'Returns the first member of $strlist.',
+    head($strlist),
+    'alex'
+  ),
+  (
+    'tail',
+    'Returns all but the first member of $strlist.',
+    tail($strlist),
+    'billy' 'charlie' 'dani' 'elliot'
+  ),
+  (
+    'init',
+    'Returns all but the last member of $strlist.',
+    init($strlist),
+    'alex' 'billy' 'charlie' 'dani'
+  ),
+  (
+    'last',
+    'Returns the last member of $strlist.',
+    last($strlist),
+    'elliot'
+  ),
+  (
+    'flatten',
+    'Returns a flattened version of $list.',
+    flatten($clrlist-nested),
+    $clrlist-flat
+  ),
+  (
+    'partition',
+    'Returns a split version of $list.',
+    (
+      partition(gt5, (4,5,6,7)),
+      partition(gt5, (0,1,2,3)),
+      partition(gt5, (6,7,8,9)),
+    ),
+    ((6 7, 4 5), ((), 0 1 2 3), (6 7 8 9, ()))
+  )
+);
+

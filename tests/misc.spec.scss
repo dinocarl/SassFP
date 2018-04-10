@@ -1,0 +1,49 @@
+// Specs for Miscellaneous functions
+
+@import '../src/misc';
+
+$misc-suite: (
+  (
+    'applyUnit',
+    'Appends $unit to $val',
+    applyUnit(px, 50) applyUnit(em, 50),
+    50px 50em
+  ),
+  (
+    'px',
+    'Shortcut function to apply px unit',
+    px(50),
+    50px
+  ),
+  (
+    'em',
+    'Shortcut function to apply em unit',
+    em(50),
+    50em
+  ),
+  (
+    'vw',
+    'Shortcut function to apply vw unit',
+    vw(50),
+    50vw
+  ),
+  (
+    'vh',
+    'Shortcut function to apply vh unit',
+    vh(50),
+    50vh
+  ),
+  (
+    'rem',
+    'Shortcut function to apply rem unit',
+    rem(50),
+    50rem
+  ),
+  (
+    'applyUnit and shortcuts',
+    'Shortcut unit functions should create the same output as the longform',
+    applyUnit(px, 50) applyUnit(em, 50) applyUnit(vw, 50) applyUnit(vh, 50) applyUnit(rem, 50),
+    px(50) em(50) vw(50) vh(50) rem(50)
+  )
+);
+

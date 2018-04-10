@@ -1,0 +1,85 @@
+// Specs for Math functions
+
+@import '../src/math';
+
+$math-suite: (
+  (
+    'add',
+    'Adds $y to $x.',
+    add(12, 2),
+    14
+  ),
+  (
+    'multiply',
+    'Multiplies $x by $y.',
+    multiply(12, 2),
+    24
+  ),
+  (
+    'subtract',
+    'Subtracts $y from $x.',
+    subtract(12, 2),
+    10
+  ),
+  (
+    'divide',
+    'Divides $x by $y.',
+    divide(12, 2),
+    6
+  ),
+  (
+    'percent',
+    'Returns $x\'s percent of $y.',
+    percent(6, 12),
+    50%
+  ),
+  (
+    'double',
+    'Doubles $x.',
+    double(10),
+    20
+  ),
+  (
+    'square',
+    'Squares $x.',
+    square(10),
+    100
+  ),
+  (
+    'inc',
+    'Increments $x.',
+    inc(10),
+    11
+  ),
+  (
+    'dec',
+    'Decrements $x.',
+    dec(10),
+    9
+  ),
+  (
+    'sum',
+    'Accepts a list of numbers and returns the sum of them.',
+    sum(10, 5, 2),
+    17
+  ),
+  (
+    'power',
+    'Returns the total after multiplying $num $exponent times.',
+    power(2, 10) power(10, 2),
+    100 1024
+  ),
+  (
+    'to-decimal-places',
+    'Returns $num to $digits number of significant digits dropping anything beyond it.',
+    to-decimal-places(2, 10.129),
+    10.12
+  ),
+  (
+    'to-decimal-places with alternative implementation',
+    'Returns the equivalent output of to-decimal-places using an alternative implemetation',
+    to-decimal-places(1, 33.33333),
+    floor(33.33333 * power(1, 10)) / power(1, 10)
+  )
+);
+

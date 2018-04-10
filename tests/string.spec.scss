@@ -1,0 +1,35 @@
+// Specs for String functions
+
+@import '../src/string';
+
+$string-suite: (
+  (
+    'prefixStr',
+    'Prefixes a string with first argument',
+    prefixStr('selector', 'one'),
+    'selectorone'
+  ),
+  (
+    'suffixStr',
+    'Suffixes a string with first argument',
+    prefixStr('selector', 'one'),
+    'selectorone'
+  ),
+  (
+    'explode',
+    'Applies a function to a list to determine whether a given member gets included',
+    explode('-', 'selector-one'),
+    'selector' 'one'
+  ),
+  (
+    'pathToMap',
+    'Converts a dot-delimited string and any value into a Sass map with that same object heirarchy.',
+    (
+      pathToMap('x', 10px)
+      pathToMap('x.y', 10px)
+      pathToMap('x.y.z', 10px)
+    ),
+    (x: 10px) (x: (y: 10px)) (x: (y: (z: 10px)))
+  )
+);
+
