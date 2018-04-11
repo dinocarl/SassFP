@@ -365,12 +365,18 @@
 /*   ✔ [assert-equal] Returns whether $val is not a map. */
 /*  */
 /*  */
+/* # Module: equals */
+/* ---------------- */
+/* Test: Returns whether the 2 provided arguments are equivalent. */
+/*   ✔ [assert-equal] Returns whether the 2 provided arguments are equivalent. */
+/*  */
+/*  */
 /* # SUMMARY ---------- */
-/* 61 Tests: */
-/* - 61 Passed */
+/* 62 Tests: */
+/* - 62 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 61 Modules */
-/* - 61 Tests */
-/* - 61 Assertions */
+/* - 62 Modules */
+/* - 62 Tests */
+/* - 62 Assertions */
 /* -------------------- */

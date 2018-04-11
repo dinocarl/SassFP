@@ -86,5 +86,16 @@ $type-spec: (
     'Returns whether $val is not a map.',
     isnt_map((header: red)) isnt_map((header red)),
     false true
+  ),
+  (
+    'equals',
+    'Returns whether the 2 provided arguments are equivalent.',
+    (
+      equals(1, 1)
+      equals(1, '1')
+      equals((header: red), (header: red))
+      equals((header red), (header red))
+    ),
+    true false true true
   )
 );

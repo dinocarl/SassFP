@@ -71,6 +71,7 @@ Like Ramda, all the functions in SassFP are iteratee-first, data-last. Some nati
     - [isnt_number](#isnt_number)
     - [isnt_null](#isnt_null)
     - [isnt_map](#isnt_map)
+    - [equals](#equals)
 
 ## String Methods
 ### prefixStr
@@ -678,6 +679,18 @@ Returns whether **`$val`** is not a map.
 ```scss
 isnt_map((header: red)); // => false
 isnt_map((header red)); // => true
+```
+
+### equals
+`($a, $b)`
+
+Returns whether **`$a`** and **`$b`** are equivalent.
+
+```scss
+equals(1, 1); // => true
+equals(1, '1'); // => false
+equals((header: red), (header: red)); // => true
+equals((header red), (header red)); // => true
 ```
 
 
