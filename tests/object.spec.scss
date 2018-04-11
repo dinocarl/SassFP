@@ -2,7 +2,7 @@
 
 @import '../src/object';
 
-$object-suite: (
+$object-spec: (
   (
     'prop',
     'Allows for getting at nested attributes in a Sass map. Uses dot syntax to get at nested attributes. Ensures a null return for any unrecognized paths.',

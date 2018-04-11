@@ -2,7 +2,7 @@
 
 @import '../src/converted';
 
-$converted-suite: (
+$converted-spec: (
   (
     'fpAppend',
     'Is same as native Sass function, append, with argument order converted',

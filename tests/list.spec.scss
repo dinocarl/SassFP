@@ -2,7 +2,7 @@
 
 @import '../src/list';
 
-$list-suite: (
+$list-spec: (
   (
     'implode',
     'Returns a string where all the members of $list have been concatenated together with $glue between them.',

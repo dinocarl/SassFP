@@ -2,7 +2,7 @@
 
 @import '../src/functional';
 
-$functional-suite: (
+$functional-spec: (
   (
     'always',
     'Returns the value passed to it.',

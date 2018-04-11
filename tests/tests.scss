@@ -1,4 +1,4 @@
-@import "../node_modules/sass-true/sass/true";
+@import '../node_modules/sass-true/sass/true';
 @import '../SassFP';
 @import 'data';
 @import 'string.spec';
@@ -11,14 +11,14 @@
 @import 'type.spec';
 
 $suite: reduce(join, (), (
-  $string-suite,
-  $list-suite,
-  $functional-suite,
-  $object-suite,
-  $math-suite,
-  $misc-suite,
-  $converted-suite,
-  $type-suite
+  $string-spec,
+  $list-spec,
+  $functional-spec,
+  $object-spec,
+  $math-spec,
+  $misc-spec,
+  $converted-spec,
+  $type-spec
 ));
 
 @each $test in $suite {
