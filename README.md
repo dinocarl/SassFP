@@ -197,6 +197,17 @@ partition(gt5, (0,1,2,3)); // => ((), (0 1 2 3))
 partition(gt5, (6,7,8,9)); // => ((6 7 8 9), ())
 ```
 
+### contains
+`($item, $list)`
+
+Returns a Boolean whether **`$item`** is in **`$list`**.
+
+```scss
+contains('alex', ('alex' 'billy' 'charlie' 'dani' 'elliot')); => true
+contains('allen', ('alex' 'billy' 'charlie' 'dani' 'elliot')); => false
+contains('billy', ('alex' 'billy' 'charlie' 'dani' 'elliot')); => true
+```
+
 
 ## Functional Methods
 ### always

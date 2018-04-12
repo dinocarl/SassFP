@@ -77,6 +77,12 @@
 /*   ✔ [assert-equal] Returns a split version of $list. */
 /*  */
 /*  */
+/* # Module: contains */
+/* ------------------ */
+/* Test: Returns a Boolean whether $item is in $list. */
+/*   ✔ [assert-equal] Returns a Boolean whether $item is in $list. */
+/*  */
+/*  */
 /* # Module: always */
 /* ---------------- */
 /* Test: Returns the value passed to it. */
@@ -372,11 +378,11 @@
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 62 Tests: */
-/* - 62 Passed */
+/* 63 Tests: */
+/* - 63 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 62 Modules */
-/* - 62 Tests */
-/* - 62 Assertions */
+/* - 63 Modules */
+/* - 63 Tests */
+/* - 63 Assertions */
 /* -------------------- */

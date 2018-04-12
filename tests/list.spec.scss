@@ -60,5 +60,15 @@ $list-spec: (
       partition(gt5, (6,7,8,9)),
     ),
     ((6 7, 4 5), ((), 0 1 2 3), (6 7 8 9, ()))
+  ),
+  (
+    'contains',
+    'Returns a Boolean whether $item is in $list.',
+    (
+      contains('alex', $strlist)
+      contains('allen', $strlist)
+      contains('billy', $strlist)
+    ),
+    true false true
   )
 );
