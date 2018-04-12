@@ -11,25 +11,13 @@
 // accepts a predicate and a list
 // outputs a new list consisting of all the members of the initial list for which the predicate is true
 @function filter($predicate, $list) {
-  $accumulated: ();
-  @each $item in $list {
-    @if call($predicate, $item) {
-      $accumulated: append($accumulated, $item);
-    }
-  }
-  @return $accumulated;
+  @return head(partition($predicate, $list));
 }
 
 // accepts a predicate and a list
 // outputs a new list consisting of all the members of the initial list for which the predicate is false
 @function reject($predicate, $list) {
-  $accumulated: ();
-  @each $item in $list {
-    @if not call($predicate, $item) {
-      $accumulated: append($accumulated, $item);
-    }
-  }
-  @return $accumulated;
+  @return last(partition($predicate, $list));
 }
 
 // accepts a function name and a list.

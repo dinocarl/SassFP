@@ -94,6 +94,7 @@
   @return ($true-list, $false-list);
 }
 
+// returns whether $item is in $list
 @function contains($item, $list) {
-  @return isnt_null(index($list, $item))
+  @return isnt_null(index($list, $item));
 }
