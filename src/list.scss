@@ -81,11 +81,12 @@
 
 // returns a 2 member list where $list is split along
 // whether its members evaluate $predicate as true
-@function partition($predicateFn, $list) {
+@function partition($predicateFn, $list...) {
+  $rest: if(length($list) > 1, tail($list), ());
   $true-list: ();
   $false-list: ();
-  @each $item in $list {
-    @if call($predicateFn, $item) {
+  @each $item in head($list) {
+    @if call($predicateFn, join($item, $rest)...) {
       $true-list: fpAppend($item, $true-list);
     } @else {
       $false-list: fpAppend($item, $false-list);
@@ -99,13 +100,7 @@
   @return isnt_null(index($list, $item));
 }
 
-// returns new list of what both $list1 and $list2 have in common
+// returns new list of what both $list1 and $list2 have in common (logical AND)
 @function intersection($list1, $list2) {
-  $accumulated: ();
-  @each $item in $list1 {
-    @if contains($item, $list2) {
-      $accumulated: fpAppend($item, $accumulated);
-    }
-  }
-  @return $accumulated;
+  @return head(partition(contains, $list1, $list2));
 }
