@@ -203,9 +203,22 @@ partition(gt5, (6,7,8,9)); // => ((6 7 8 9), ())
 Returns a Boolean whether **`$item`** is in **`$list`**.
 
 ```scss
-contains('alex', ('alex' 'billy' 'charlie' 'dani' 'elliot')); => true
-contains('allen', ('alex' 'billy' 'charlie' 'dani' 'elliot')); => false
-contains('billy', ('alex' 'billy' 'charlie' 'dani' 'elliot')); => true
+$strlist: ('alex' 'billy' 'charlie' 'dani' 'elliot');
+contains('alex', $strlist); => true
+contains('allen', $strlist); => false
+contains('billy', $strlist); => true
+```
+
+### intersection
+`($list1, $list2)`
+
+Returns a new list of what both **`$list1`** and **`$list2`** have in common.
+
+```scss
+$strlist: ('alex' 'billy' 'charlie' 'dani' 'elliot');
+intersection(('alex', 'billy', 'allen'), $strlist); // // => ('alex' 'billy')
+intersection(('alex.a', 'billy', 'allen'), $strlist); // // => ('billy')
+intersection(('alex.a', 'allen'), $strlist); // // => ()
 ```
 
 

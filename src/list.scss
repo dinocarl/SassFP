@@ -98,3 +98,14 @@
 @function contains($item, $list) {
   @return isnt_null(index($list, $item));
 }
+
+// returns new list of what both $list1 and $list2 have in common
+@function intersection($list1, $list2) {
+  $accumulated: ();
+  @each $item in $list1 {
+    @if contains($item, $list2) {
+      $accumulated: fpAppend($item, $accumulated);
+    }
+  }
+  @return $accumulated;
+}

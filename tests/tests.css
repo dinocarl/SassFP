@@ -83,6 +83,12 @@
 /*   ✔ [assert-equal] Returns a Boolean whether $item is in $list. */
 /*  */
 /*  */
+/* # Module: intersection */
+/* ---------------------- */
+/* Test: Returns new list of what both $list1 and $list2 have in common. */
+/*   ✔ [assert-equal] Returns new list of what both $list1 and $list2 have in common. */
+/*  */
+/*  */
 /* # Module: always */
 /* ---------------- */
 /* Test: Returns the value passed to it. */
@@ -378,11 +384,11 @@
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 63 Tests: */
-/* - 63 Passed */
+/* 64 Tests: */
+/* - 64 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 63 Modules */
-/* - 63 Tests */
-/* - 63 Assertions */
+/* - 64 Modules */
+/* - 64 Tests */
+/* - 64 Assertions */
 /* -------------------- */

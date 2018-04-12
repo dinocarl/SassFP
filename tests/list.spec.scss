@@ -70,5 +70,15 @@ $list-spec: (
       contains('billy', $strlist)
     ),
     true false true
+  ),
+  (
+    'intersection',
+    'Returns new list of what both $list1 and $list2 have in common.',
+    (
+      intersection(('alex' 'billy' 'allen'), $strlist)
+      intersection(('alex.a' 'billy' 'allen'), $strlist)
+      intersection(('alex.a' 'allen'), $strlist)
+    ),
+    ('alex' 'billy') ('billy',) ()
   )
 );
