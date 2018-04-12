@@ -80,5 +80,15 @@ $list-spec: (
       intersection(('alex.a' 'allen'), $strlist)
     ),
     ('alex' 'billy') ('billy',) ()
+  ),
+  (
+    'difference',
+    'Returns new list of what both $list1 and $list2 have in common.',
+    (
+      difference(('alex' 'billy'), $strlist)
+      difference(('alex' 'billy' 'allen'), $strlist)
+      difference(('alex.a' 'billy' 'allen'), $strlist)
+    ),
+    () ('allen',) ('alex.a' 'allen')
   )
 );

@@ -89,6 +89,12 @@
 /*   ✔ [assert-equal] Returns new list of what both $list1 and $list2 have in common. */
 /*  */
 /*  */
+/* # Module: difference */
+/* -------------------- */
+/* Test: Returns new list of what both $list1 and $list2 have in common. */
+/*   ✔ [assert-equal] Returns new list of what both $list1 and $list2 have in common. */
+/*  */
+/*  */
 /* # Module: always */
 /* ---------------- */
 /* Test: Returns the value passed to it. */
@@ -384,11 +390,11 @@
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 64 Tests: */
-/* - 64 Passed */
+/* 65 Tests: */
+/* - 65 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 64 Modules */
-/* - 64 Tests */
-/* - 64 Assertions */
+/* - 65 Modules */
+/* - 65 Tests */
+/* - 65 Assertions */
 /* -------------------- */

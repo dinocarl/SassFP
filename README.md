@@ -21,6 +21,7 @@ Like Ramda, all the functions in SassFP are iteratee-first, data-last. Some nati
     - [partition](#partition)
     - [contains](#contains)
     - [intersection](#intersection)
+    - [difference](#difference)
 - [Functional Methods](#functional-methods)
     - [always](#always)
     - [map](#map)
@@ -214,7 +215,7 @@ contains('billy', $strlist); => true
 ### intersection
 `($list1, $list2)`
 
-Returns a new list of what both **`$list1`** and **`$list2`** have in common.
+Returns a new list of what both **`$list1`** and **`$list2`** have in common. Inverse of **`difference`**.
 
 ```scss
 $strlist: ('alex' 'billy' 'charlie' 'dani' 'elliot');
@@ -223,6 +224,17 @@ intersection(('alex.a', 'billy', 'allen'), $strlist); // // => ('billy')
 intersection(('alex.a', 'allen'), $strlist); // // => ()
 ```
 
+### difference
+`($list1, $list2)`
+
+Returns new list of what **`$list1`** and **`$list2`** do not have in common. Inverse of **`intersection`**.
+
+```scss
+$strlist: ('alex' 'billy' 'charlie' 'dani' 'elliot');
+difference(('alex' 'billy'), $strlist); // => ()
+difference(('alex' 'billy' 'allen'), $strlist); // => ('allen')
+difference(('alex.a' 'billy' 'allen'), $strlist); // => ('alex.a' 'allen')
+```
 
 ## Functional Methods
 ### always
