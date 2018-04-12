@@ -19,6 +19,8 @@ Like Ramda, all the functions in SassFP are iteratee-first, data-last. Some nati
     - [last](#last)
     - [flatten](#flatten)
     - [partition](#partition)
+    - [contains](#contains)
+    - [intersection](#intersection)
 - [Functional Methods](#functional-methods)
     - [always](#always)
     - [map](#map)
