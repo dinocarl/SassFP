@@ -61,3 +61,63 @@
   @return $accumulated;
 }
 
+// creates a dot-delimited list of all the paths of a given map object
+@function listPaths($obj, $prefixWith: '') {
+  $paths: map-keys($obj);
+  $output: ();
+  @each $path in $paths {
+    $currentVal: prop($path, $obj);
+    // base case
+    $output: fpAppend(prefixStr($prefixWith, $path), $output);
+    // recur
+    @if is_map($currentVal) {
+      $backtrace: '#{$prefixWith}#{$path}.';
+      $output: join($output, listPaths($currentVal, $backtrace));
+    }
+  }
+  @return $output;
+}
+
+// creates new map object from the provided one, then removing a specified list of keys
+@function omit($key-list, $obj) {
+  // omit compares the paths in $key-list to
+  // the ones from all the ones available of the object
+  // then uses the remainder to create a new object
+  $augmented-paths: ();
+  // make sure to add parent elements to removal list
+  // since leaving them in place will reinstate the removed path
+  @each $key in $key-list {
+    @if isnt_null(str-index($key, '.')) {
+      $augmented-paths: fpAppend(
+        implode(
+          '.',
+          init(
+            explode(
+              '.',
+              $key
+            )
+          )
+        ),
+        $augmented-paths
+      );
+    }
+  }
+  $augmented-paths: join($key-list, $augmented-paths);
+  // this is a bit of an optimization:
+  // remove the nested paths of root elements
+  // that have no nested paths marked for removal
+  // since adding a root element and all its children
+  // individually would be highly redundant.
+  // relies on listPaths returning a root element
+  // and its children all next to one another
+  $pickedPaths: last(partition(contains, listPaths($obj), $augmented-paths));
+  $last-path: 'a highly unlikely string to be used as a keyname';
+  $final-pass-paths: ();
+  @each $path in $pickedPaths {
+    @if (is_null(str-index($path, $last-path))) {
+      $final-pass-paths: fpAppend($path, $final-pass-paths);
+      $last-path: $path;
+    }
+  }
+  @return pick($final-pass-paths, $obj);
+}

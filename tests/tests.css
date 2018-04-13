@@ -161,6 +161,18 @@
 /*   ✔ [assert-equal] Creates new map object from list of keys and a given map object. */
 /*  */
 /*  */
+/* # Module: listPaths */
+/* ------------------- */
+/* Test: Creates a flat, dot-delimited list of all the paths of $map. */
+/*   ✔ [assert-equal] Creates a flat, dot-delimited list of all the paths of $map. */
+/*  */
+/*  */
+/* # Module: omit */
+/* -------------- */
+/* Test: Creates new map object from the provided one, then removing a specified list of keys. */
+/*   ✔ [assert-equal] Creates new map object from the provided one, then removing a specified list of keys. */
+/*  */
+/*  */
 /* # Module: add */
 /* ------------- */
 /* Test: Adds $y to $x. */
@@ -390,11 +402,11 @@
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 65 Tests: */
-/* - 65 Passed */
+/* 67 Tests: */
+/* - 67 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 65 Modules */
-/* - 65 Tests */
-/* - 65 Assertions */
+/* - 67 Modules */
+/* - 67 Tests */
+/* - 67 Assertions */
 /* -------------------- */

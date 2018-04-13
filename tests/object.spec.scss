@@ -48,5 +48,23 @@ $object-spec: (
     (header:(one: #333))
     $clrobj
     (arm: null)
+  ),
+  (
+    'listPaths',
+    'Creates a flat, dot-delimited list of all the paths of $map.',
+    (
+      listPaths((header:(one: #333, two: #444, three: (four: red, five: blue)), footer: #666))
+    ),
+    "header" "header.one" "header.two" "header.three" "header.three.four" "header.three.five" "footer"
+  ),
+  (
+    'omit',
+    'Creates new map object from the provided one, then removing a specified list of keys.',
+    (
+      omit('footer', $clrobj)
+      omit(('header.one', 'header.three.four'), (header:(one: #333, two: #444, three: (four: red, five: blue)), footer: #666, body: green, sidebar: (top: yellow, bottom: orange)))
+    ),
+    (header: (one: #333, two: #444))
+    (header: (two: #444, three: (five: blue)), footer: #666, body: green, sidebar: (top: yellow, bottom: orange))
   )
 );

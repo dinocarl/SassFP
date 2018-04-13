@@ -35,6 +35,8 @@ Like Ramda, all the functions in SassFP are iteratee-first, data-last. Some nati
     - [propOr](#propor)
     - [assign](#assign)
     - [pick](#pick)
+    - [omit](#omit)
+    - [listPaths](#listPaths)
 - [Mathematical Methods](#mathematical-methods)
     - [add](#add)
     - [multiply](#multiply)
@@ -375,6 +377,46 @@ pick('footer', $colors); // => (footer: #666)
 pick('header.one', $colors); // => (header:(one: #333))
 pick(('header', 'footer'), $colors); // same as original
 ```
+
+### omit
+`($key-list, $map)`
+
+Creates new map object from the provided one, then removing a specified list of keys.
+
+```scss
+omit(
+  ('header.one', 'header.three.four'),
+  (header: (
+    one: #333,
+    two: #444,
+    three: (
+      four: red,
+      five: blue
+    )
+  ),
+  footer: #666
+));
+// =>
+//   (header: (
+//     two: #444,
+//     three: (
+//       five: blue
+//     )
+//   ),
+//   footer: #666
+// )
+```
+
+### listPaths
+`($map)`
+
+Creates a flat, dot-delimited list of all the paths of **`$map`**.
+
+```scss
+$colors: (header:(one: #333, two: #444), footer: #666);
+listPaths($colors); // => ("header" "header.one" "header.two" "footer")
+```
+
 
 
 ## Mathematical Methods
