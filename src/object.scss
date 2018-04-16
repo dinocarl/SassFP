@@ -88,17 +88,12 @@
   // since leaving them in place will reinstate the removed path
   @each $key in $key-list {
     @if isnt_null(str-index($key, '.')) {
-      $augmented-paths: fpAppend(
-        implode(
-          '.',
-          init(
-            explode(
-              '.',
-              $key
-            )
-          )
-        ),
-        $augmented-paths
+      $augmented-paths: compose(
+        (append, $augmented-paths),
+        (implode, '.'),
+        init,
+        (explode, '.'),
+        $key
       );
     }
   }

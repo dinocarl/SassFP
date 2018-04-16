@@ -102,7 +102,13 @@ $functional-spec: (
         (map, square),
         (4, 5, 6)
       )
+      compose(
+        (implode, '.'),
+        init,
+        (explode, '.'),
+        ('x.y.z')
+      )
     ),
-    $clrlist-darkened xd-e-a-b-c 154
+    $clrlist-darkened xd-e-a-b-c 154 'x.y'
   )
 );

@@ -45,9 +45,20 @@
   @return slice(2, length($list), $list);
 }
 
+// ensures that a list gets handed back from rest parameters
+@function ensureList($args...) {
+  @return if(
+    // an arglist is identifable by having type arglist and length 1
+    type-of($args) == arglist and length($args) == 1,
+    reduce(append, (), head($args)),
+    $args
+  );
+}
+
 // returns all but the last member of a list
-@function init($list) {
-  @return slice(1, length($list) - 1, $list);
+@function init($list...) {
+  $passed-list: ensureList($list...);
+  @return slice(1, length($passed-list) - 1, $passed-list);
 }
 
 // returns the last member of a list
