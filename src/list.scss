@@ -35,24 +35,26 @@
   @return $accumulated;
 }
 
-// returns the first member of a list
-@function head($list) {
-  @return nth($list, 1);
-}
-
-// returns all but the first member of a list
-@function tail($list) {
-  @return slice(2, length($list), $list);
-}
-
 // ensures that a list gets handed back from rest parameters
 @function ensureList($args...) {
   @return if(
     // an arglist is identifable by having type arglist and length 1
     type-of($args) == arglist and length($args) == 1,
-    reduce(append, (), head($args)),
+    reduce(append, (), nth($args, 1)),
     $args
   );
+}
+
+// returns the first member of a list
+@function head($list...) {
+  $passed-list: ensureList($list...);
+  @return nth($passed-list, 1);
+}
+
+// returns all but the first member of a list
+@function tail($list...) {
+  $passed-list: ensureList($list...);
+  @return slice(2, length($passed-list), $passed-list);
 }
 
 // returns all but the last member of a list
@@ -62,8 +64,9 @@
 }
 
 // returns the last member of a list
-@function last($list) {
-  @return nth($list, length($list));
+@function last($list...) {
+  $passed-list: ensureList($list...);
+  @return nth($passed-list, length($passed-list));
 }
 
 // flattens a list

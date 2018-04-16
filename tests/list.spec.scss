@@ -90,5 +90,35 @@ $list-spec: (
       difference(('alex.a' 'billy' 'allen'), $strlist)
     ),
     () ('allen',) ('alex.a' 'allen')
+  ),
+  (
+    'integrations',
+    'Run itegrations with list methods',
+    (
+      compose(
+        head,
+        (explode, '.'),
+        ('x.y.z')
+      )
+      compose(
+        (implode, '.'),
+        tail,
+        (explode, '.'),
+        ('x.y.z')
+      )
+      compose(
+        (implode, '.'),
+        init,
+        (explode, '.'),
+        ('x.y.z')
+      )
+      compose(
+        (implode, '.'),
+        last,
+        (explode, '.'),
+        ('x.y.z')
+      )
+    ),
+    'x' 'y.z' 'x.y' 'z'
   )
 );

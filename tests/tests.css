@@ -95,6 +95,12 @@
 /*   ✔ [assert-equal] Returns new list of what both $list1 and $list2 have in common. */
 /*  */
 /*  */
+/* # Module: integrations */
+/* ---------------------- */
+/* Test: Run itegrations with list methods */
+/*   ✔ [assert-equal] Run itegrations with list methods */
+/*  */
+/*  */
 /* # Module: always */
 /* ---------------- */
 /* Test: Returns the value passed to it. */
@@ -402,11 +408,11 @@
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 67 Tests: */
-/* - 67 Passed */
+/* 68 Tests: */
+/* - 68 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 67 Modules */
-/* - 67 Tests */
-/* - 67 Assertions */
+/* - 68 Modules */
+/* - 68 Tests */
+/* - 68 Assertions */
 /* -------------------- */
