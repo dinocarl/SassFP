@@ -17,9 +17,19 @@ $list-spec: (
   ),
   (
     'slice',
-    'Returns **`$list`**\'s members beginning at position **`$start`** and ending at **`$end`**.',
+    'Returns $list\'s members beginning at position $start and ending at $end.',
     slice(3, 5, $strlist),
     'charlie' 'dani' 'elliot'
+  ),
+  (
+    'ensureList',
+    'Returns a list whether passed a set of arguments or a list.',
+    (
+      ensureList($strlist)
+      ensureList('alex', 'billy', 'charlie', 'dani', 'elliot')
+    ),
+    $strlist
+    ("alex", "billy", "charlie", "dani", "elliot")
   ),
   (
     'head',

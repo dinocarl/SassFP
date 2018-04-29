@@ -37,8 +37,14 @@
 /*  */
 /* # Module: slice */
 /* --------------- */
-/* Test: Returns **`$list`**'s members beginning at position **`$start`** and ending at **`$end`**. */
-/*   ✔ [assert-equal] Returns **`$list`**'s members beginning at position **`$start`** and ending at **`$end`**. */
+/* Test: Returns $list's members beginning at position $start and ending at $end. */
+/*   ✔ [assert-equal] Returns $list's members beginning at position $start and ending at $end. */
+/*  */
+/*  */
+/* # Module: ensureList */
+/* -------------------- */
+/* Test: Returns a list whether passed a set of arguments or a list. */
+/*   ✔ [assert-equal] Returns a list whether passed a set of arguments or a list. */
 /*  */
 /*  */
 /* # Module: head */
@@ -408,11 +414,11 @@
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 68 Tests: */
-/* - 68 Passed */
+/* 69 Tests: */
+/* - 69 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 68 Modules */
-/* - 68 Tests */
-/* - 68 Assertions */
+/* - 69 Modules */
+/* - 69 Tests */
+/* - 69 Assertions */
 /* -------------------- */

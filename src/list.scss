@@ -71,17 +71,11 @@
 
 // flattens a list
 @function flatten($list...) {
-  // compose and pipe can pass these along as arguments
-  // so this is a 'preflight' step to ensure the input is a list
-  @return _flatten($list);
-}
-
-// internal method that actually does the flattening
-@function _flatten($list) {
+  $passed-list: ensureList($list...);
   $result: ();
-  @each $item in $list {
+  @each $item in $passed-list {
     @if is_list($item) {
-      $flatten: _flatten($item);
+      $flatten: flatten($item);
       @each $i in $flatten {
         $result: append($result, $i);
       }
