@@ -4,8 +4,19 @@
 
 $object-spec: (
   (
+    'path',
+    'Allows for getting at nested attributes in a Sass map using list syntax. Ensures a null return for any unrecognized paths.',
+    (
+      path(('header', 'two'), $clrobj)
+      path(('footer'), $clrobj)
+      path(('body'), $clrobj)
+      path(('header', 'two', 'three', 'four'), $clrobj)
+    ),
+    #444 #666 null null
+  ),
+  (
     'prop',
-    'Allows for getting at nested attributes in a Sass map. Uses dot syntax to get at nested attributes. Ensures a null return for any unrecognized paths.',
+    'Allows for getting at nested attributes in a Sass map using dot syntax. Ensures a null return for any unrecognized paths.',
     (
       prop('header.two', $clrobj)
       prop('footer', $clrobj)
@@ -13,6 +24,17 @@ $object-spec: (
       prop('header.two.three.four', $clrobj)
     ),
     #444 #666 null null
+  ),
+  (
+    'pathOr',
+    'Returns the value of a `path` lookup when successful, and returns a provided fallback when not.',
+    (
+      pathOr(':(', ('header', 'two'), $clrobj)
+      pathOr(':(', ('footer'), $clrobj)
+      pathOr(':(', ('body'), $clrobj)
+      pathOr(':(', ('header', 'two', 'three', 'four'), $clrobj)
+    ),
+    #444 #666 ":(" ":("
   ),
   (
     'propOr',

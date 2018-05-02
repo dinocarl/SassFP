@@ -149,10 +149,22 @@
 /*   ✔ [assert-equal] Accepts a list of function names and initial data, outputs the result of each of the functions being run on the successive results from last to first. */
 /*  */
 /*  */
+/* # Module: path */
+/* -------------- */
+/* Test: Allows for getting at nested attributes in a Sass map using list syntax. Ensures a null return for any unrecognized paths. */
+/*   ✔ [assert-equal] Allows for getting at nested attributes in a Sass map using list syntax. Ensures a null return for any unrecognized paths. */
+/*  */
+/*  */
 /* # Module: prop */
 /* -------------- */
-/* Test: Allows for getting at nested attributes in a Sass map. Uses dot syntax to get at nested attributes. Ensures a null return for any unrecognized paths. */
-/*   ✔ [assert-equal] Allows for getting at nested attributes in a Sass map. Uses dot syntax to get at nested attributes. Ensures a null return for any unrecognized paths. */
+/* Test: Allows for getting at nested attributes in a Sass map using dot syntax. Ensures a null return for any unrecognized paths. */
+/*   ✔ [assert-equal] Allows for getting at nested attributes in a Sass map using dot syntax. Ensures a null return for any unrecognized paths. */
+/*  */
+/*  */
+/* # Module: pathOr */
+/* ---------------- */
+/* Test: Returns the value of a `path` lookup when successful, and returns a provided fallback when not. */
+/*   ✔ [assert-equal] Returns the value of a `path` lookup when successful, and returns a provided fallback when not. */
 /*  */
 /*  */
 /* # Module: propOr */
@@ -414,11 +426,11 @@
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 69 Tests: */
-/* - 69 Passed */
+/* 71 Tests: */
+/* - 71 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 69 Modules */
-/* - 69 Tests */
-/* - 69 Assertions */
+/* - 71 Modules */
+/* - 71 Tests */
+/* - 71 Assertions */
 /* -------------------- */

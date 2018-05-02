@@ -1,6 +1,6 @@
 {
   "name": "sassfp",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Library of functional methods for Sass",
   "main": "SassFP.scss",
   "directories": {

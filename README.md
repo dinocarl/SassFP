@@ -31,7 +31,9 @@ Like Ramda, all the functions in SassFP are iteratee-first, data-last. Some nati
     - [pipe](#pipe)
     - [compose](#compose)
 - [Object Methods](#object-methods)
+    - [path](#path)
     - [prop](#prop)
+    - [pathOr](#pathor)
     - [propOr](#propor)
     - [assign](#assign)
     - [pick](#pick)
@@ -332,10 +334,23 @@ compose(
 ```
 
 ## Object Methods
+
+### path
+`($key-list, $map)`
+
+Allows for getting at nested attributes in a Sass map using list syntax. Ensures a null return for any unrecognized paths.
+
+```scss
+$colors: (header:(one: #333, two: #444), footer: #666);
+path(('header', 'two'), $colors); // => #444
+path(('footer'), $colors); // => #666
+path(('header', 'two', 'three', 'four'), $colors); // => null
+```
+
 ### prop
 `($path, $map)`
 
-Allows for getting at nested attributes in a Sass map. Uses dot syntax to get at nested attributes. Ensures a `null` return for any unrecognized paths.
+Allows for getting at nested attributes in a Sass map using dot syntax. Ensures a null return for any unrecognized paths.
 
 ```scss
 $colors: (header:(one: #333, two: #444), footer: #666);
@@ -343,6 +358,19 @@ prop('header.two', $colors); // => #444
 prop('footer', $colors); // => #666
 prop('body', $colors); // => null
 ```
+
+### pathOr
+`($fallback, $key-list, $map)`
+
+Returns the value of a `path` lookup when successful, and returns a provided fallback when not.
+
+```scss
+$colors: (header:(one: #333, two: #444), footer: #666);
+pathOr(':(', ('header', 'two'), $colors); // => #444
+pathOr(':(', ('body'), $colors); // => ':('
+pathOr(':(', ('header', 'two', 'three', 'four'), $colors); // => ':('
+```
+
 ### propOr
 `($fallback, $path, $map)`
 

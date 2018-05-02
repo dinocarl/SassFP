@@ -8,11 +8,8 @@
 // allows for getting at nested attributes in a Sass map
 // ensures a null return for any unrecognized paths
 // $colors: (header:(one: #333, two: #444), footer: #666);
-// prop('header.two', $colors); => #444
-// prop('footer', $colors); => #666
-// prop('body', $colors); => null
-@function prop($path, $map) {
-  $keys: explode('.', $path);
+// path(('header', 'two'), $colors); => #444
+@function path($keys, $map) {
   @each $key in $keys {
     @if isnt_map($map) {
       $map: (_mt_: null);
@@ -22,9 +19,22 @@
   @return $map;
 }
 
+// like path, but uses a dot syntax string
+// prop('header.two', $colors); => #444
+// prop('footer', $colors); => #666
+// prop('body', $colors); => null
+@function prop($path, $map) {
+  @return path(explode('.', $path), $map);
+}
+
 @function propOr($fallback, $path, $map) {
   $propLookUp: prop($path, $map);
   @return if(is_null($propLookUp), $fallback, $propLookUp);
+}
+
+@function pathOr($fallback, $keys, $map) {
+  $pathLookUp: path($keys, $map);
+  @return if(is_null($pathLookUp), $fallback, $pathLookUp);
 }
 
 // allows for merging deeply nested maps
