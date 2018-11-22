@@ -4,6 +4,10 @@
   @return darken($color, 10%);
 }
 
+@function darkenby($pct, $color) {
+  @return darken($color, $pct);
+}
+
 @function gt5($val) {
   @return $val > 5;
 }
