@@ -266,6 +266,23 @@ Returns a new list where each member of **`$list`** has had function **`$fn`** r
 map(darkenbyten, (#fff, red, #222, #333)); // => #e6e6e6 #cc0000 #090909 #1a1a1a
 ```
 
+As of **`v1.2`**, **`$fn`** may itself be a list where the first member is the function to be run against each member of **`$list`**, and the others are extra arguments that the function would require in effect allowing functions to be decorated.
+
+```scss
+@function darkenby($pct, $color) {
+  @return darken($color, $pct);
+}
+map((darkenby, 10%), (#fff, red, #222, #333)); // => #e6e6e6 #cc0000 #090909 #1a1a1a
+```
+
+Because Sass supports space-separated lists, the commas are optional, and omitting them may increase legibility and in any case is equivalent.
+
+```scss
+map((darkenby 10%), (#fff, red, #222, #333)); // => #e6e6e6 #cc0000 #090909 #1a1a1a
+```
+
+Most important, however, is that the value(s) provided by iterating over **`list` must always be in the last argument position `$fn` expects**.
+
 ### filter
 `($predicate, $list)`
 

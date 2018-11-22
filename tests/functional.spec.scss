@@ -1,6 +1,7 @@
 // Specs for Functional functions
 
 @import '../src/functional';
+@import 'data';
 
 $functional-spec: (
   (
@@ -43,7 +44,9 @@ $functional-spec: (
     'map',
     'Returns a new list where each member of $list has had function $fn run against it.',
     map(darkenbyten, $clrlist-flat),
-    $clrlist-darkened
+    map((darkenby, 10%), $clrlist-flat),
+    map((darkenby 10%), $clrlist-flat),
+    $clrlist-darkened $clrlist-darkened $clrlist-darkened
   ),
   (
     'reduce',

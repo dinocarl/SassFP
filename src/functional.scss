@@ -22,10 +22,13 @@
 
 // accepts a function name and a list.
 // outputs a new list where each member has had the function run against it
-@function map($fn, $list) {
+@function map($fnName, $list) {
+  $fn: head($fnName);
+  $rest: if(is_list($fnName), tail($fnName), ());
   $accumulated: ();
   @for $i from 1 through length($list) {
-    $accumulated: append($accumulated, call($fn, nth($list, $i)));
+    $item: nth($list, $i);
+    $accumulated: append($accumulated, call($fn, join($rest, $item)...));
   }
   @return $accumulated;
 }
