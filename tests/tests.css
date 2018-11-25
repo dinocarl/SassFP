@@ -131,6 +131,12 @@
 /*   ✔ [assert-equal] Returns a new list where each member of $list has had function $fn run against it. */
 /*  */
 /*  */
+/* # Module: map-with-index */
+/* ------------------------ */
+/* Test: Returns a new list where each member of $list has had function $fn run against it, but also needs the item's index. */
+/*   ✔ [assert-equal] Returns a new list where each member of $list has had function $fn run against it, but also needs the item's index. */
+/*  */
+/*  */
 /* # Module: reduce */
 /* ---------------- */
 /* Test: Accumulates the result of running each member of $list through $fn starting with the $initial value and $list's first member. */
@@ -426,11 +432,11 @@
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 71 Tests: */
-/* - 71 Passed */
+/* 72 Tests: */
+/* - 72 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 71 Modules */
-/* - 71 Tests */
-/* - 71 Assertions */
+/* - 72 Modules */
+/* - 72 Tests */
+/* - 72 Assertions */
 /* -------------------- */
