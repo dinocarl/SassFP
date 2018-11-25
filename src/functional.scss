@@ -22,15 +22,20 @@
 
 // accepts a function name and a list.
 // outputs a new list where each member has had the function run against it
-@function map($fnName, $list) {
+@function map($fnName, $list, $use-index: false) {
   $fn: head($fnName);
   $rest: if(is_list($fnName), tail($fnName), ());
   $accumulated: ();
   @for $i from 1 through length($list) {
     $item: nth($list, $i);
+    $item: if($use-index, ($item, $i), $item);
     $accumulated: append($accumulated, call($fn, join($rest, $item)...));
   }
   @return $accumulated;
+}
+
+@function map-with-index($fnName, $list) {
+  @return map($fnName, $list, true);
 }
 
 // accepts a function name, a list, and an initial value.

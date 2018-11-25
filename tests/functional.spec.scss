@@ -49,6 +49,16 @@ $functional-spec: (
     $clrlist-darkened $clrlist-darkened $clrlist-darkened
   ),
   (
+    'map-with-index',
+    'Returns a new list where each member of $list has had function $fn run against it and its index as two arguments.',
+    (
+      map-with-index(prefixStr, $strlist)
+      map-with-index(add, (4,5,6))
+    ),
+    ("alex1" "billy2" "charlie3" "dani4" "elliot5")
+    (5 7 9)
+  ),
+  (
     'reduce',
     'Accumulates the result of running each member of $list through $fn starting with the $initial value and $list\'s first member.',
     (
