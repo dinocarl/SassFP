@@ -21,11 +21,22 @@
   @return last(partition($predicate, $list));
 }
 
+// internal
+// returns either the tail of argument
+// or an empty list if it's not a list
+@function _rest-or-list($maybe-list) {
+  @return if(
+    is_list($maybe-list),
+    slice(2, length($maybe-list), $maybe-list),
+    ()
+  );
+}
+
 // accepts a function name and a list.
 // outputs a new list where each member has had the function run against it
 @function map($fnName, $list, $use-index: false) {
   $fn: head($fnName);
-  $rest: if(is_list($fnName), tail($fnName), ());
+  $rest: _rest-or-list($fnName);
   $accumulated: ();
   @for $i from 1 through length($list) {
     $item: nth($list, $i);
@@ -39,12 +50,15 @@
   @return map($fnName, $list, true);
 }
 
+
 // accepts a function name, a list, and an initial value.
 // outputs the accumulated result of running the function on each list member
-@function reduce($callback, $initial, $list) {
+@function reduce($fnName, $initial, $list) {
+  $fn: nth($fnName, 1);
+  $rest: _rest-or-list($fnName);
   $accumulated: $initial;
   @for $i from 1 through length($list) {
-    $accumulated: call(safe-call($callback), $accumulated, nth($list, $i));
+    $accumulated: call(safe-call($fn), join($rest, ($accumulated, nth($list, $i)))...);
   }
   @return $accumulated;
 }

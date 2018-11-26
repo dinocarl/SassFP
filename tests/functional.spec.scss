@@ -1,6 +1,8 @@
 // Specs for Functional functions
 
 @import '../src/functional';
+@import '../src/string';
+@import '../src/math';
 @import 'data';
 
 $functional-spec: (
@@ -65,8 +67,10 @@ $functional-spec: (
       reduce(prefixStr, '.', ('alex', 'billy', 'charlie'))
       reduce(suffixStr, '', ('alex', 'billy', 'charlie'))
       reduce(add, 0, (4,5,6))
+      reduce((sum, 1, 2), 0, (4,5,6))
+      reduce((sum 1 2), 0, (4,5,6))
     ),
-    ".alexbillycharlie" "charliebillyalex" 15
+    ".alexbillycharlie" "charliebillyalex" 15 24 24
   ),
   (
     'pipe',
