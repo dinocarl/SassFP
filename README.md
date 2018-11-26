@@ -337,6 +337,24 @@ reduce(suffixStr, '', ('alex', 'billy', 'charlie')); // => "charliebillyalex"
 reduce(add, 0, (4,5,6)); // => 15
 ```
 
+As of **`v1.4.0`**, **`$fn`** may itself be a list where the first member is the function to be run against each member of **`$list`**, and the others are extra arguments that the function would require, in effect allowing functions to be decorated.
+
+```scss
+reduce((sum, 1, 2), 0 (4, 5, 6)); // => 24
+```
+
+Most important, however, is that the value(s) provided by iterating over **`$list` must always be in the last argument position `$fn` expects and the accumulator in the second-to-last**. So, in the example above, the execution goes like this:
+
+```
+  function  add'l values  accumulator   member    outcome
+     ⬇︎       ⬇︎   ⬇︎           ⬇︎         ⬇︎         ⬇︎
+    sum(      1,   2,          0,         4 )   =>   7
+    sum(      1,   2,          7,         5 )   =>   15
+    sum(      1,   2,          15,        6 )   =>   24
+```
+
+In the particular case of **`sum`**, argument order isn't important, but for others it could very well be.
+
 ### pipe
 `($params...)`
 
