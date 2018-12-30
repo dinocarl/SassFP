@@ -1,0 +1,8 @@
+
+@function safe-call($fn) {
+  @if function-exists('get-function') {
+    @return get-function($fn);
+  } @else {
+    @return $fn;
+  }
+}

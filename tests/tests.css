@@ -133,8 +133,8 @@
 /*  */
 /* # Module: map-with-index */
 /* ------------------------ */
-/* Test: Returns a new list where each member of $list has had function $fn run against it, but also needs the item's index. */
-/*   ✔ [assert-equal] Returns a new list where each member of $list has had function $fn run against it, but also needs the item's index. */
+/* Test: Returns a new list where each member of $list has had function $fn run against it and its index as two arguments. */
+/*   ✔ [assert-equal] Returns a new list where each member of $list has had function $fn run against it and its index as two arguments. */
 /*  */
 /*  */
 /* # Module: reduce */
