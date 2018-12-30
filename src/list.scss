@@ -94,7 +94,7 @@
   $true-list: ();
   $false-list: ();
   @each $item in head($list) {
-    @if call($predicateFn, join($item, $rest)...) {
+    @if call(safe-call($predicateFn), join($item, $rest)...) {
       $true-list: fpAppend($item, $true-list);
     } @else {
       $false-list: fpAppend($item, $false-list);

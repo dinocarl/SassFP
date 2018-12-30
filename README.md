@@ -1,8 +1,20 @@
 # SassFP
 
-A set of utilities inspired by [Ramda][ramda], [lodash FP][lodashfp], and other Functional libraries for Sass.
+A set of utilities inspired by [Ramda], [lodash FP], and other Functional libraries for Sass.
 
 Like Ramda, all the functions in SassFP are iteratee-first, data-last. Some native Sass methods have been re-supplied here with that argument order, but, so far, only those that I've personally needed in projects.
+
+### Installation
+
+SassFP is a node-module and can be installed via
+
+```bash
+npm install sassfp
+```
+
+### Requirements
+
+SassFP requires [Sass 3.3] or greater due to its reliance on and ability to manipulate [Sass maps]. As of v1.3.1, it is compatibile with [Sass 3.5].
 
 - [String Methods](#string-methods)
     - [prefixStr](#prefixstr)
@@ -829,8 +841,11 @@ equals((header red), (header red)); // => true
 ```
 
 
-  [ramda]: http://ramdajs.com
-  [lodashfp]: https://github.com/lodash/lodash/wiki/FP-Guide
+  [Ramda]: http://ramdajs.com
+  [lodash FP]: https://github.com/lodash/lodash/wiki/FP-Guide
+  [Sass 3.3]: http://thesassway.com/news/sass-3-3-released#maps
+  [Sass maps]: http://sass-lang.com/documentation/file.SASS_REFERENCE.html#maps
+  [Sass 3.5]: https://oddbird.net/2017/03/30/safe-get/
   [append]: http://sass-lang.com/documentation/Sass/Script/Functions.html#append-instance_method
   [join]: http://sass-lang.com/documentation/Sass/Script/Functions.html#join-instance_method
   [nth]: http://sass-lang.com/documentation/Sass/Script/Functions.html#nth-instance_method

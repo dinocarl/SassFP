@@ -1,6 +1,8 @@
 // SassFP
 // Library of iteratee-first, data-last Functional Mehtods
 
+@import 'src/util';
+@import 'src/misc';
 @import 'src/converted';
 @import 'src/type';
 @import 'src/string';
@@ -8,4 +10,3 @@
 @import 'src/functional';
 @import 'src/object';
 @import 'src/math';
-@import 'src/misc';

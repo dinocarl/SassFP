@@ -1,5 +1,6 @@
 // Functional Methods
 
+@import 'util';
 @import 'type';
 @import 'list';
 
@@ -29,7 +30,7 @@
   @for $i from 1 through length($list) {
     $item: nth($list, $i);
     $item: if($use-index, ($item, $i), $item);
-    $accumulated: append($accumulated, call($fn, join($rest, $item)...));
+    $accumulated: append($accumulated, call(safe-call($fn), join($rest, $item)...));
   }
   @return $accumulated;
 }
@@ -43,7 +44,7 @@
 @function reduce($callback, $initial, $list) {
   $accumulated: $initial;
   @for $i from 1 through length($list) {
-    $accumulated: call($callback, $accumulated, nth($list, $i));
+    $accumulated: call(safe-call($callback), $accumulated, nth($list, $i));
   }
   @return $accumulated;
 }
@@ -57,7 +58,7 @@
   @if is_list($fnName) {
     $input: append(tail($fnName), $input);
   }
-  @return call($fn, $input...);
+  @return call(safe-call($fn), $input...);
 }
 
 // accepts a list of function names and initial data.
