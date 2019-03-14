@@ -1,0 +1,362 @@
+@import "../SassFP";
+
+
+@function range-list( $first, $last ) {
+  $output: ();
+  @for $i from $first through $last {
+    $output: append($output, $i);
+  }
+  @return $output;
+}
+
+
+// Begin data-col fns
+
+
+@function single-column-calc( $num-cols, $gutter ) {
+  @return ( 100 - ( $gutter * ( $num-cols - 1 ) ) ) / $num-cols;
+}
+
+@function column-width-calc( $span, $num-cols, $gutter ) {
+  $single-column: single-column-calc( $num-cols, $gutter );
+  @return $single-column + ( ( $single-column + $gutter ) * ( $span - 1 ) );
+}
+
+@function single-col-px($gutter-width, $total-width, $total-span) {
+  @return ( $total-width - ( ( $total-span - 1 ) * $gutter-width ) ) / $total-span;
+};
+
+@function span-width-calc( $gutter-width, $total-width, $total-span, $span ) {
+  $single-col: single-col-px( $gutter-width, $total-width, $total-span );
+  $col-margin-ratio: $single-col / $gutter-width;
+  @return ( $span * ( $gutter-width * $col-margin-ratio ) ) + ( ( $span - 1 ) * $gutter-width );
+}
+
+@function offset-width-calc( $gutter-width, $total-width, $total-span, $span ) {
+  $single-col: single-col-px( $gutter-width, $total-width, $total-span );
+  $col-margin-ratio: $single-col / $gutter-width;
+  @return ( $span * ( $gutter-width * $col-margin-ratio ) ) + ( $span * $gutter-width );
+}
+
+@function create-width-map( $curr-gutter, $curr-width, $num-cols, $nests, $span ) {
+  $px-span: span-width-calc( $curr-gutter, $curr-width, $num-cols, $span );
+  $px-offset: offset-width-calc( $curr-gutter, $curr-width, $num-cols, $span );
+  $lookup-span: inspect( $span );
+  $nested-data: ();
+
+  @if isnt_null( $nests ) and isnt_null( prop( $lookup-span, $nests ) ) {
+    $nested-data: map-merge(
+      $nested-data,
+      reduce(
+        (create-width-data, $curr-gutter, $px-span, $num-cols, null),
+        (),
+        prop( $lookup-span, $nests )
+      )
+    );
+  }
+  @else {
+    $nested-data: null;
+  }
+
+  @return (
+    span: (
+      px: $px-span,
+      pct: percent( $px-span, $curr-width )
+    ),
+    offset: (
+      px: $px-offset,
+      pct: percent( $px-offset, $curr-width )
+    ),
+    nests: $nested-data
+  );
+}
+
+@function create-width-data( $curr-gutter, $curr-width, $num-cols, $nests, $data-map, $span ) {
+  @return map-merge(
+    $data-map,
+    ( $span: create-width-map( $curr-gutter, $curr-width, $num-cols, $nests, $span ) )
+  );
+}
+
+@function create-column-data( $num-cols, $nests, $data-map, $width-data ) {
+  $width-id: prop( 'id', $width-data );
+  $curr-width: prop( 'max', $width-data );
+  $curr-gutter: prop( 'gutter', $width-data );
+  $curr-gutter-size: percent( $curr-gutter, $curr-width );
+  $col-list: range-list( 1, $num-cols );
+
+  @return map-merge(
+    $data-map,
+    (
+      #{$curr-width}: (
+        id: $width-id,
+        gutter: $curr-gutter,
+        max-width: $curr-width,
+        widths: reduce(
+          (create-width-data, $curr-gutter, $curr-width, $num-cols, $nests),
+          (),
+          $col-list
+        )
+      )
+    )
+  );
+}
+
+@function create-columns-data( $seed ) {
+  @return reduce(
+    (create-column-data, prop( 'cols', $seed ), prop( 'nests', $seed ) ),
+    (),
+    prop( 'widths', $seed )
+  );
+}
+
+@function kebab-class( $list ) {
+  @return compose(
+    (prefixStr, '.'),
+    (implode, '-'),
+    $list
+  );
+}
+
+// Data
+$column-data: (
+  cols: 12,
+  names: (
+    gen: 'col',
+    offset: 'offset',
+    order: 'ord',
+  ),
+  widths: (
+    (
+      id: 'xs',
+      max: 480,
+      gutter: 8,
+    ),
+    (
+      id: 'sm',
+      max: 768,
+      gutter: 12,
+    ),
+    (
+      id: 'md',
+      max: 992,
+      gutter: 12,
+    ),
+    (
+      id: 'lg',
+      max: 1200,
+      gutter: 14,
+    ),
+  ),
+  first-mq: 768,
+  nests: (
+    '2': (6),
+    '3': (4),
+    '4': (3, 6),
+    '6': (2, 4, 6),
+    '8': (3, 6, 9),
+    '9': (4, 8),
+    '10': (6),
+  ),
+);
+
+// Mixins
+@mixin col-media-query( $width, $first-mq ) {
+  @if $width >= $first-mq {
+    @media only screen and (min-width: #{$width + 1}px) {
+      @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}
+
+@mixin offset-0( $size ) {
+  #{ create-offset-selector( (
+    size: $size,
+    span: 0
+  ) ) } {
+    margin-left: 0;
+  }
+}
+
+
+// output CSS
+body {
+  margin: 0;
+  padding: 0;
+  font-family: monospace;
+  line-height: 1.2
+}
+
+.bgo {
+  background-color: orange;
+}
+
+.bgs {
+  background-color: silver;
+}
+
+.row {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  & > * {
+    box-sizing: border-box;
+    border: 1px solid #000;
+  }
+}
+
+// Assemble the data
+$all-data: map-merge(
+  $column-data,
+  (specs: create-columns-data( $column-data ))
+);
+
+@mixin generate-columns( $col-data ) {
+  // Create some convenience variables
+  $gen-name: path( ( 'names', 'gen' ), $col-data );
+  $order-name: path( ( 'names', 'order' ), $col-data );
+  $offset-name: path( ( 'names', 'offset' ), $col-data );
+  $first-id: prop( 'id', head( prop( 'widths', $col-data ) ) );
+
+  $acc-selectors: ();
+
+  // Accumulate full width classes here
+  // above all the others to use the cascade
+  $full-width-classes: ();
+  %full-width-class {
+    width: 100%;
+  }
+
+  // iterate over the data to create the rest of the output
+  @each $width, $width-data in prop( 'specs', $col-data) {
+    $id: prop( 'id', $width-data );
+    $max: prop( 'max-width', $width-data );
+    $overrides: ();
+    @include col-media-query(
+      $max,
+      prop( 'first-mq', $col-data )
+    ) {
+      @each $span, $span-data in prop( 'widths', $width-data ) {
+        $base-selector: kebab-class( ( $gen-name, $id, $span ) );
+        $offset-selector: kebab-class( ( $gen-name, $id, $offset-name, $span ) );
+        $order-selector: kebab-class( ( $order-name, $id, $span ) );
+        $curr-width: path( ( 'widths', $span, 'span', 'pct' ), $width-data );
+        $curr-offset: path( ( 'widths', $span, 'offset', 'pct' ), $width-data );
+        $curr-nests: path( ( 'widths', $span, 'nests' ), $width-data );
+        $prev-bases: path( ( $span, 'bases' ), $acc-selectors);
+        $prev-offsets: path( ( $span, 'offsets' ), $acc-selectors);
+        $nest-parent: if(
+          isnt_null( $prev-bases ),
+          append( $prev-bases, $base-selector ),
+          $base-selector
+        );
+
+        // All but the first size needs to be full-width by default
+        // Add the rest to the full-width list
+        @if $id != $first-id {
+          $full-width-classes: append( $full-width-classes, $base-selector, comma );
+        }
+
+        // Width classes
+        // Don't bother outputting the last column since it will
+        // always be full-width, and a full-width offset also
+        // doesn't make sense. Instead, attach them to the full-width list.
+        // Use this area to output any previously iterated-over classnames
+        // so they can be avaiable, but overridden using the cascade below
+        @if $span !=  prop( 'cols', $col-data) {
+          @if isnt_null( $prev-bases ) {
+            // Previous sized columns
+            #{ $prev-bases } {
+              width: $curr-width;
+            }
+
+            // Previous sized offsets
+            #{ $prev-offsets } {
+              margin-left: $curr-offset;
+            }
+          }
+
+          @if isnt_null( $curr-nests ) {
+            @each $nested-span, $nested-data in $curr-nests {
+              $nested-classes: ();
+              @each $seed-span-data in prop( 'widths', $col-data ) {
+                $nested-classes: append(
+                  $nested-classes,
+                  kebab-class(
+                    (
+                      $gen-name,
+                      prop( 'id', $seed-span-data ),
+                      $nested-span
+                    )
+                  ),
+                  comma
+                );
+              }
+              #{ $nest-parent } {
+                #{ $nested-classes } {
+                  width: path( ('span', 'pct' ), $nested-data );
+                }
+              }
+            }
+          }
+
+          // Add to overrides
+          $overrides: append( $overrides, (
+            class: ( $base-selector, $curr-width ),
+            offset: ( $offset-selector, $curr-offset ),
+          ) );
+
+          // Smaller columns need to be updated with the values generated
+          // by their larger cousins. Hold on to previous class names
+          // to include them in later iterations
+          $acc-selectors: map-merge(
+            $acc-selectors,
+            (
+              $span: (
+                bases: append( path( ( $span, 'bases' ), $acc-selectors ), $base-selector, comma ),
+                offsets: append( path( ( $span, 'offsets' ), $acc-selectors ), $offset-selector, comma ),
+              )
+            )
+          );
+        }
+        // this is for the smallest size classes
+        // to follow a mobile-first strategy
+        // as well as all the classes whose
+        // span is the same as the max as an optimization
+        @else {
+          $full-width-classes: append( $full-width-classes, $base-selector, comma );
+        }
+
+        // Order classes
+        #{ $order-selector } {
+          order: $span;
+        }
+      }
+
+      // Output the standalone, new column-sizing classes
+      // and offsets here to ensure that they get priority
+      @each $override in $overrides {
+        #{ head( prop( 'class', $override ) ) } {
+          width:  last( prop( 'class', $override ) );
+        }
+        #{ head( prop( 'offset', $override ) ) } {
+          margin-left:  last( prop( 'offset', $override ) );
+        }
+      }
+    }
+  }
+
+  // All iterations have been completed.
+  // Output the list of full-width classes
+  // above everything else to ensure they
+  // can be overridden by the cascade
+  #{ $full-width-classes } {
+    @extend %full-width-class;
+  }
+}
+
+@include generate-columns( $all-data );
