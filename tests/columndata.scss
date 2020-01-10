@@ -38,19 +38,19 @@
   @return ( $span * ( $gutter-width * $col-margin-ratio ) ) + ( $span * $gutter-width );
 }
 
-@function create-width-map( $curr-gutter, $curr-width, $num-cols, $nests, $span ) {
+@function create-width-map( $curr-gutter, $curr-width, $num-cols, $span, $depth ) {
   $px-span: span-width-calc( $curr-gutter, $curr-width, $num-cols, $span );
   $px-offset: offset-width-calc( $curr-gutter, $curr-width, $num-cols, $span );
   $lookup-span: inspect( $span );
   $nested-data: ();
 
-  @if isnt_null( $nests ) and isnt_null( prop( $lookup-span, $nests ) ) {
+  @if $span > 1 and $span <= $num_cols and $depth < 1 {
     $nested-data: map-merge(
       $nested-data,
       reduce(
-        (create-width-data, $curr-gutter, $px-span, $num-cols, null),
+        (create-width-data, $curr-gutter, $px-span, $span, inc( $depth )),
         (),
-        prop( $lookup-span, $nests )
+        range-list(1, dec( $span ))
       )
     );
   }
@@ -71,14 +71,14 @@
   );
 }
 
-@function create-width-data( $curr-gutter, $curr-width, $num-cols, $nests, $data-map, $span ) {
+@function create-width-data( $curr-gutter, $curr-width, $num-cols, $depth, $data-map, $span ) {
   @return map-merge(
     $data-map,
-    ( $span: create-width-map( $curr-gutter, $curr-width, $num-cols, $nests, $span ) )
+    ( $span: create-width-map( $curr-gutter, $curr-width, $num-cols, $span, $depth ) )
   );
 }
 
-@function create-column-data( $num-cols, $nests, $data-map, $width-data ) {
+@function create-column-data( $num-cols, $data-map, $width-data ) {
   $width-id: prop( 'id', $width-data );
   $curr-width: prop( 'max', $width-data );
   $curr-gutter: prop( 'gutter', $width-data );
@@ -91,9 +91,9 @@
       #{$curr-width}: (
         id: $width-id,
         gutter: $curr-gutter,
-        max-width: $curr-width,
+        max: $curr-width,
         widths: reduce(
-          (create-width-data, $curr-gutter, $curr-width, $num-cols, $nests),
+          (create-width-data, $curr-gutter, $curr-width, $num-cols, 0),
           (),
           $col-list
         )
@@ -104,7 +104,7 @@
 
 @function create-columns-data( $seed ) {
   @return reduce(
-    (create-column-data, prop( 'cols', $seed ), prop( 'nests', $seed ) ),
+    (create-column-data, prop( 'cols', $seed ) ),
     (),
     prop( 'widths', $seed )
   );
@@ -129,35 +129,30 @@ $column-data: (
   widths: (
     (
       id: 'xs',
+      cols: 8,
       max: 480,
       gutter: 8,
     ),
     (
       id: 'sm',
+      cols: 12,
       max: 768,
       gutter: 12,
     ),
     (
       id: 'md',
+      cols: 12,
       max: 992,
       gutter: 12,
     ),
     (
       id: 'lg',
+      cols: 12,
       max: 1200,
       gutter: 14,
     ),
   ),
   first-mq: 768,
-  nests: (
-    '2': (6),
-    '3': (4),
-    '4': (3, 6),
-    '6': (2, 4, 6),
-    '8': (3, 6, 9),
-    '9': (4, 8),
-    '10': (6),
-  ),
 );
 
 // Mixins
@@ -169,15 +164,6 @@ $column-data: (
   }
   @else {
     @content;
-  }
-}
-
-@mixin offset-0( $size ) {
-  #{ create-offset-selector( (
-    size: $size,
-    span: 0
-  ) ) } {
-    margin-left: 0;
   }
 }
 
@@ -196,6 +182,10 @@ body {
 
 .bgs {
   background-color: silver;
+}
+
+.rspnsv-image img {
+  max-width: 100%;
 }
 
 .row {
@@ -231,11 +221,31 @@ $all-data: map-merge(
     width: 100%;
   }
 
-  // iterate over the data to create the rest of the output
+  // Iterate over the data to create the rest of the output.
+  // The @each iterator in use here allows looping over a
+  // hash map, but doesn't support index lookups during the
+  // loop, so a current index is kept track of by way of a
+  // mutating variable, $idx. That index is needed late to
+  // limit which nested selectors are going to get output
+  $idx: 0;
   @each $width, $width-data in prop( 'specs', $col-data) {
     $id: prop( 'id', $width-data );
-    $max: prop( 'max-width', $width-data );
+    $idx: inc($idx);
+    $max: prop( 'max', $width-data );
     $overrides: ();
+    $bp-spans: ();
+    $bp-offsets: ();
+    @each $bp-name in prop( 'widths', $col-data ) {
+      $bp-spans: map-merge(
+        $bp-spans,
+        (prop( 'id', $bp-name ): ()),
+      );
+      $bp-offsets: map-merge(
+        $bp-offsets,
+        (prop( 'id', $bp-name ): ()),
+      );
+    }
+
     @include col-media-query(
       $max,
       prop( 'first-mq', $col-data )
@@ -268,22 +278,14 @@ $all-data: map-merge(
         // Use this area to output any previously iterated-over classnames
         // so they can be avaiable, but overridden using the cascade below
         @if $span !=  prop( 'cols', $col-data) {
-          @if isnt_null( $prev-bases ) {
-            // Previous sized columns
-            #{ $prev-bases } {
-              width: $curr-width;
-            }
-
-            // Previous sized offsets
-            #{ $prev-offsets } {
-              margin-left: $curr-offset;
-            }
-          }
-
+          // Create the nested selectors
           @if isnt_null( $curr-nests ) {
             @each $nested-span, $nested-data in $curr-nests {
               $nested-classes: ();
-              @each $seed-span-data in prop( 'widths', $col-data ) {
+              // Limit to those that are the current media query sizes
+              // and smaller to allow larger sized selectors to remain
+              // at full width until their media query gets hit
+              @each $seed-span-data in slice( 1, $idx, prop( 'widths', $col-data ) ) {
                 $nested-classes: append(
                   $nested-classes,
                   kebab-class(
@@ -296,6 +298,10 @@ $all-data: map-merge(
                   comma
                 );
               }
+
+              // Relies on Sass' ability to take multiple parents
+              // with multiple children to create all the combinations
+              // as a comma-separated list of selectors
               #{ $nest-parent } {
                 #{ $nested-classes } {
                   width: path( ('span', 'pct' ), $nested-data );
@@ -304,11 +310,60 @@ $all-data: map-merge(
             }
           }
 
-          // Add to overrides
+          // Add the current width and offset to the overrides list
+          // This list needs to be accumulated during this loop
+          // but ouput later to ensure a lower spot in the cascade
           $overrides: append( $overrides, (
             class: ( $base-selector, $curr-width ),
             offset: ( $offset-selector, $curr-offset ),
           ) );
+
+          // Same goes for the previous classes that have already
+          // been added. They will need to be grouped with their
+          // breakpoint-named siblings to ensure that smaller sizes
+          // can have the appropriately resized sizes in larger
+          // breakpoints. In other words, when gutters change sizes
+          // in different breakpoints, it is not necessary for a user
+          // to explicitly add every size to every element, but only
+          // the smallest size at which they wish to see the layout.
+          // eg, `col-xs-4` will be 4 spans wide thru `sm`, 'md', and `lg`
+          // and it won't need to be restated for each of those
+          @if isnt_null( $prev-bases ) {
+            // Add to $bp-spans
+            @each $selector in $prev-bases {
+              @if isnt_null( $selector ) {
+                $bp-name: nth( explode( '-', $selector ), 2 );
+                $bp-list: prop( $bp-name, $bp-spans );
+                $bp-list: append(
+                  $bp-list,
+                  ($selector, $curr-width),
+                );
+                $bp-spans: map-merge(
+                  $bp-spans,
+                  ($bp-name: $bp-list),
+                );
+              }
+            }
+          }
+
+          // Repeat for offsets (see above comment)
+          @if isnt_null( $prev-offsets ) {
+            // Add to $bp-offsets
+            @each $selector in $prev-offsets {
+              @if isnt_null( $selector ) {
+                $bp-name: nth( explode( '-', $selector ), 2 );
+                $bp-list: prop( $bp-name, $bp-offsets );
+                $bp-list: append(
+                  $bp-list,
+                  ($selector, $curr-offset),
+                );
+                $bp-offsets: map-merge(
+                  $bp-offsets,
+                  ($bp-name: $bp-list),
+                );
+              }
+            }
+          }
 
           // Smaller columns need to be updated with the values generated
           // by their larger cousins. Hold on to previous class names
@@ -334,6 +389,39 @@ $all-data: map-merge(
         // Order classes
         #{ $order-selector } {
           order: $span;
+        }
+      }
+
+      // Each id will need a special offset-0 class
+      #{kebab-class( ( $gen-name, $id, $offset-name, 0 ) )} {
+        margin-left: 0;
+      }
+
+      // Output previously (ie, smaller breakpoints) defined width selectors
+      // They will be grouped according to breakpoint size first,
+      // then column width, allowing larger breakpoint sizes to
+      // cascade over previously defined widths. In other words,
+      // `xs` sizes get redefined so they can adjust to larger
+      // breakpoints' changing gutter sizes. They need to be grouped
+      // with the others of their same breakpoints to ensure that
+      // larger breakpoints with smaller column widths can override
+      // smaller breakpoints' definitions with larger widths
+      @each $bp-name, $override in $bp-spans {
+        // Previously sized columns
+        @each $classinfo in $override {
+          #{head( $classinfo )} {
+            width: #{last( $classinfo )};
+          }
+        }
+      }
+
+      // Repeat for offsets
+      @each $bp-name, $override in $bp-offsets {
+        // Previously sized offsets
+        @each $classinfo in $override {
+          #{head( $classinfo )} {
+            margin-left: #{last( $classinfo )};
+          }
         }
       }
 
