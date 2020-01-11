@@ -1,6 +1,6 @@
 {
   "name": "sassfp",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Library of functional methods for Sass",
   "main": "SassFP.scss",
   "directories": {
@@ -30,6 +30,6 @@
   },
   "homepage": "https://github.com/dinocarl/SassFP#readme",
   "devDependencies": {
-    "sass-true": "^3.1.0"
+    "sass-true": "^5.0.0"
   }
 }
