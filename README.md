@@ -1,8 +1,12 @@
 # SassFP
+#### v1.5.0
 
-A set of utilities inspired by [Ramda], [lodash FP], and other Functional libraries for Sass.
+A set of utilities inspired by [Ramda][], [lodash FP][], and other Functional
+libraries for Sass.
 
-Like Ramda, all the functions in SassFP are iteratee-first, data-last. Some native Sass methods have been re-supplied here with that argument order, but, so far, only those that I've personally needed in projects.
+Like Ramda, all the functions in SassFP are iteratee-first, data-last. Some
+native Sass methods have been re-supplied here with that argument order, but, so
+far, only those that I've personally needed in projects.
 
 ### Installation
 
@@ -14,7 +18,8 @@ npm install sassfp
 
 ### Requirements
 
-SassFP requires [Sass 3.3] or greater due to its reliance on and ability to manipulate [Sass maps]. As of v1.3.1, it is compatibile with [Sass 3.5].
+SassFP requires [Sass 3.3][] or greater due to its reliance on and ability to
+manipulate [Sass maps][]. As of **`v1.3.1`**, it is compatible with [Sass 3.5][].
 
 - [String Methods](#string-methods)
     - [prefixStr](#prefixstr)
@@ -36,6 +41,9 @@ SassFP requires [Sass 3.3] or greater due to its reliance on and ability to mani
     - [difference](#difference)
 - [Functional Methods](#functional-methods)
     - [always](#always)
+    - [identity](#identity)
+    - [T](#T)
+    - [F](#F)
     - [map](#map)
     - [map-with-index](#map-with-index)
     - [filter](#filter)
@@ -124,7 +132,8 @@ explode('-', 'selector-one'); // => ('selector', 'one')
 ### pathToMap
 `($path, $val)`
 
-Converts a dot-delimited string and any value into a Sass map with that same object heirarchy.
+Converts a dot-delimited string and any value into a Sass map with that same
+object heirarchy.
 
 ```scss
 pathToMap('x', 10px); => (x: 10px)
@@ -137,7 +146,8 @@ pathToMap('x.y.z', 10px); => (x: (y: (z: 10px)))
 ### implode
 `($glue: '', $list: ())`
 
-Returns a string where all the members of **`$list`** have been concatenated together with **`$glue`** between them.
+Returns a string where all the members of **`$list`** have been concatenated
+together with **`$glue`** between them.
 
 ```scss
 implode('-', ('selector', 'one')); // => 'selector-one'
@@ -155,7 +165,8 @@ repeat(3, 10); // => (10, 10, 10)
 ### slice
 `($start, $end, $list)`
 
-Returns **`$list`**'s members beginning at position **`$start`** and ending at **`$end`**.
+Returns **`$list`**'s members beginning at position **`$start`** and ending at
+**`$end`**.
 
 ```scss
 slice(3, 5, ('alex', 'billy', 'charlie', 'dani', 'elliot')); // => ('charlie', 'dani', 'elliot')
@@ -209,7 +220,9 @@ flatten(#fff, red, (#222, #333)); // => (#fff, red, #222, #333)
 ### partition
 `($predicate, $list)`
 
-Returns 2-dimensional list where the first member contains all the members of **`$list`** for which **`$predicate`** is **`true`**, and the second, all those for which it is **`false`**.
+Returns 2-dimensional list where the first member contains all the members of
+**`$list`** for which **`$predicate`** is **`true`**, and the second, all those
+for which it is **`false`**.
 
 ```scss
 partition(gt5, (4,5,6,7)); // => ((6 7), (4 5))
@@ -232,7 +245,8 @@ contains('billy', $strlist); => true
 ### intersection
 `($list1, $list2)`
 
-Returns a new list of what both **`$list1`** and **`$list2`** have in common. Inverse of **`difference`**.
+Returns a new list of what both **`$list1`** and **`$list2`** have in common.
+Inverse of **`difference`**.
 
 ```scss
 $strlist: ('alex' 'billy' 'charlie' 'dani' 'elliot');
@@ -244,7 +258,8 @@ intersection(('alex.a', 'allen'), $strlist); // // => ()
 ### difference
 `($list1, $list2)`
 
-Returns new list of what **`$list1`** and **`$list2`** do not have in common. Inverse of **`intersection`**.
+Returns new list of what **`$list1`** and **`$list2`** do not have in common.
+Inverse of **`intersection`**.
 
 ```scss
 $strlist: ('alex' 'billy' 'charlie' 'dani' 'elliot');
@@ -255,22 +270,69 @@ difference(('alex.a' 'billy' 'allen'), $strlist); // => ('alex.a' 'allen')
 
 ## Functional Methods
 ### always
-`($val)`
+`($val, `_`$b`_`)`
 
-Returns the value passed to it.
+Returns the first value passed to it. As of **`v1.5.0`**, this accepts a second
+optional parameter, _`$b`_, to not only better align with Ramda's signature, but
+to also allow it to participate in compositional flows.  **`identity`** ought to
+be substituted for any previous usage of **`always`**, though there are no plans
+to deprecate the single-argument functionality.
 
 ```scss
 always(1)  // => 1
 always('asdf')  // => "asdf"
 always(('x', 'y', 'z'))  // => ("x", "y", "z")
-always(true)  // => true
-always(false)  // => false
+always('x', 'y')  // => "x"
+always(true, false)  // => true
+always(false, true)  // => false
+```
+
+### identity
+`($val)`
+
+Returns the value passed to it.
+
+```scss
+identity(1)  // => 1
+identity('asdf')  // => "asdf"
+identity(('x', 'y', 'z'))  // => ("x", "y", "z")
+identity(true)  // => true
+identity(false)  // => false
+```
+### T
+`($val...)`
+
+Returns `true`, regardless of what arguments are passed or how many there are.
+
+```scss
+T(1)  // => true
+T('asdf')  // => true
+T(('x', 'y', 'z'))  // => true
+T('x', 'y', 'z')  // => true
+T(true)  // => true
+T(false)  // => true
+T()  // => true
+```
+### F
+`($val...)`
+
+Returns `false`, regardless of what arguments are passed or how many there are.
+
+```scss
+F(1)  // => false
+F('asdf')  // => false
+F(('x', 'y', 'z'))  // => false
+F('x', 'y', 'z')  // => false
+F(true)  // => false
+F(false)  // => false
+F()  // => false
 ```
 
 ### map
 `($fn, $list)`
 
-Returns a new list where each member of **`$list`** has had function **`$fn`** run against it.
+Returns a new list where each member of **`$list`** has had function **`$fn`**
+run against it.
 
 ```scss
 @function darkenbyten($color) {
@@ -279,7 +341,10 @@ Returns a new list where each member of **`$list`** has had function **`$fn`** r
 map(darkenbyten, (#fff, red, #222, #333)); // => #e6e6e6 #cc0000 #090909 #1a1a1a
 ```
 
-As of **`v1.2.0`**, **`$fn`** may itself be a list where the first member is the function to be run against each member of **`$list`**, and the others are extra arguments that the function would require, in effect allowing functions to be decorated.
+As of **`v1.2.0`**, **`$fn`** may itself be a list where the first member is the
+function to be run against each member of **`$list`**, and the others are extra
+arguments that the function would require, in effect allowing functions to be
+decorated.
 
 ```scss
 @function darkenby($pct, $color) {
@@ -288,18 +353,24 @@ As of **`v1.2.0`**, **`$fn`** may itself be a list where the first member is the
 map((darkenby, 10%), (#fff, red, #222, #333)); // => #e6e6e6 #cc0000 #090909 #1a1a1a
 ```
 
-Because Sass supports space-separated lists, the commas are optional, and omitting them may increase legibility.
+Because Sass supports space-separated lists, the commas are optional, and
+omitting them may increase legibility.
 
 ```scss
 map((darkenby 10%), (#fff, red, #222, #333)); // => #e6e6e6 #cc0000 #090909 #1a1a1a
 ```
 
-Most important, however, is that the value(s) provided by iterating over **`$list` must always be in the last argument position `$fn` expects**.
+Most important, however, is that the value(s) provided by iterating over
+**`$list` must always be in the last argument position `$fn` expects**.
 
 ### map-with-index
 `($fn, $list)`
 
-Returns a new list where each member of **`$list`** has had function **`$fn`** run against it and its index as two arguments. Works identically to [map](#map), but with the item's index passed as an additional argument to **`$fn`** in the last argument position and the value provided by **`$list`** in the second-to-last.
+Returns a new list where each member of **`$list`** has had function **`$fn`**
+run against it and its index as two arguments. Works identically to [map](#map),
+but with the item's index passed as an additional argument to **`$fn`** in the
+last argument position and the value provided by **`$list`** in the
+second-to-last.
 ```scss
 map-with-index(prefixStr, ("alex", "billy", "charlie")); // => ("alex1", "billy2", "charlie3")
 map-with-index(add, (4, 5, 6)); // => (5, 7, 9)
@@ -308,7 +379,8 @@ map-with-index(add, (4, 5, 6)); // => (5, 7, 9)
 ### filter
 `($predicate, $list)`
 
-Returns a new list where **`$predicate`** returns **`true`** for members of **`$list`**. Inverse of **`reject`**.
+Returns a new list where **`$predicate`** returns **`true`** for members of
+**`$list`**. Inverse of **`reject`**.
 
 ```scss
 @function gt5($val) {
@@ -320,7 +392,8 @@ filter(gt5, (4,5,6,7)); // => (6, 7)
 ### reject
 `($predicate, $list)`
 
-Returns a new list where **`$predicate`** returns **`false`** for members of **`$list`**. Inverse of **`filter`**.
+Returns a new list where **`$predicate`** returns **`false`** for members of
+**`$list`**. Inverse of **`filter`**.
 
 ```scss
 reject(gt5, (4,5,6,7)); // => (4, 5)
@@ -329,7 +402,8 @@ reject(gt5, (4,5,6,7)); // => (4, 5)
 ### reduce
 `($fn, $initial, $list)`
 
-Accumulates the result of running each member of **`$list`** through **`$fn`** starting with the **`$initial`** value and **`$list`**'s first member.
+Accumulates the result of running each member of **`$list`** through **`$fn`**
+starting with the **`$initial`** value and **`$list`**'s first member.
 
 ```scss
 reduce(prefixStr, '.', ('alex', 'billy', 'charlie')); // => ".alexbillycharlie"
@@ -337,13 +411,19 @@ reduce(suffixStr, '', ('alex', 'billy', 'charlie')); // => "charliebillyalex"
 reduce(add, 0, (4,5,6)); // => 15
 ```
 
-As of **`v1.4.0`**, **`$fn`** may itself be a list where the first member is the function to be run against each member of **`$list`**, and the others are extra arguments that the function would require, in effect allowing functions to be decorated.
+As of **`v1.4.0`**, **`$fn`** may itself be a list where the first member is the
+function to be run against each member of **`$list`**, and the others are extra
+arguments that the function would require, in effect allowing functions to be
+decorated.
 
 ```scss
 reduce((sum, 1, 2), 0 (4, 5, 6)); // => 24
 ```
 
-Most important, however, is that the value(s) provided by iterating over **`$list` must always be in the last argument position `$fn` expects and the accumulator in the second-to-last**. So, in the example above, the execution goes like this:
+Most important, however, is that the value(s) provided by iterating over
+**`$list` must always be in the last argument position `$fn` expects and the
+accumulator in the second-to-last**. So, in the example above, the execution
+goes like this:
 
 ```
   function  add'l values  accumulator   member    outcome
@@ -358,7 +438,11 @@ In the particular case of **`sum`**, argument order isn't important, but for oth
 ### pipe
 `($params...)`
 
-Accepts a list of arguments where the last item is the initial data and the others are a sequence of functions to run. Returns the result of each of the functions being run on the successive results from first to last. **The very last item must be the data being operated on.** Functions being passed in with additional parameters take the form of sub-lists.
+Accepts a list of arguments where the last item is the initial data and the
+others are a sequence of functions to run. Returns the result of each of the
+functions being run on the successive results from first to last. **The very
+last item must be the data being operated on.** Functions being passed in with
+additional parameters take the form of sub-lists.
 
 ```scss
 pipe(
@@ -371,7 +455,8 @@ pipe(
 ### compose
 `($params...)`
 
-Same as **`pipe`**, but functions run in reverse order. Initial data remains last argument.
+Same as **`pipe`**, but functions run in reverse order. Initial data remains
+last argument.
 
 ```scss
 compose(
@@ -395,7 +480,8 @@ compose(
 ### path
 `($key-list, $map)`
 
-Allows for getting at nested attributes in a Sass map using list syntax. Ensures a null return for any unrecognized paths.
+Allows for getting at nested attributes in a Sass map using list syntax. Ensures
+a null return for any unrecognized paths.
 
 ```scss
 $colors: (header:(one: #333, two: #444), footer: #666);
@@ -407,7 +493,8 @@ path(('header', 'two', 'three', 'four'), $colors); // => null
 ### prop
 `($path, $map)`
 
-Allows for getting at nested attributes in a Sass map using dot syntax. Ensures a null return for any unrecognized paths.
+Allows for getting at nested attributes in a Sass map using dot syntax. Ensures
+a null return for any unrecognized paths.
 
 ```scss
 $colors: (header:(one: #333, two: #444), footer: #666);
@@ -419,7 +506,8 @@ prop('body', $colors); // => null
 ### pathOr
 `($fallback, $key-list, $map)`
 
-Returns the value of a `path` lookup when successful, and returns a provided fallback when not.
+Returns the value of a `path` lookup when successful, and returns a provided
+fallback when not.
 
 ```scss
 $colors: (header:(one: #333, two: #444), footer: #666);
@@ -431,7 +519,8 @@ pathOr(':(', ('header', 'two', 'three', 'four'), $colors); // => ':('
 ### propOr
 `($fallback, $path, $map)`
 
-Returns the value of a `prop` lookup when successful, and returns a provided fallback when not.
+Returns the value of a `prop` lookup when successful, and returns a provided
+fallback when not.
 
 ```scss
 $colors: (header:(one: #333, two: #444), footer: #666);
@@ -454,7 +543,8 @@ assign($colors, (header: (three: red))); // => (header:(one: #333, two: #444, th
 ### pick
 `($key-list, $map)`
 
-Creates new map object from **`$map`** selecting keys provided by **`$key-list`**.
+Creates new map object from **`$map`** selecting keys provided by
+**`$key-list`**.
 
 ```scss
 $colors: (header:(one: #333, two: #444), footer: #666);
@@ -466,7 +556,8 @@ pick(('header', 'footer'), $colors); // same as original
 ### omit
 `($key-list, $map)`
 
-Creates new map object from the provided one, then removing a specified list of keys.
+Creates new map object from the provided one, then removing a specified list of
+keys.
 
 ```scss
 omit(
@@ -608,7 +699,9 @@ power(10, 2); // => 1024 (2^10)
 ### to-decimal-places
 `($digits: 2, $num: 1)`
 
-Returns **`$num`** to **`$digits`** number of significant digits dropping anything beyond it. **`$digits`** is 2 by default since Sass has a default of returning 3 significant digits.
+Returns **`$num`** to **`$digits`** number of significant digits dropping
+anything beyond it. **`$digits`** is 2 by default since Sass has a default of
+returning 3 significant digits.
 
 ```scss
 to-decimal-places(2, 10.129); // => 10.12
@@ -678,7 +771,7 @@ Existing Sass functions with data-last argument orders.
 ### fpAppend
 `($item, $list)`
 
-Adds an item to the end of a provided list. See Sass [append] documentation.
+Adds an item to the end of a provided list. See Sass [append][] documentation.
 
 ```scss
 fpAppend('charlie', ('alex', 'billy')); // => 'alex' 'billy' 'charlie'
@@ -687,7 +780,7 @@ fpAppend('charlie', ('alex', 'billy')); // => 'alex' 'billy' 'charlie'
 ### fpJoin
 `($list2, $list1)`
 
-Joins **`$list2`** to the end of **`$list1`**. See Sass [join] documentation.
+Joins **`$list2`** to the end of **`$list1`**. See Sass [join][] documentation.
 
 ```scss
 fpJoin(('charlie' 'dani'), ('alex', 'billy')); // => 'alex' 'billy' 'charlie' 'dani'
@@ -696,7 +789,7 @@ fpJoin(('charlie' 'dani'), ('alex', 'billy')); // => 'alex' 'billy' 'charlie' 'd
 ### fpNth
 `($position, $list)`
 
-Returns the item at **`$position`** from **`$list`**. See Sass [nth] documentation.
+Returns the item at **`$position`** from **`$list`**. See Sass [nth][] documentation.
 
 ```scss
 fpNth(2, ('alex', 'billy')); // => 'billy'

@@ -7,6 +7,32 @@
 
 $functional-spec: (
   (
+    'T',
+    'Returns true.',
+    (
+      T(1),
+      T('asdf'),
+      T('x', 'y', 'z', 2),
+      T(true),
+      T(false),
+      T()
+    ),
+    (true, true, true, true, true, true)
+  ),
+  (
+    'F',
+    'Returns false.',
+    (
+      F(1, 2),
+      F('asdf', 2),
+      F('x', 'y', 'z', 2),
+      F(true),
+      F(false),
+      F()
+    ),
+    (false, false, false, false, false, false)
+  ),
+  (
     'always',
     'Returns the value passed to it.',
     (
@@ -14,7 +40,32 @@ $functional-spec: (
       always('asdf'),
       always(('x', 'y', 'z')),
       always(true),
-      always(false)
+      always(false),
+      always(F()),
+    ),
+    (1, 'asdf', ('x', 'y', 'z'), true, false, false)
+  ),
+  (
+    'always',
+    'Returns the first value passed to it when passed 2 arguments.',
+    (
+      always(1, 2),
+      always('asdf', 2),
+      always(('x', 'y', 'z'), 2),
+      always(true, 2),
+      always(false, 2)
+    ),
+    (1, 'asdf', ('x', 'y', 'z'), true, false)
+  ),
+  (
+    'identity',
+    'Returns the same value passed to it.',
+    (
+      identity(1),
+      identity('asdf'),
+      identity(('x', 'y', 'z')),
+      identity(true),
+      identity(false)
     ),
     (1, 'asdf', ('x', 'y', 'z'), true, false)
   ),
