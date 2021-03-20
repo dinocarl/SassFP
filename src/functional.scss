@@ -4,9 +4,24 @@
 @import 'type';
 @import 'list';
 
-// returns the value provided
-@function always($val) {
+// returns the first value provided
+@function always($val, $b: null) {
   @return $val;
+}
+
+// identity
+@function identity($a) {
+  @return $a;
+}
+
+// functional True
+@function T($args...) {
+  @return true;
+}
+
+// functional False
+@function F($args...) {
+  @return false;
 }
 
 // accepts a predicate and a list

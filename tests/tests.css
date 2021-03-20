@@ -107,10 +107,34 @@
 /*   ✔ [assert-equal] Run itegrations with list methods */
 /*  */
 /*  */
+/* # Module: T */
+/* ----------- */
+/* Test: Returns true. */
+/*   ✔ [assert-equal] Returns true. */
+/*  */
+/*  */
+/* # Module: F */
+/* ----------- */
+/* Test: Returns false. */
+/*   ✔ [assert-equal] Returns false. */
+/*  */
+/*  */
 /* # Module: always */
 /* ---------------- */
 /* Test: Returns the value passed to it. */
 /*   ✔ [assert-equal] Returns the value passed to it. */
+/*  */
+/*  */
+/* # Module: always */
+/* ---------------- */
+/* Test: Returns the first value passed to it when passed 2 arguments. */
+/*   ✔ [assert-equal] Returns the first value passed to it when passed 2 arguments. */
+/*  */
+/*  */
+/* # Module: identity */
+/* ------------------ */
+/* Test: Returns the same value passed to it. */
+/*   ✔ [assert-equal] Returns the same value passed to it. */
 /*  */
 /*  */
 /* # Module: filter */
@@ -432,11 +456,11 @@
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 72 Tests: */
-/* - 72 Passed */
+/* 76 Tests: */
+/* - 76 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 72 Modules */
-/* - 72 Tests */
-/* - 72 Assertions */
+/* - 76 Modules */
+/* - 76 Tests */
+/* - 76 Assertions */
 /* -------------------- */
