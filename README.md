@@ -51,6 +51,7 @@ manipulate [Sass maps][]. As of **`v1.3.1`**, it is compatible with [Sass 3.5][]
     - [reduce](#reduce)
     - [pipe](#pipe)
     - [compose](#compose)
+    - [cond](#cond)
 - [Object Methods](#object-methods)
     - [path](#path)
     - [prop](#prop)
@@ -99,7 +100,13 @@ manipulate [Sass maps][]. As of **`v1.3.1`**, it is compatible with [Sass 3.5][]
     - [isnt_number](#isnt_number)
     - [isnt_null](#isnt_null)
     - [isnt_map](#isnt_map)
+- [Relational Methods](#relational-methods)
     - [equals](#equals)
+    - [eq](#eq)
+    - [lt](#lt)
+    - [lte](#lte)
+    - [gt](#gt)
+    - [gte](#gte)
 
 ## String Methods
 ### prefixStr
@@ -473,6 +480,38 @@ compose(
   (map, square),
   (4,5,6)
 ); // => 154
+```
+
+### cond
+`(($predicates-and-actions-list, $data))`
+
+Accepts a two dimensional list of predicate and transformation functions that,
+taken together, are read as a series of nested `if / else` statements, where the
+first `true` value encountered has its transformation executed against the
+supplied data. Like **`pipe`** and **`compose`**, the data comes in the last
+position.
+
+The assumption of both the predicate and transformation functions is that they
+are unary functions where the provided data serves as the parameter to both
+functions. Alternatively, n-ary functions may also be used in either assuming
+that the passed value is coming in the functions' last argument positions, and
+all other arguments are provided by as a list.
+
+To ensure a return, use the **`T`** function in the last position of
+predicate-transformation pairs (so, second-to-last in overall list), coupled
+with an **`always`**. As noted with **`map`**, omitting commas in the inner
+lists may help with legibility.
+
+```scss
+@function darkenby($pct, $color) { @return darken($color, $pct); }
+@function lightenby($pct, $color) { @return lighten($color, $pct); }
+
+cond((
+  ((equals yellow), (lightenby 20))
+  ((equals red), (darkenby 10))
+  (T, (always #000))
+  red
+)) // => #cc0000
 ```
 
 ## Object Methods
@@ -939,16 +978,72 @@ isnt_map((header: red)); // => false
 isnt_map((header red)); // => true
 ```
 
+## Relational
 ### equals
 `($a, $b)`
 
-Returns whether **`$a`** and **`$b`** are equivalent.
+Returns whether **`$a`** and **`$b`** are equivalent (function version of Sass
+`==` operator).
 
 ```scss
 equals(1, 1); // => true
 equals(1, '1'); // => false
 equals((header: red), (header: red)); // => true
 equals((header red), (header red)); // => true
+```
+
+### eq
+`($a, $b)`
+
+Returns whether **`$a`** and **`$b`** are equivalent (alias of `equals`).
+
+
+### lt
+`($a, $b)`
+
+Returns whether the first argument is less than the second (function version of
+Sass `<` operator).
+
+```scss
+lt(1, 10) // => true
+lt(10, 1) // => false
+lt(1, 1) // => false
+```
+
+### lte
+`($a, $b)`
+
+Returns whether the first argument is less than or equal to the second (function
+version of Sass `<=` operator).
+
+```scss
+lte(1, 10) // => true
+lte(10, 1) // => false
+lte(1, 1) // => true
+```
+
+### gt
+`($a, $b)`
+
+Returns whether the first argument is greater than the second (function version
+of Sass `>` operator).
+
+```scss
+gt(1, 10) // => false
+gt(10, 1) // => true
+gt(1, 1) // => false
+```
+
+### gte
+`($a, $b)`
+
+Returns whether the first argument is greater than or equal to the second
+(function version of Sass `>=` operator).
+
+```scss
+gte(1, 10) // => false
+gte(10, 1) // => true
+gte(1, 1) // => true
 ```
 
 

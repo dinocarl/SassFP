@@ -1,11 +1,14 @@
 // Data for tests
-
-@function darkenbyten($color) {
-  @return darken($color, 10%);
-}
-
 @function darkenby($pct, $color) {
   @return darken($color, $pct);
+}
+
+@function lightenby($pct, $color) {
+  @return lighten($color, $pct);
+}
+
+@function darkenbyten($color) {
+  @return darkenby(10%, $color);
 }
 
 @function gt5($val) {
