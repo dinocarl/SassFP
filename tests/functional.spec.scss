@@ -3,6 +3,7 @@
 @import '../src/functional';
 @import '../src/string';
 @import '../src/math';
+@import '../src/type';
 @import 'data';
 
 $functional-spec: (
@@ -172,5 +173,30 @@ $functional-spec: (
       )
     ),
     $clrlist-darkened xd-e-a-b-c 154
-  )
+  ),
+  (
+    'cond',
+    'Evaluates a list of pairs of functions, consisting of a predicate and some action, where when the first is
+    true, the second gets run.',
+    (
+      cond((
+        (F, (darkenby 20))
+        (T, (darkenby 10))
+        (T, lightenbyten)
+        red
+      ))
+      cond((
+        ((equals yellow), (lightenby 20))
+        ((equals red), (darkenby 10))
+        (T, (always #000))
+        red
+      ))
+      cond((
+        ((lt 5), (always 'yep'))
+        (T, (always 'nope'))
+        10
+      ))
+    ),
+    #cc0000 #cc0000 "yep"
+  ),
 );

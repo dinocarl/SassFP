@@ -179,6 +179,14 @@
 /*   ✔ [assert-equal] Accepts a list of function names and initial data, outputs the result of each of the functions being run on the successive results from last to first. */
 /*  */
 /*  */
+/* # Module: cond */
+/* -------------- */
+/* Test: Evaluates a list of pairs of functions, consisting of a predicate and some action, where when the first is
+    true, the second gets run. */
+/*   ✔ [assert-equal] Evaluates a list of pairs of functions, consisting of a predicate and some action, where when the first is
+    true, the second gets run. */
+/*  */
+/*  */
 /* # Module: path */
 /* -------------- */
 /* Test: Allows for getting at nested attributes in a Sass map using list syntax. Ensures a null return for any unrecognized paths. */
@@ -455,12 +463,42 @@
 /*   ✔ [assert-equal] Returns whether the 2 provided arguments are equivalent. */
 /*  */
 /*  */
+/* # Module: eq */
+/* ------------ */
+/* Test: Returns whether the 2 provided arguments are equivalent (alias of equals). */
+/*   ✔ [assert-equal] Returns whether the 2 provided arguments are equivalent (alias of equals). */
+/*  */
+/*  */
+/* # Module: lt */
+/* ------------ */
+/* Test: Returns whether the first argument is less than the second. */
+/*   ✔ [assert-equal] Returns whether the first argument is less than the second. */
+/*  */
+/*  */
+/* # Module: lte */
+/* ------------- */
+/* Test: Returns whether the first argument is less than or equal to the second. */
+/*   ✔ [assert-equal] Returns whether the first argument is less than or equal to the second. */
+/*  */
+/*  */
+/* # Module: gt */
+/* ------------ */
+/* Test: Returns whether the first argument is greater than the second. */
+/*   ✔ [assert-equal] Returns whether the first argument is greater than the second. */
+/*  */
+/*  */
+/* # Module: gte */
+/* ------------- */
+/* Test: Returns whether the first argument is greater than or equal to the second. */
+/*   ✔ [assert-equal] Returns whether the first argument is greater than or equal to the second. */
+/*  */
+/*  */
 /* # SUMMARY ---------- */
-/* 76 Tests: */
-/* - 76 Passed */
+/* 82 Tests: */
+/* - 82 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 76 Modules */
-/* - 76 Tests */
-/* - 76 Assertions */
+/* - 82 Modules */
+/* - 82 Tests */
+/* - 82 Assertions */
 /* -------------------- */

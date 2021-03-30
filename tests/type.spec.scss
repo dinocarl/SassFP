@@ -97,5 +97,35 @@ $type-spec: (
       equals((header red), (header red))
     ),
     true false true true
-  )
+  ),
+  (
+    'eq',
+    'Returns whether the 2 provided arguments are equivalent (alias of equals).',
+    eq(1, 1) eq('1','1') eq(999999, 999999) eq('999999','999999') eq(1, 2) eq('1', '2'),
+    true true true true false false
+  ),
+  (
+    'lt',
+    'Returns whether the first argument is less than the second.',
+    lt(1, 10) lt(10, 1) lt(999999, 999999) lt(999999, 9999999) lt(1, 2),
+    true false false true true
+  ),
+  (
+    'lte',
+    'Returns whether the first argument is less than or equal to the second.',
+    lte(1, 11) lte(10, 1) lte(999999, 999999) lte(999999, 9999999) lte(1, 2),
+    true false true true true
+  ),
+  (
+    'gt',
+    'Returns whether the first argument is greater than the second.',
+    gt(1, 10) gt(10, 1) gt(999999, 999999) gt(999999, 9999999) gt(1, 2),
+    false true false false false
+  ),
+  (
+    'gte',
+    'Returns whether the first argument is greater than or equal to the second.',
+    gte(1, 10) gte(10, 1) gte(999999, 999999) gte(999999, 9999999) gte(1, 2),
+    false true true false false
+  ),
 );

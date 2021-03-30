@@ -112,3 +112,26 @@
   }
   @return $result;
 }
+
+// accepts a list of function names and initial data.
+// outputs the result of each of the functions being run
+// on the successive results from first to last
+@function cond($list) {
+  $conditions: init($list);
+  $data: last($list);
+  $should-break: false;
+  $result: null;
+  @each $item in $conditions {
+    $predicate: head($item);
+    $pred-fn: head($predicate);
+    $pred-rest: _rest-or-list($predicate);
+    @if not $should-break and _item-fn-call($pred-fn, join($pred-rest, $data)) {
+      $action: last($item);
+      $fn: head($action);
+      $rest: _rest-or-list($action);
+      $result: _item-fn-call($fn, join($rest, $data));
+      $should-break: true;
+    }
+  }
+  @return $result;
+}
