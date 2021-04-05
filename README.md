@@ -1,5 +1,5 @@
 # SassFP
-#### v1.5.0
+#### v1.6.0
 
 A set of utilities inspired by [Ramda][], [lodash FP][], and other Functional
 libraries for Sass.
