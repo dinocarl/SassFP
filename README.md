@@ -1,5 +1,5 @@
 # SassFP
-#### v1.6.2
+#### v1.7.0
 
 A set of utilities inspired by [Ramda][], [lodash FP][], and other Functional
 libraries for Sass.
@@ -39,6 +39,9 @@ manipulate [Sass maps][]. As of **`v1.3.1`**, it is compatible with [Sass 3.5][]
     - [contains](#contains)
     - [intersection](#intersection)
     - [difference](#difference)
+    - [every](#every)
+    - [none](#none)
+    - [some](#some)
 - [Functional Methods](#functional-methods)
     - [always](#always)
     - [identity](#identity)
@@ -107,6 +110,8 @@ manipulate [Sass maps][]. As of **`v1.3.1`**, it is compatible with [Sass 3.5][]
     - [lte](#lte)
     - [gt](#gt)
     - [gte](#gte)
+    - [fpAnd](#fpAnd)
+    - [fpOr](#fpOr)
 
 ## String Methods
 ### prefixStr
@@ -275,6 +280,42 @@ difference(('alex' 'billy' 'allen'), $strlist); // => ('allen')
 difference(('alex.a' 'billy' 'allen'), $strlist); // => ('alex.a' 'allen')
 ```
 
+### every
+`($predicate, $list)`
+
+Returns a boolean indicating whether _every_ item in **`$list`** satisfies the
+function **`$predicate`**. Inverse of **`none`**.
+
+```scss
+every(is_string, (0 1 2 3)) // => false
+every(is_string, (0 1 2 '3')) // => false
+every(is_number, (0 1 2 3)) // => true
+```
+
+### none
+`($predicate, $list)`
+
+Returns a boolean indicating whether _no_ item in **`$list`** satisfies the
+function **`$predicate`**.  Inverse of **`every`**.
+
+```scss
+none(is_string, (0 1 2 3)) // => true
+none(is_string, (0 1 2 '3')) // => false
+none(is_number, (0 1 2 3)) // => false
+```
+
+### some
+`($predicate, $list)`
+
+Returns a boolean indicating whether _any_ item in **`$list`** satisfies the
+function **`$predicate`**.
+
+```scss
+some(is_string, (0 1 2 3)) // => false
+some(is_string, (0 1 2 '3')) // => true
+some(is_number, (0 1 2 3)) // => true
+
+```
 ## Functional Methods
 ### always
 `($val, `_`$b`_`)`
@@ -434,7 +475,7 @@ goes like this:
 
 ```
   function  add'l values  accumulator   member    outcome
-     ⬇︎       ⬇︎   ⬇︎           ⬇︎         ⬇︎         ⬇︎
+      ⬇︎       ⬇︎    ⬇︎           ⬇︎          ⬇︎          ⬇︎
     sum(      1,   2,          0,         4 )   =>   7
     sum(      1,   2,          7,         5 )   =>   15
     sum(      1,   2,          15,        6 )   =>   24
@@ -835,7 +876,7 @@ fpNth(2, ('alex', 'billy')); // => 'billy'
 ```
 
 
-## Convenience Type Boolean Methods
+## Convenience Type Predicates
 ### is_list
 `($val)`
 
@@ -978,7 +1019,7 @@ isnt_map((header: red)); // => false
 isnt_map((header red)); // => true
 ```
 
-## Relational
+## Relational Predicates
 ### equals
 `($a, $b)`
 
@@ -1044,6 +1085,44 @@ Returns whether the first argument is greater than or equal to the second
 gte(1, 10) // => false
 gte(10, 1) // => true
 gte(1, 1) // => true
+```
+
+### fpAnd
+`($a, $b)`
+
+Returns whether both supplied arguments are true. (function version of Sass
+`and` connective).
+
+```scss
+fpAnd(true, true) // => true
+fpAnd(true, false) // => false
+fpAnd(false, true) // => false
+fpAnd(false, false) // => false
+```
+
+Can be used in a `reduce`:
+```scss
+reduce(fpAnd, true, (true, true, true) // => true
+reduce(fpAnd, true, (true, false, true) // => false
+```
+
+### fpOr
+`($a, $b)`
+
+Returns whether either supplied arguments are true. (function version of Sass
+`or` connective).
+
+```scss
+fpOr(true, true) // => true
+fpOr(true, false) // => true
+fpOr(false, true) // => true
+fpOr(false, false) // => false
+```
+
+Can be used in a `reduce`:
+```scss
+reduce(fpOr, false, (false, false, true) // => true
+reduce(fpOr, false, (false, false, false) // => false
 ```
 
 
