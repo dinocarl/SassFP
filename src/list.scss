@@ -116,3 +116,16 @@
 @function difference($list1, $list2) {
   @return last(partition(contains, $list1, $list2));
 }
+
+// returns a boolean whether every item in the list satisfies the predicate function
+@function every($predicate, $list) {
+  @return length(head(partition($predicate, $list))) == length($list);
+}
+// returns a boolean whether no item in the list satisfies the predicate function
+@function none($predicate, $list) {
+  @return length(last(partition($predicate, $list))) == length($list);
+}
+// returns a boolean whether any item in the list satisfies the predicate function
+@function some($predicate, $list) {
+  @return length(head(partition($predicate, $list))) > 0;
+}

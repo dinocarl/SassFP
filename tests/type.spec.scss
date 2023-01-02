@@ -128,4 +128,30 @@ $type-spec: (
     gte(1, 10) gte(10, 1) gte(999999, 999999) gte(999999, 9999999) gte(1, 2),
     false true true false false
   ),
+  (
+    'fpAnd',
+    'Returns whether both supplied arguments are true.',
+    fpAnd(true, true) fpAnd(true, false) fpAnd(false, true) fpAnd(false, false),
+    true false false false
+  ),
+  (
+    'fpOr',
+    'Returns whether either supplied arguments are true.',
+    fpOr(true, true) fpOr(true, false) fpOr(false, true) fpOr(false, false),
+    true true true false
+  ),(
+    'integrations',
+    'Run itegrations with type predicates',
+    (
+      reduce(fpAnd, true, (true true true))
+      reduce(fpAnd, true, (true false true))
+      reduce(fpAnd, true, (false false false))
+      reduce(fpAnd, false, (true true true))
+      reduce(fpOr, false, (true true true))
+      reduce(fpOr, false, (true false true))
+      reduce(fpOr, false, (false false false))
+      reduce(fpOr, true, (false false false))
+    ),
+    true false false false true true false true
+  )
 );

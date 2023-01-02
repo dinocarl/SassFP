@@ -101,6 +101,24 @@
 /*   ✔ [assert-equal] Returns new list of what both $list1 and $list2 have in common. */
 /*  */
 /*  */
+/* # Module: every */
+/* --------------- */
+/* Test: Returns a boolean indicating whether every item in the list satisfies the predicate function. */
+/*   ✔ [assert-equal] Returns a boolean indicating whether every item in the list satisfies the predicate function. */
+/*  */
+/*  */
+/* # Module: none */
+/* -------------- */
+/* Test: Returns a boolean indicating whether no item in the list satisfies the predicate function. */
+/*   ✔ [assert-equal] Returns a boolean indicating whether no item in the list satisfies the predicate function. */
+/*  */
+/*  */
+/* # Module: some */
+/* -------------- */
+/* Test: Returns a boolean indicating whether any item in the list satisfies the predicate function. */
+/*   ✔ [assert-equal] Returns a boolean indicating whether any item in the list satisfies the predicate function. */
+/*  */
+/*  */
 /* # Module: integrations */
 /* ---------------------- */
 /* Test: Run itegrations with list methods */
@@ -493,12 +511,30 @@
 /*   ✔ [assert-equal] Returns whether the first argument is greater than or equal to the second. */
 /*  */
 /*  */
+/* # Module: fpAnd */
+/* --------------- */
+/* Test: Returns whether both supplied arguments are true. */
+/*   ✔ [assert-equal] Returns whether both supplied arguments are true. */
+/*  */
+/*  */
+/* # Module: fpOr */
+/* -------------- */
+/* Test: Returns whether either supplied arguments are true. */
+/*   ✔ [assert-equal] Returns whether either supplied arguments are true. */
+/*  */
+/*  */
+/* # Module: integrations */
+/* ---------------------- */
+/* Test: Run itegrations with type predicates */
+/*   ✔ [assert-equal] Run itegrations with type predicates */
+/*  */
+/*  */
 /* # SUMMARY ---------- */
-/* 82 Tests: */
-/* - 82 Passed */
+/* 88 Tests: */
+/* - 88 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 82 Modules */
-/* - 82 Tests */
-/* - 82 Assertions */
+/* - 88 Modules */
+/* - 88 Tests */
+/* - 88 Assertions */
 /* -------------------- */

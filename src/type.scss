@@ -23,3 +23,6 @@
 @function lte($a, $b) { @return $a <= $b; }
 @function gt($a, $b) { @return $a > $b; }
 @function gte($a, $b) { @return $a >= $b; }
+
+@function fpAnd($a, $b) { @return $a and $b; }
+@function fpOr($a, $b) { @return $a or $b; }

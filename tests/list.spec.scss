@@ -1,6 +1,7 @@
 // Specs for String functions
 
 @import '../src/list';
+@import '../src/type';
 
 $list-spec: (
   (
@@ -100,6 +101,39 @@ $list-spec: (
       difference(('alex.a' 'billy' 'allen'), $strlist)
     ),
     () ('allen',) ('alex.a' 'allen')
+  ),
+  (
+    'every',
+    'Returns a boolean indicating whether every item in the list satisfies the predicate function.',
+    (
+      every(isnt_null, $strlist)
+      every(is_string, (0 1 2 3))
+      every(is_string, (0 1 2 '3'))
+      every(is_number, (0 1 2 3))
+    ),
+    true false false true
+  ),
+  (
+    'none',
+    'Returns a boolean indicating whether no item in the list satisfies the predicate function.',
+    (
+      none(is_null, $strlist)
+      none(is_string, (0 1 2 3))
+      none(is_string, (0 1 2 '3'))
+      none(is_number, (0 1 2 3))
+    ),
+    true true false false
+  ),
+  (
+    'some',
+    'Returns a boolean indicating whether any item in the list satisfies the predicate function.',
+    (
+      some(is_null, $strlist)
+      some(is_string, (0 1 2 3))
+      some(is_string, (0 1 2 '3'))
+      some(is_number, (0 1 2 3))
+    ),
+    false false true true
   ),
   (
     'integrations',
