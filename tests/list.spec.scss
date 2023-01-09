@@ -136,6 +136,16 @@ $list-spec: (
     false false true true
   ),
   (
+    'reverse',
+    'Returns a list whose elements appear in the reverse order of the supplied list.',
+    (
+      reverse($strlist)
+      reverse(reverse($strlist))
+    ),
+    ("elliot" "dani" "charlie" "billy" "alex")
+    $strlist
+  ),
+  (
     'integrations',
     'Run itegrations with list methods',
     (

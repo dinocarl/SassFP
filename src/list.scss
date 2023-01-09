@@ -129,3 +129,15 @@
 @function some($predicate, $list) {
   @return length(head(partition($predicate, $list))) > 0;
 }
+
+
+// returns a list whose elements appear in the reverse order of the supplied list
+@function reverse($list) {
+  $passed-list: ensureList($list...);
+  $result: ();
+  @for $i from length($passed-list) * -1 through -1 {
+    $item: nth($passed-list, abs($i));
+    $result: append($result, $item);
+  }
+  @return $result;
+}

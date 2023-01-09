@@ -1,5 +1,5 @@
 # SassFP
-#### v1.7.0
+#### v1.8.0
 
 A set of utilities inspired by [Ramda][], [lodash FP][], and other Functional
 libraries for Sass.
@@ -35,6 +35,7 @@ manipulate [Sass maps][]. As of **`v1.3.1`**, it is compatible with [Sass 3.5][]
     - [init](#init)
     - [last](#last)
     - [flatten](#flatten)
+    - [reverse](#reverse)
     - [partition](#partition)
     - [contains](#contains)
     - [intersection](#intersection)
@@ -88,7 +89,7 @@ manipulate [Sass maps][]. As of **`v1.3.1`**, it is compatible with [Sass 3.5][]
     - [fpAppend](#fpappend)
     - [fpJoin](#fpjoin)
     - [fpNth](#fpnth)
-- [Convenience Type Boolean Methods](#convenience-type-boolean-methods)
+- [Convenience Type Predicates](#convenience-type-predicates)
     - [is_list](#is_list)
     - [is_color](#is_color)
     - [is_string](#is_string)
@@ -103,7 +104,7 @@ manipulate [Sass maps][]. As of **`v1.3.1`**, it is compatible with [Sass 3.5][]
     - [isnt_number](#isnt_number)
     - [isnt_null](#isnt_null)
     - [isnt_map](#isnt_map)
-- [Relational Methods](#relational-methods)
+- [Relational Predicates](#relational-predicates)
     - [equals](#equals)
     - [eq](#eq)
     - [lt](#lt)
@@ -227,6 +228,15 @@ Returns a flattened version of **`$list`**.
 
 ```scss
 flatten(#fff, red, (#222, #333)); // => (#fff, red, #222, #333)
+```
+
+### reverse
+`($list)`
+
+Returns a list whose elements appear in the reverse order of **`$list`**.
+
+```scss
+reverse((#fff, red, (#222, #333))); // => (#222, #333 red #fff)
 ```
 
 ### partition
@@ -1090,7 +1100,7 @@ gte(1, 1) // => true
 ### fpAnd
 `($a, $b)`
 
-Returns whether both supplied arguments are true. (function version of Sass
+Returns whether both supplied arguments are true (function version of Sass
 `and` connective).
 
 ```scss
@@ -1109,7 +1119,7 @@ reduce(fpAnd, true, (true, false, true) // => false
 ### fpOr
 `($a, $b)`
 
-Returns whether either supplied arguments are true. (function version of Sass
+Returns whether either supplied arguments are true (function version of Sass
 `or` connective).
 
 ```scss

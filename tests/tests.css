@@ -119,6 +119,12 @@
 /*   ✔ [assert-equal] Returns a boolean indicating whether any item in the list satisfies the predicate function. */
 /*  */
 /*  */
+/* # Module: reverse */
+/* ----------------- */
+/* Test: Returns a list whose elements appear in the reverse order of the supplied list. */
+/*   ✔ [assert-equal] Returns a list whose elements appear in the reverse order of the supplied list. */
+/*  */
+/*  */
 /* # Module: integrations */
 /* ---------------------- */
 /* Test: Run itegrations with list methods */
@@ -530,11 +536,11 @@
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 88 Tests: */
-/* - 88 Passed */
+/* 89 Tests: */
+/* - 89 Passed */
 /* - 0 Failed */
 /* Stats: */
-/* - 88 Modules */
-/* - 88 Tests */
-/* - 88 Assertions */
+/* - 89 Modules */
+/* - 89 Tests */
+/* - 89 Assertions */
 /* -------------------- */
