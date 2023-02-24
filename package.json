@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "tdd": "node-sass tests/tests.scss tests/tests.css --watch",
+    "tdd": "node-sass tests/curry.scss tests/curry.css --watch",
     "test": "node-sass tests/tests.scss tests/tests.css"
   },
   "repository": {

@@ -1,0 +1,82 @@
+@import '../SassFP';
+
+@function curry($arity, $fn, $args) {
+  @return (
+    fn: $fn,
+    args: $args,
+    arity: $arity,
+  );
+}
+
+@function invoke($fn-or-curried-data, $args) {
+  $curry-data: if(
+    is_map($fn-or-curried-data),
+    map-merge(
+      $fn-or-curried-data,
+      (args: join(path((args), $fn-or-curried-data), $args))
+    ),
+    (
+      fn: $fn-or-curried-data,
+      args: $args,
+      arity: length($args),
+    ),
+  );
+  $check-fn: path((fn), $curry-data);
+  $check-args: path((args), $curry-data);
+  $check-arity: path((arity), $curry-data);
+  @return if(
+    gte(length($check-args), $check-arity),
+    call(safe-call($check-fn), $check-args...),
+    $curry-data
+  );
+}
+
+@function invoke-with($args, $fn) {
+  @return invoke($fn, $args);
+}
+
+@function add-2($a) {
+    @return invoke(
+      curry(2, add, (2)),
+      $a
+    );
+}
+
+@function add-with-three($a, $b, $c) {
+  @return $a + $b + $c;
+}
+
+@function add-2nd-to-3($a) {
+  @return invoke(
+    curry(3, add-with-three, (14)),
+    $a
+  );
+}
+
+$aa: compose(
+  (invoke-with 10),
+  (invoke-with 15),
+  curry(3, add-with-three, 5)
+);
+
+.test {
+  $c: invoke(curry, (2, add, 4));
+  @debug $c;
+  $x: curry(2, add, (2));
+  $y: add-2nd-to-3(2);
+  @debug $y;
+  $a: invoke(add-2nd-to-3, 9);
+  $z: curry(3, add-with-three, (2));
+  $zz: invoke($z, (5));
+  content: $aa;
+  content: invoke($x, (10));
+  content: add-2(7);
+  content: invoke($y, (3));
+  content: invoke($a, (3));
+  content: invoke($zz, 3);
+  content: map((invoke, $zz), (10,20,30));
+  content: invoke(add, (2, 5));
+  content: invoke($c, 10);
+  content: invoke(length, ((1 2 3),));
+  content: reverse((#fff, red, (#222, #333)));
+}
